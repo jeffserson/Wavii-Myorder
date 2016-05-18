@@ -15,8 +15,9 @@
 			<f:viewAction action="#{cadastroMyordemBean.PrepararCadastro3}" />
 			</f:metadata>
 			
-			
-			<p:growl autoUpdate="true"   showDetail="true" sticky="true"   />
+			<p:messages autoUpdate="false" closable="true">
+                 <p:effect  event="load" delay="200" />
+               </p:messages>
 			<p:tabView >
 				
 			<div class="ui-fluid">

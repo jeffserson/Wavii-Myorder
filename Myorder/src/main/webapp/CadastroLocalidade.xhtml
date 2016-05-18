@@ -15,8 +15,11 @@
 			<f:viewAction action="#{cadastroMyordemBean.PrepararCadastro4}" />
 			</f:metadata>
 			
-			
-			<p:messages autoUpdate="true"   showDetail="true" sticky="true"   />
+		
+		       <p:messages autoUpdate="false" closable="true">
+                 <p:effect  event="load" delay="500" />
+                </p:messages>
+		
 			<p:tabView >
 				
 			<div class="ui-fluid">
