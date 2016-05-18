@@ -37,7 +37,7 @@
 					" />
 				    
 				    <p:outputLabel value="Nome" for="nome" />
-					<p:inputText styleClass="up" id="nome" value="#{cadastroMyordemBean.uf.nome}"/>
+					<p:inputText styleClass="up" id="nome" maxlength="60" autocomplete="false" value="#{cadastroMyordemBean.uf.nome}"/>
 				    
 				    <p:outputLabel for="pais" value="Pais: "/>
                     <p:selectOneMenu id="pais" value="#{cadastroMyordemBean.uf.pais}" 

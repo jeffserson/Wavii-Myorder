@@ -35,12 +35,22 @@
 					styleClass="panelgrid-noborder"
 					columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4">
 					
+					<p:outputLabel value="Cep" for="cep" />
+					<p:inputMask mask="999.99.999" requiredMessage="Cep Obrigatorio" id="cep" autocomplete="false" maxlength="10"  value="#{cadastroMyordemBean.cep.cep}"  required="true"/>
+				    
+				    
+				    <p:outputLabel value="Logradouro" for="logradouro" />
+					<p:inputText styleClass="up" id="logradouro" required="true" requiredMessage="Logradouro Obrigatorio" autocomplete="false" maxlength="60" value="#{cadastroMyordemBean.cep.logradouro}"/>
+				    
+				    <p:outputLabel value="Complemento" for="complemento" />
+					<p:inputText styleClass="up" id="complemento"  requiredMessage="Complemento Obrigatorio" autocomplete="false" maxlength="60"  value="#{cadastroMyordemBean.cep.complemento}" required="true"/>
+				    
 					
 					
 					<h:outputText value="Pais: "/>
                     <p:selectOneMenu id="pais"  value="#{cadastroMyordemBean.cep.pais}" 
                     editable="true" 
-                    filter="true" filterMatchMode="contains" converter="converter" >
+                    filter="true" filterMatchMode="contains" converter="converter" required="true" requiredMessage="Pais Obrigatorio" >
                    <f:selectItem itemLabel="Selecione" noSelectionOption="true" />
                    <f:selectItems value="#{cadastroMyordemBean.paises}" var="pais" 
                     itemValue="#{pais}" itemLabel="#{pais.nome}"/> 
@@ -73,17 +83,7 @@
                     itemValue="#{sublocalidade}" itemLabel="#{sublocalidade.nome}"/> 
 				    </p:selectOneMenu>
 				    
-				    <p:outputLabel value="Cep" for="cep" />
-					<p:inputMask mask="999.99.999" id="cep"  value="#{cadastroMyordemBean.cep.cep}"  required="true"/>
 				    
-				    
-				    <p:outputLabel value="Logradouro" for="logradouro" />
-					<p:inputText styleClass="up" id="logradouro"  value="#{cadastroMyordemBean.cep.logradouro}"/>
-				    
-				    <p:outputLabel value="Complemento" for="complemento" />
-					<p:inputText styleClass="up" id="complemento"  value="#{cadastroMyordemBean.cep.complemento}" required="true"/>
-				    
-					
                     </p:panelGrid>
                     <p:toolbar>
 				<p:toolbarGroup>

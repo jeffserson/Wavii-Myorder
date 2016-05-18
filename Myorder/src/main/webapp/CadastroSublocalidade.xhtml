@@ -36,10 +36,10 @@
 				    
 				    
 				    <p:outputLabel value="Codigo" for="codigo" />
-					<p:inputText id="codigo" value="#{cadastroMyordemBean.sublocalidade.codigo}"/>
+					<p:inputText id="codigo" maxlength="30" autocomplete="false" value="#{cadastroMyordemBean.sublocalidade.codigo}"/>
 				    
 				    <p:outputLabel value="Bairro" for="nome" />
-					<p:inputText styleClass="up" id="nome" value="#{cadastroMyordemBean.sublocalidade.nome}"/>
+					<p:inputText styleClass="up" id="nome" maxlength="30" autocomplete="false" value="#{cadastroMyordemBean.sublocalidade.nome}"/>
 				    
 				   <p:outputLabel for="tblocalidade" value="Cidade: "/>
                     <p:selectOneMenu id="tblocalidade" value="#{cadastroMyordemBean.sublocalidade.localidade}" 

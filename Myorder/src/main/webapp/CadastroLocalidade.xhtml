@@ -34,13 +34,13 @@
 					columnClasses="ui-grid-col-2, ui-grid-col-4, ui-grid-col-2, ui-grid-col-4">
 				    
 				    <p:outputLabel value="Codigo:" for="codigo" />
-					<p:inputText id="codigo" value="#{cadastroMyordemBean.localidade.codigo}"/>
+					<p:inputText id="codigo" maxlength="30" autocomplete="false" value="#{cadastroMyordemBean.localidade.codigo}"/>
 				 	
 				    <p:outputLabel value="Cidade:" for="nome" />
-					<p:inputText styleClass="up" id="nome" value="#{cadastroMyordemBean.localidade.nome}"/>
+					<p:inputText styleClass="up" maxlength="60"  autocomplete="false" id="nome" value="#{cadastroMyordemBean.localidade.nome}"/>
 				    
 				    <p:outputLabel value="Ibge:" for="ibge" />
-					<p:inputText id="ibge" value="#{cadastroMyordemBean.localidade.ibge}"/>
+					<p:inputText id="ibge" maxlength="30" autocomplete="false" value="#{cadastroMyordemBean.localidade.ibge}"/>
 					
 					<p:outputLabel for="uf" value="uf: "/>
                     <p:selectOneMenu id="uf" value="#{cadastroMyordemBean.localidade.uf}" 

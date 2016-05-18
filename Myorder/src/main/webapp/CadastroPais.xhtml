@@ -33,12 +33,12 @@
 				    
 				    
 				    <p:outputLabel value="Codigo" for="codigo" />
-					<p:inputText id="codigo" value="#{cadastroMyordemBean.pais.codigo}"  maxlength="60" required="true"
+					<p:inputText id="codigo" value="#{cadastroMyordemBean.pais.codigo}" autocomplete="false"  maxlength="30" required="true"
 					 requiredMessage="Codigo Obrigatorio"/>
 				    
 				    <p:outputLabel value="Nome" for="nome" />
-					<p:inputText styleClass="up" id="nome" value="#{cadastroMyordemBean.pais.nome}" required="true"
-					 requiredMessage="Nome Obrigatorio"/>
+					<p:inputText styleClass="up" id="nome" value="#{cadastroMyordemBean.pais.nome}" autocomplete="false" required="true"
+					 requiredMessage="Nome Obrigatorio" maxlength="60"/>
 				    
 				    
 					

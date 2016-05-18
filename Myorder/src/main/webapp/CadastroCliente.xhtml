@@ -7,7 +7,7 @@
 	template="/WEB-INF/templates/Layout.xhtml">
 	 
 	<ui:define name="content">
-		<h1 class="aw-page-title">Empresa</h1>
+		<h1 class="aw-page-title">Cadastro Empresa</h1>
         
              
         
@@ -42,12 +42,12 @@
 					
 			        <p:outputLabel value="Codigo:" for="codigo" />
 					<p:inputText id="codigo" value="#{cadastroMyordemBean.empresa.codigo}" size="10"
-					 required="true" requiredMessage="codigo Obrigratorio"/>
+					 required="true" requiredMessage="codigo Obrigratorio" autocomplete="false"/>
 					
 						
 					<p:outputLabel value="Cnpj:" for="cnpj" />
 					<p:inputText id="cnpj"  value="#{cadastroMyordemBean.empresa.cnpj}" size="30" required="true"
-					requiredMessage="Cnpj É Obrigatorio"/>
+					requiredMessage="Cnpj É Obrigatorio" maxlength="18" autocomplete="false"/>
 					
 					
 					<p:outputLabel value="Razão:" for="razao" />
@@ -57,7 +57,7 @@
 					
 					<p:outputLabel value="Fantasia:" for="fantasia" />
 					<p:inputText id="fantasia" styleClass="up" value="#{cadastroMyordemBean.empresa.fantasia}" size="54"
-					 />
+					  autocomplete="false" maxlength="60"/>
 					</p:panelGrid>
 					
 					
@@ -65,21 +65,21 @@
 					<p:panelGrid columns="4" layout="grid" styleClass="panelgrid-noborder" 
 					 columnClasses="ui-grid-col-1, ui-grid-col-2,ui-grid-col-1, ui-grid-col-2" >
 				    <p:outputLabel value="Inscestadual:" for="inscestadual" />
-					<p:inputText  id="inscestadual"  value="#{cadastroMyordemBean.empresa.inscestadual}"  size="15"
+					<p:inputText  id="inscestadual" maxlength="30" autocomplete="false" value="#{cadastroMyordemBean.empresa.inscestadual}"  size="15"
 					 required="true" requiredMessage="Inscricão Estadual Obrigatoria"/>
 					
 					<p:outputLabel value="Inscmunicipal:" for="inscmunicipal:" />
-					<p:inputText  id="inscmunicipal"  value="#{cadastroMyordemBean.empresa.inscmunicipal}" size="15" 
+					<p:inputText  id="inscmunicipal" maxlength="30" autocomplete="false"  value="#{cadastroMyordemBean.empresa.inscmunicipal}" size="15" 
 					required="true"  requiredMessage="Inscricão Municipal Obrigatoria"/>
 					</p:panelGrid>
 					<p:panelGrid columns="2" layout="grid" 
 					styleClass="panelgrid-noborder"
 					columnClasses="ui-grid-col-1, ui-grid-col-2, ui-grid-col-1, ui-grid-col-2">
 					<p:outputLabel value="Homepage:" for="homepage" />
-					<p:inputText  id="homepage" styleClass="up" value="#{cadastroMyordemBean.empresa.homepage}" size="54" />
+					<p:inputText  id="homepage" autocomplete="false" maxlength="60" styleClass="up" value="#{cadastroMyordemBean.empresa.homepage}" size="54" />
 			         
 			        <p:outputLabel value="Email:" for="email"  />
-					<p:inputText  id="email" styleClass="up" value="#{cadastroMyordemBean.empresa.email}" size="54"
+					<p:inputText  id="email" styleClass="up" autocomplete="false" maxlength="60" value="#{cadastroMyordemBean.empresa.email}" size="54"
 					 required="true" requiredMessage="Email Obrigatorio"/>
 			        </p:panelGrid>
                     </p:tab>
@@ -88,8 +88,8 @@
 			
 			      <p:tab title="Endereço">
 			     
-				   <p:panelGrid  columns="2" layout="grid" styleClass="panelgrid-noborder" 
-				    columnClasses="ui-grid-col-1, ui-grid-col-2" style="margin-top: 20px" >
+				<p:panelGrid  columns="2" layout="grid" styleClass="panelgrid-noborder" 
+				columnClasses="ui-grid-col-1, ui-grid-col-2" style="margin-top: 20px" >
 							
 					
 			    <p:outputLabel value="Cep:" for="cep" />
@@ -112,11 +112,11 @@
 			   <p:outputLabel value="Logradouro:" for="logradouro" />
 				<p:inputText styleClass="up" id="logradouro"  value="#{cadastroMyordemBean.empresa.logradouro}" size="55" />	
 			    <h:outputText value="Numero"/>
-			    <p:inputText id="numero"  value="#{cadastroMyordemBean.empresa.numero}" size="5"/>
+			    <p:inputText id="numero" autocomplete="false" maxlength="60" value="#{cadastroMyordemBean.empresa.numero}" size="5"/>
 			    
 			  
 				    <p:outputLabel value="Complemento:" for="complemento" />
-					<p:inputText styleClass="up" id="complemento"  value="#{cadastroMyordemBean.empresa.complemento}" size="55" />
+					<p:inputText styleClass="up" id="complemento" autocomplete="false" maxlength="60" value="#{cadastroMyordemBean.empresa.complemento}" size="55" />
 					 </p:panelGrid>
 					
 					<p:panelGrid columns="4" layout="grid" styleClass="panelgrid-noborder" 

@@ -34,10 +34,10 @@
 				    
 				   
 				    <p:outputLabel value="Codigo" for="codigo" />
-					<p:inputText id="codigo" value="#{cadastroMyordemBean.logradouro.codigo}"/>
+					<p:inputText id="codigo" maxlength="30" autocomplete="false" value="#{cadastroMyordemBean.logradouro.codigo}"/>
 				    
-				    <p:outputLabel value="Nome" for="nome" />
-					<p:inputText styleClass="up" id="nome" value="#{cadastroMyordemBean.logradouro.nome}"/>
+				    <p:outputLabel value="Tipo Logradouro" for="nome" />
+					<p:inputText required="true" requiredMessage="Logradoro deve ser informado" styleClass="up" id="nome" maxlength="60" autocomplete="false" value="#{cadastroMyordemBean.logradouro.nome}"/>
 				    
 				    
 					
