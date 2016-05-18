@@ -5,3 +5,10 @@ Myorder/.settings/org.eclipse.wst.common.component
 *.xml
 Myorder/.settings/org.eclipse.wst.jsdt.ui.superType.container
 *.name
+*.class
+.DS_Store
+.metadata
+.settings
+.classpath
+.project
+target/
