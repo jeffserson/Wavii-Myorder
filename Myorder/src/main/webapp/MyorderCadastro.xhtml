@@ -1,0 +1,164 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	template="/WEB-INF/templates/Layout.xhtml">
+	
+	<ui:define name="content">
+	                                                        
+		<h1 class="aw-page-title">Clientes</h1>
+		          
+		<h:form id="frm">
+			<p:messages autoUpdate="true" />
+			<f:metadata>
+			 
+			 <f:viewAction action="#{consultaMyorderBean.consultar2}" />
+			 <f:viewAction action="#{consultaMyorderBean.consultar3}" />
+			 </f:metadata>
+		       
+		       
+		    <div  style="margin-top: 5px; margin-bottom: 20px">
+    		<p:inputText id="nome" size="40" value="#{consultaMyorderBean.nome}" placeholder="Nome do cliente" />
+    		<p:spacer width="10px"/>
+    		<p:commandButton value="Pesquisar"   action="#{consultaMyorderBean.pesquisar}" update="@form" />
+    	    </div>
+		       
+		
+		<p:dataTable value="#{consultaMyorderBean.empresas}"
+		 
+		 var="empresa"   
+		 paginator="true" 
+		 rows="10" 
+		 paginatorPosition="bottom"
+		 >
+		  <p:column headerText="#:" width="40">
+		  <h:outputText value="#{empresa.id}"></h:outputText>
+		  </p:column>
+		  <p:column headerText="Codigo:">
+		  <h:outputText value="#{empresa.codigo}"></h:outputText>
+		  </p:column>
+		  <p:column headerText="Nome:">
+		  <h:outputText value="#{empresa.nome}"></h:outputText>
+		  </p:column>
+		  
+		  <p:column headerText="Cnpj:">
+		  <h:outputText value="#{empresa.cnpj}"></h:outputText>
+		  </p:column>
+		  
+		  <p:column>
+		  <p:commandButton   value="Editar"  process="@this" title="editar" icon="fa fa-edit" update="frm" oncomplete="PF('carDialog').show()">
+		  <f:setPropertyActionListener value="#{empresa}" target="#{cadastroMyordemBean.empresa}" ></f:setPropertyActionListener>
+		  <f:setPropertyActionListener value="#{pais}" target="#{cadastroMyordemBean.pais}" ></f:setPropertyActionListener>
+		 
+		  </p:commandButton>
+		  <p:commandButton process="@this" value="excluir" actionListener="#{consultaMyorderBean.excluir(empresa)}" 
+		  icon="ui-icon-trash"  action="#{consultaMyorderBean.consultar2}" update="@form"   >
+	      <p:confirm header="Confirmacão" message="deseja excluir?" icon="ui-icon-alert" />
+		  </p:commandButton>
+		  
+		<p:confirmDialog global="true" showEffect="explode" hideEffect="fade">
+        <p:commandButton value="sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" actionListener="#{consultaMyorderBean.excluir(cliente)}" />
+        <p:commandButton value="Não"  icon="ui-icon-close" action="/MyorderCadastro?faces-redirect=true" process="@this"/>
+        </p:confirmDialog>
+		  
+		  
+		</p:column>
+		
+		
+		
+		
+		</p:dataTable>
+		
+		<p:dialog header="Empresa" widgetVar="carDialog" modal="true" position="center"
+		   >
+             
+          <p:tabView>
+          <p:tab title="empresa">
+          <p:panelGrid  columns="2" layout="grid"  styleClass="panelgrid-noborder" style="margin-top: 20px" 
+          columnClasses="ui-grid-col-3, ui-grid-col-4" >
+                  
+          
+                <p:outputLabel value="Cnpj:" />
+                <p:inputText value="#{cadastroMyordemBean.empresa.cnpj}" size="15"></p:inputText>
+             
+                <p:outputLabel value="Razão social:" />
+                <p:inputText value="#{cadastroMyordemBean.empresa.razao}" size="60"></p:inputText>
+ 
+                <p:outputLabel value="Fantasia" />
+                <p:inputText value="#{cadastroMyordemBean.empresa.fantasia}"></p:inputText>
+                 
+               
+                <p:outputLabel value="Inscri estadual:" />
+                <p:inputText value="#{cadastroMyordemBean.empresa.inscestadual}" size="15">
+                </p:inputText>
+                
+                <p:outputLabel value="Ins Municipal:" />
+                <p:inputText value="#{cadastroMyordemBean.empresa.inscmunicipal}" size="15"></p:inputText>
+                <p:outputLabel value="Telefone:" />
+                <p:inputText value="#{cadastroMyordemBean.empresa.fone}"></p:inputText>
+                
+                <p:outputLabel value="Homepage:" />
+                <p:inputText value="#{cadastroMyordemBean.empresa.homepage}"></p:inputText>
+                  
+                <p:commandButton value="editar" actionListener="#{cadastroMyordemBean.salvar}" action="/MyorderCadastro?faces-redirect=true"></p:commandButton>
+                 <p:commandButton value="cancelar"></p:commandButton>
+            </p:panelGrid>
+          
+          
+          
+          
+          </p:tab>
+          
+          <p:tab title="Dados complementares">
+          
+            <p:panelGrid  columns="2" layout="grid" styleClass="panelgrid-noborder" style="margin-top: 20px"
+             columnClasses="ui-grid-col-3, ui-grid-col-4">
+                <p:outputLabel value="Email:" />
+                <p:inputText value="#{cadastroMyordemBean.empresa.email}" size="40"></p:inputText>
+ 
+                <p:outputLabel value="Telefone" />
+                <p:inputText value="#{cadastroMyordemBean.empresa.fone}"></p:inputText>
+ 
+                <p:outputLabel value="Codigo:" />
+                <p:inputText value="#{cadastroMyordemBean.empresa.codigo}"></p:inputText>
+                
+                <p:outputLabel value="Cep:" />
+                <p:inputText value="#{cadastroMyordemBean.empresa.cep}"></p:inputText>
+                 
+                <p:outputLabel value="Cidade:" />
+                <p:inputText value="#{cadastroMyordemBean.empresa.tblocalidade.nome}"></p:inputText>
+                
+                <p:outputLabel value="Bairro:" />
+                <p:inputText value="#{cadastroMyordemBean.empresa.subloclidade.nome}"></p:inputText>
+                 
+                <p:outputLabel value="Logradouro:" />
+                <p:inputText value="#{cadastroMyordemBean.empresa.logradouro}"></p:inputText>
+                 
+                 <p:outputLabel value="Tipo:" />
+                <p:inputText value="#{cadastroMyordemBean.empresa.tblogradouro.nome}"></p:inputText>
+
+                <p:commandButton value="editar" actionListener="#{cadastroMyordemBean.salvar}" action="/MyorderCadastro?faces-redirect=true"></p:commandButton>
+                 <p:commandButton value="cancelar"></p:commandButton>
+            </p:panelGrid>
+            </p:tab>
+           </p:tabView>
+    </p:dialog>
+		
+	
+		</h:form>
+		
+		<h:form>
+		<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Novo" action="/CadastroCliente?faces-redirect=true"
+						  />
+				</p:toolbarGroup>
+				
+			</p:toolbar>
+		</h:form>
+		
+		
+	</ui:define>
+</ui:composition>

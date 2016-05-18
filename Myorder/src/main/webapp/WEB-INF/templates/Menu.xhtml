@@ -1,0 +1,31 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+	
+		<h:form>
+		
+		<nav class="aw-menu">
+		<div class="ui-fluid">
+		<p:menubar>  
+		<p:submenu label="Menu">
+			<p:submenu label="Cadastros">
+				<p:menuitem value="Empresa" action="/MyorderCadastro?faces-redirect=true"/> 
+			</p:submenu>
+			<p:submenu label="Aux tabelas">
+			<p:menuitem value="Pais" action="/PaisesCadastrados?faces-redirect=true"></p:menuitem>
+			<p:menuitem value="Uf"   action="/UfCadastrados?faces-redirect=true"></p:menuitem>
+			<p:menuitem value="Localidade"  action="/LocaisCadastrados?faces-redirect=true"></p:menuitem>
+			<p:menuitem value="Sublocalidade" action="/BairrosCadastrados?faces-redirect=true" />
+			<p:menuitem value="Logradouro"  action="/LogradourosCadastrados2?faces-redirect=true"/>
+			<p:menuitem value="Cep"  action="/CepsCadastrados?faces-redirect=true" />
+			</p:submenu>
+			</p:submenu>
+			
+		</p:menubar>
+		</div>
+		</nav>
+	</h:form>
+
+</ui:composition>

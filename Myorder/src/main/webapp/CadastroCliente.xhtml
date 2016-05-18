@@ -1,0 +1,185 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
+	template="/WEB-INF/templates/Layout.xhtml">
+	 
+	<ui:define name="content">
+		<h1 class="aw-page-title">Empresa</h1>
+        
+             
+        
+           
+           
+           
+         
+		<h:form id="frm">
+			<f:metadata> 
+			<f:viewAction action="#{cadastroMyordemBean.PrepararCadastro2}" />
+			<f:viewAction action="#{cadastroMyordemBean.PrepararCadastro8}" />
+			<f:viewAction action="#{cadastroMyordemBean.PrepararCadastro6}" />
+			</f:metadata>
+			
+			<div class="ui-fluid"></div>
+			
+			  
+			  
+			  <p:messages autoUpdate="false" closable="true">
+        <p:effect  event="load" delay="500" />
+              </p:messages>
+ 
+			  
+			  
+			   <p:tabView dynamic="true" cache="true">
+			
+			      <p:tab title="Empresa">
+			      
+				   <p:panelGrid columns="2" layout="grid" style="margin-top: 20px"
+					styleClass="panelgrid-noborder"
+					columnClasses="ui-grid-col-1, ui-grid-col-2, ui-grid-col-1, ui-grid-col-2">
+					
+			        <p:outputLabel value="Codigo:" for="codigo" />
+					<p:inputText id="codigo" value="#{cadastroMyordemBean.empresa.codigo}" size="10"
+					 required="true" requiredMessage="codigo Obrigratorio"/>
+					
+						
+					<p:outputLabel value="Cnpj:" for="cnpj" />
+					<p:inputText id="cnpj"  value="#{cadastroMyordemBean.empresa.cnpj}" size="30" required="true"
+					requiredMessage="Cnpj É Obrigatorio"/>
+					
+					
+					<p:outputLabel value="Razão:" for="razao" />
+					<p:inputText styleClass="up" id="razao"  value="#{cadastroMyordemBean.empresa.razao}" size="54" 
+					/>
+					
+					
+					<p:outputLabel value="Fantasia:" for="fantasia" />
+					<p:inputText id="fantasia" styleClass="up" value="#{cadastroMyordemBean.empresa.fantasia}" size="54"
+					 />
+					</p:panelGrid>
+					
+					
+					
+					<p:panelGrid columns="4" layout="grid" styleClass="panelgrid-noborder" 
+					 columnClasses="ui-grid-col-1, ui-grid-col-2,ui-grid-col-1, ui-grid-col-2" >
+				    <p:outputLabel value="Inscestadual:" for="inscestadual" />
+					<p:inputText  id="inscestadual"  value="#{cadastroMyordemBean.empresa.inscestadual}"  size="15"
+					 required="true" requiredMessage="Inscricão Estadual Obrigatoria"/>
+					
+					<p:outputLabel value="Inscmunicipal:" for="inscmunicipal:" />
+					<p:inputText  id="inscmunicipal"  value="#{cadastroMyordemBean.empresa.inscmunicipal}" size="15" 
+					required="true"  requiredMessage="Inscricão Municipal Obrigatoria"/>
+					</p:panelGrid>
+					<p:panelGrid columns="2" layout="grid" 
+					styleClass="panelgrid-noborder"
+					columnClasses="ui-grid-col-1, ui-grid-col-2, ui-grid-col-1, ui-grid-col-2">
+					<p:outputLabel value="Homepage:" for="homepage" />
+					<p:inputText  id="homepage" styleClass="up" value="#{cadastroMyordemBean.empresa.homepage}" size="54" />
+			         
+			        <p:outputLabel value="Email:" for="email"  />
+					<p:inputText  id="email" styleClass="up" value="#{cadastroMyordemBean.empresa.email}" size="54"
+					 required="true" requiredMessage="Email Obrigatorio"/>
+			        </p:panelGrid>
+                    </p:tab>
+			
+			
+			
+			      <p:tab title="Endereço">
+			     
+				   <p:panelGrid  columns="2" layout="grid" styleClass="panelgrid-noborder" 
+				    columnClasses="ui-grid-col-1, ui-grid-col-2" style="margin-top: 20px" >
+							
+					
+			    <p:outputLabel value="Cep:" for="cep" />
+				<p:inputMask mask="99999-999" id="cep"  value="#{cadastroMyordemBean.empresa.cep}" size="10" 
+				required="true" requiredMessage="Cep Obrigatorio"/>
+			
+			     
+			    <h:outputText value="Tipo Logradouro: " />
+                <p:selectOneMenu  id="tblogradouro"  value="#{cadastroMyordemBean.empresa.tblogradouro}" effect="fade" editable="true"
+                 filter="true" filterMatchMode="contains"  converter="converter">
+                <f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+                <f:selectItems   value="#{cadastroMyordemBean.logradouros}" var="logradouro"
+                itemValue="#{logradouro}" itemLabel="#{logradouro.nome}"  /> 
+                </p:selectOneMenu>
+			    </p:panelGrid>
+			      
+			     <p:panelGrid columns="4" layout="grid" styleClass="panelgrid-noborder" 
+					 columnClasses="ui-grid-col-1, ui-grid-col-5,ui-grid-col-0, ui-grid-col-2">
+					 
+			   <p:outputLabel value="Logradouro:" for="logradouro" />
+				<p:inputText styleClass="up" id="logradouro"  value="#{cadastroMyordemBean.empresa.logradouro}" size="55" />	
+			    <h:outputText value="Numero"/>
+			    <p:inputText id="numero"  value="#{cadastroMyordemBean.empresa.numero}" size="5"/>
+			    
+			  
+				    <p:outputLabel value="Complemento:" for="complemento" />
+					<p:inputText styleClass="up" id="complemento"  value="#{cadastroMyordemBean.empresa.complemento}" size="55" />
+					 </p:panelGrid>
+					
+					<p:panelGrid columns="4" layout="grid" styleClass="panelgrid-noborder" 
+					 columnClasses="ui-grid-col-1, ui-grid-col-2,ui-grid-col-1, ui-grid-col-2">
+					<h:outputText value="Pais: "/>
+                    <p:selectOneMenu styleClass="up" id="pais"  value="#{cadastroMyordemBean.pais1}" 
+                    editable="true" 
+                    filter="true" filterMatchMode="contains" converter="converter" >
+                   <f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+                   <f:selectItems value="#{cadastroMyordemBean.paises}" var="pais" 
+                    itemValue="#{pais}" itemLabel="#{pais.nome}"
+                   /> 
+                    <p:ajax  update="uf tblocalidade"   listener="#{cadastroMyordemBean.alterarestado}"/>
+                    </p:selectOneMenu>	
+                    
+                    
+                    <h:outputText value="Estado: "/>
+                    <p:selectOneMenu id="uf" value="#{cadastroMyordemBean.uf2}" 
+                    editable="true" 
+                    filter="true" filterMatchMode="contains" converter="converter" >
+                    <f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+                    <f:selectItems value="#{cadastroMyordemBean.uf1}" var="uf"
+                    itemValue="#{uf}" itemLabel="#{uf.nome}"
+                   /> 
+                   <p:ajax  update="tblocalidade"   listener="#{cadastroMyordemBean.alterarcidade}"/>
+                    </p:selectOneMenu>
+			
+			        <h:outputText value="Cidade: "/>
+                    <p:selectOneMenu id="tblocalidade"  value="#{cadastroMyordemBean.empresa.tblocalidade}" 
+                    editable="true" 
+                    filter="true" filterMatchMode="contains" converter="converter" >
+                    <f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+                    <f:selectItems value="#{cadastroMyordemBean.localidades}" var="localidade"
+                    itemValue="#{localidade}" itemLabel="#{localidade.nome}"/> 
+                    </p:selectOneMenu>
+					
+					<h:outputText value="Bairro: "/>
+                    <p:selectOneMenu id="sublocalidade"  value="#{cadastroMyordemBean.empresa.subloclidade}" 
+                    editable="true" 
+                    filter="true" filterMatchMode="contains" converter="converter" >
+                    <f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+                    <f:selectItems value="#{cadastroMyordemBean.sublocalidades}" var="sublocalidade"
+                    itemValue="#{sublocalidade}" itemLabel="#{sublocalidade.nome}"/> 
+                    </p:selectOneMenu>
+                    </p:panelGrid>
+				    </p:tab>
+					</p:tabView>
+					
+			
+			<p:toolbar>
+			<p:toolbarGroup>
+					<p:commandButton value="Salvar" icon="ui-icon-disk" actionListener="#{cadastroMyordemBean.salvar}" 
+						 update="@form"  action="/MyorderCadastro?faces-redirect=true"/>
+						 <p:commandButton value="Cancelar" icon="fa fa-close"
+						 process="@this"  action="/MyorderCadastro?faces-redirect=true"/>
+				</p:toolbarGroup>
+				 
+			</p:toolbar>
+		
+        
+			
+		</h:form>
+	 
+	</ui:define>
+	
+</ui:composition>

@@ -1,0 +1,117 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/Layout.xhtml">
+	
+	<ui:define name="content">
+	                                                        
+		<h1 class="aw-page-title">Cidades</h1>
+		          
+		<h:form id="frm">
+			<p:growl autoUpdate="true" />
+			<f:metadata>
+			 <f:viewAction action="#{consultaMyorderBean.consultar6}" />
+			 </f:metadata>
+		
+		<div  style="margin-top: 5px; margin-bottom: 20px">
+    		<p:inputText id="nome" size="40" value="#{consultaMyorderBean.nome}" placeholder="Nome da cidade">
+    		</p:inputText>
+    		<p:spacer width="10px"/>
+    		<p:commandButton value="Pesquisar" action="#{consultaMyorderBean.pesquisarcidade}" update="@form"/>
+    	    </div>
+		
+		
+		<p:dataTable value="#{consultaMyorderBean.localidades}" 
+		 var="localidade"
+		 paginator="true" 
+		 rows="10" 
+		 paginatorPosition="bottom"
+		 >
+		 
+		  <p:column headerText="#:" width="40">
+		  <h:outputText value="#{localidade.id}"></h:outputText>
+		  </p:column>
+		 
+		 
+		  <p:column headerText="Codigo:">
+		  <h:outputText value="#{localidade.codigo}"></h:outputText>
+		  </p:column>
+		  
+		  <p:column headerText="Estado:">
+		  <h:outputText value="#{localidade.uf.nome}"></h:outputText>
+		  </p:column>
+		  
+		  
+		  <p:column headerText="Cidade:">
+		  <h:outputText value="#{localidade.nome}"></h:outputText>
+		  </p:column>
+		 
+		  
+		    <p:column headerText="IBGE:">
+		  <h:outputText value="#{localidade.ibge}"></h:outputText>
+		  </p:column>
+		 
+		  
+		   <p:column>
+		   <p:commandButton value="editar"   icon="fa fa-edit" title="Editar" update="frm" oncomplete="PF('carDialog').show()" >
+		   <f:setPropertyActionListener value="#{localidade}" target="#{cadastroMyordemBean.localidade}" ></f:setPropertyActionListener>
+		  </p:commandButton>
+		  
+		  <p:commandButton process="@this" value="excluir" actionListener="#{consultaMyorderBean.excluirloc(localidade)}"
+		  icon="ui-icon-trash"  action="#{consultaMyorderBean.consultar6}" update="@form"   >
+	      <p:confirm header="Confirmacão" message="deseja excluir?" icon="ui-icon-alert" />
+		  </p:commandButton>
+		  
+		  
+		<p:confirmDialog global="true" showEffect="explode" hideEffect="fade">
+        <p:commandButton value="sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" actionListener="#{consultaMyorderBean.excluirloc(localidade)}" />
+        <p:commandButton value="Não"  icon="ui-icon-close" action="/LocaisCadastrados?faces-redirect=true" process="@this"/>
+        </p:confirmDialog>
+		
+		   </p:column>
+		</p:dataTable>
+		
+		
+		<div class="ui-fluid">
+		
+		<p:dialog  header="Informacão" widgetVar="carDialog" modal="true" 
+		     resizable="false"  dynamic="true" responsive="true" draggable="false">
+         
+          
+            <p:panelGrid  columns="2" columnClasses="label,value"  layout="tabular">
+               
+                <p:outputLabel value="Codigo:" />
+                <p:inputText value="#{cadastroMyordemBean.localidade.codigo}"></p:inputText>
+                
+                
+               <p:outputLabel value="Nome:" />
+               <p:inputText value="#{cadastroMyordemBean.localidade.nome}"></p:inputText>
+ 
+                <p:outputLabel value="IBGE:" />
+                <p:inputText value="#{cadastroMyordemBean.localidade.ibge}"></p:inputText>
+ 
+                <p:commandButton value="editar"    actionListener="#{cadastroMyordemBean.salvarloc}" action="/LocaisCadastrados?faces-redirect=true">
+                </p:commandButton>
+                 <p:commandButton value="cancelar"></p:commandButton>
+            </p:panelGrid>
+           
+    </p:dialog>
+    </div>
+		</h:form>
+		
+		<h:form>
+		<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Novo" action="/CadastroLocalidade?faces-redirect=true"
+						  />
+				</p:toolbarGroup>
+				
+			</p:toolbar>
+		</h:form>
+		
+		
+		
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <h:outputStylesheet library="algaworks" name="estilo.css" />
+    </h:head>
+    <h:body>
+               <center>
+                <h:outputText value="Usuário ou senha incorretos!" rendered="#{param.erro}" style="color: darkred"/>
+            </center>
+            
+            <div id="login-dialog">
+            <form action="j_spring_security_check" method="post">
+                <h:panelGrid columns="2" cellpadding="5" styleClass="grid-login">
+                    <p:outputLabel for="j_username" value="Nome:" styleClass="up" /> 
+                    <p:inputText id="j_username"  autocomplete="false"/>
+                    <p:outputLabel for="j_password" value="Senha:" />
+                    <p:password id="j_password" />
+                    
+                    
+                    <h:commandButton value="Login"/>
+                </h:panelGrid>
+            </form>
+            </div>
+    </h:body>
+</html>
