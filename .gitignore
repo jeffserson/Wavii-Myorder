@@ -1,10 +1,4 @@
-Myorder/.classpath
-*.pageflow
-*.prefs
-Myorder/.settings/org.eclipse.wst.common.component
-*.xml
-Myorder/.settings/org.eclipse.wst.jsdt.ui.superType.container
-*.name
+
 *.class
 .DS_Store
 .metadata
