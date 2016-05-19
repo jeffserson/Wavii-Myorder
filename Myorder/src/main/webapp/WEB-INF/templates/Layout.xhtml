@@ -20,7 +20,16 @@
 	<h:outputScript target="body" library="primefaces" name="jquery/jquery.js" />
 	<h:outputScript target="body" library="algaworks" name="javascripts/app.js" />
 </h:head>
- 
+ 	
+    <h:form>
+     <p:growl id="messages" showDetail="true" sticky="true" />
+     <p:idleMonitor timeout="60000">
+        <p:ajax event="active" listener="#{loginController.timeout()}" update="messages" />
+    </p:idleMonitor>
+    
+    </h:form>
+	
+	
       
 <h:body>
         
@@ -38,7 +47,7 @@
 	<section class="aw-content  js-content">
 		<ui:insert name="content" />
 	</section>
-	
+
 </h:body>
 
 </html>

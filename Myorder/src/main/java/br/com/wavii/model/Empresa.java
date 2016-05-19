@@ -140,22 +140,22 @@ public class Empresa implements BaseEntity, Serializable{
 	@Column(length = 60,nullable = false)
 	private String fantasia;
 	@NotEmpty
-	@Column(length = 60,nullable = false)
+	@Column(length = 150,nullable = false)
 	private String razao;
-	@Column(length = 60,nullable = false)
+	@Column(length = 30,nullable = false)
 	private String inscestadual;
-	@Column(length = 60,nullable = false)
+	@Column(length = 30,nullable = false)
 	private String inscmunicipal;
-	@Column(length = 60,nullable = false)
+	@Column(length = 10,nullable = false)
 	private String cep;
 	
-	@Column(length = 60,nullable = false)
+	@Column(length = 150,nullable = false)
 	private String logradouro;
-	@Column(length = 60,nullable = false)
+	@Column(length = 200,nullable = false)
 	private String complemento;
-	@Column(length = 60,nullable = false)
+	@Column(length = 10,nullable = false)
 	private String numero;
-	@Column(length = 80,nullable = false)
+	@Column(length = 30,nullable = false)
 	private String fone;
 	@Column(length = 80,nullable = false)
 	private String homepage;

@@ -28,11 +28,11 @@ public class Localidade implements BaseEntity, Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	@Column(length = 60,nullable = false)
+	@Column(length = 30,nullable = false)
     private String codigo;
-	@Column(length = 60,nullable = false)
+	@Column(length = 150,nullable = false)
     private String nome;
-	@Column(length = 60,nullable = false)
+	@Column(length = 30,nullable = false)
     private String ibge;
 	
 	@ManyToOne(cascade=CascadeType.ALL)

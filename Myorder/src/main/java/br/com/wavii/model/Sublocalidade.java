@@ -25,9 +25,9 @@ public class Sublocalidade implements BaseEntity,  Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	@Column(length = 60,nullable = false)
+	@Column(length = 30,nullable = false)
 	private String codigo;
-	@Column(length = 60,nullable = false)
+	@Column(length = 150,nullable = false)
 	private String nome;
 	@ManyToOne
 	@JoinColumn(name="tb_uf")

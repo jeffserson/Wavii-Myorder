@@ -35,7 +35,7 @@ public class Pais implements BaseEntity, Serializable{
 	@Column(length = 60,nullable = false)
 	private String codigo;
 	
-	@Column(length = 60,nullable = false)
+	@Column(length = 150,nullable = false)
 	private String nome;
 	
 	@OneToMany(mappedBy="pais")

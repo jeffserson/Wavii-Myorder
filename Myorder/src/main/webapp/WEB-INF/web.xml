@@ -71,9 +71,12 @@
 	  </filter-mapping>
   
        <session-config>
-  <session-timeout>3</session-timeout>
+  <session-timeout>10</session-timeout>
     </session-config>
   
-  
+  <error-page>
+    <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+    <location>/login.xhtml</location>
+</error-page>
   
 </web-app>

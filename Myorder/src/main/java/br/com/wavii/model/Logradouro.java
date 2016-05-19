@@ -46,7 +46,7 @@ public class Logradouro implements BaseEntity, Serializable {
     
 	
 	@NotEmpty
-	@Column(length = 80,nullable = false)
+	@Column(length = 150,nullable = false)
 	private String nome;
 	
 	public Long getId() {

@@ -41,11 +41,11 @@ public class Cep implements BaseEntity, Serializable {
 	@ManyToOne
 	@JoinColumn(name="tb_pais")
 	private Pais pais;
-	@Column(length = 60,nullable = false)
+	@Column(length = 10,nullable = false)
 	private String cep;
-	@Column(length = 60,nullable = false)
+	@Column(length = 150,nullable = false)
 	private String logradouro;
-	@Column(length = 60,nullable = false)
+	@Column(length = 200,nullable = false)
 	private String complemento;
 	
 	public Long getId() {
