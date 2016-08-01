@@ -15,7 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.br.CNPJ;
 
@@ -24,24 +26,20 @@ import br.com.wavii.converter.BaseEntity;
 
 
 
+
+
+
+
 @Entity
 @Table(name="tb_empresa")
-public class Empresa implements BaseEntity, Serializable{
+public class Empresa implements BaseEntity,  Serializable{
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	private String codigo;
-	
-	public String getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
 	public String getNome() {
 		return nome;
 	}
@@ -136,16 +134,17 @@ public class Empresa implements BaseEntity, Serializable{
 	@CNPJ
 	@Column(length = 60,nullable = false)
 	private String cnpj;
-	@NotEmpty
+	@NotBlank(message="Nome Fantasia Obrigatorio")
 	@Column(length = 60,nullable = false)
 	private String fantasia;
-	@NotEmpty
+	@NotBlank
 	@Column(length = 150,nullable = false)
 	private String razao;
 	@Column(length = 30,nullable = false)
 	private String inscestadual;
 	@Column(length = 30,nullable = false)
 	private String inscmunicipal;
+	@NotBlank
 	@Column(length = 10,nullable = false)
 	private String cep;
 	
@@ -159,6 +158,7 @@ public class Empresa implements BaseEntity, Serializable{
 	private String fone;
 	@Column(length = 80,nullable = false)
 	private String homepage;
+	@NotBlank
 	@Column(length = 80,nullable = false)
 	private String Email;
 	
@@ -166,7 +166,7 @@ public class Empresa implements BaseEntity, Serializable{
 	@JoinColumn(name="tb_sublocalidade")
 	private Sublocalidade subloclidade;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="tb_pais")
 	private Pais pais;
 	
@@ -177,7 +177,9 @@ public class Empresa implements BaseEntity, Serializable{
 	public void setPais(Pais pais) {
 		this.pais = pais;
 	}
+
 	@ManyToOne
+	@JoinColumn(name = "logradouro_id")
 	private Logradouro tblogradouro;
 	
 	
@@ -187,11 +189,11 @@ public class Empresa implements BaseEntity, Serializable{
 	public void setTblogradouro(Logradouro tblogradouro) {
 		this.tblogradouro = tblogradouro;
 	}
-	@ManyToOne(cascade= CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="tb_uf")
 	private Uf uf;
 	
-	@ManyToOne(cascade= CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="tb_localidade")
 	private Localidade tblocalidade;
 	
@@ -217,6 +219,7 @@ public class Empresa implements BaseEntity, Serializable{
 		this.logradouro = logradouro;
 	}
 	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -224,7 +227,6 @@ public class Empresa implements BaseEntity, Serializable{
 		result = prime * result + ((Email == null) ? 0 : Email.hashCode());
 		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
 		result = prime * result + ((cnpj == null) ? 0 : cnpj.hashCode());
-		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
 		result = prime * result + ((complemento == null) ? 0 : complemento.hashCode());
 		result = prime * result + ((fantasia == null) ? 0 : fantasia.hashCode());
 		result = prime * result + ((fone == null) ? 0 : fone.hashCode());
@@ -266,11 +268,6 @@ public class Empresa implements BaseEntity, Serializable{
 			if (other.cnpj != null)
 				return false;
 		} else if (!cnpj.equals(other.cnpj))
-			return false;
-		if (codigo == null) {
-			if (other.codigo != null)
-				return false;
-		} else if (!codigo.equals(other.codigo))
 			return false;
 		if (complemento == null) {
 			if (other.complemento != null)

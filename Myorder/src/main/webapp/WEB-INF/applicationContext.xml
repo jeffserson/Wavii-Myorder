@@ -6,45 +6,62 @@
                             http://www.springframework.org/schema/beans/spring-beans.xsd
                             http://www.springframework.org/schema/security
                             http://www.springframework.org/schema/security/spring-security-3.1.xsd">
+                            
+       <b:bean id="appUserDetailsService" class="br.com.wavii.securyti.AppUserDetailsService" />        
+                     
+      <b:bean id="exceptionTranslationFilter" class="org.springframework.security.web.access.ExceptionTranslationFilter">
+	    <b:property name="accessDeniedHandler" ref="jsfAccessDeniedHandler"/>
+	    <b:property name="authenticationEntryPoint" ref="authenticationEntryPoint"/>
+	</b:bean>
+	
+	<b:bean id="jsfAccessDeniedHandler" class="br.com.wavii.securyti.JsfAccessDeniedHandler">
+	    <b:property name="loginPath" value="/AcessoNegado.xhtml" />
+	    <b:property name="contextRelative" value="true" />
+	</b:bean>
+	
+	<b:bean id="authenticationEntryPoint" class="br.com.wavii.securyti.JsfLoginUrlAuthenticationEntryPoint">
+	    <b:property name="loginFormUrl" value="/login.xhtml"/>
+	    <b:property name="redirectStrategy" ref="jsfRedirectStrategy" />
+	</b:bean>
+	
 
-        <http auto-config="true" use-expressions="true">
-        <intercept-url pattern="/index"   access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/BairrosCadastrados.xhtml"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/CadastroCep.xhtml"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/CadastroCliente.xhtml"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/CadastroLocalidade.xhtml"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/CadastroLogradouro.xhtml"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/CadastroPais.xhtml"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/CadastroSublocalidade.xhtml"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/CadastroUf.xhtml"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/CepsCadastrados.xhtml"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/LocaisCadastrados.xhtml"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/LogradourosCadastrados.xhtml"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/MyorderCadastro"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/PaisesCadastrados"  access="hasRole('ROLE_USER')"/>
-        <form-login login-page="/login.xhtml"   
-         default-target-url="/Index.xhtml" 
-         authentication-failure-url="/login.xhtml?erro=true"
+
+	<b:bean id="jsfRedirectStrategy" class="br.com.wavii.securyti.JsfRedirectStrategy"/>     
+                            
+             <http pattern="/login.xhtml" security="none" />
+             <http pattern="/Erro.xhtml" security="none" />
+             <http pattern="/javax.faces.resource/**" security="none" />
+        <http auto-config="false" use-expressions="true">
+        
+        <custom-filter ref="exceptionTranslationFilter" before="FILTER_SECURITY_INTERCEPTOR" />
+        
+        <intercept-url pattern="/index.xhtml"   access="hasAnyRole('ROLE_USER','VENDEDORES')"/>
+        <intercept-url pattern="/CadastroCaixa.xhtml"  access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/CadastroMesa.xhtml"  access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/CadastroTabela.xhtml"  access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/CadastroCliente1.xhtml"  access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/CadastroProduto.xhtml"  access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/CadastroEmpresa.xhtml"  access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/CadastroFuncionario"  access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/auxcadastro/**" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/cadastros/**" access="hasAnyRole('VENDEDORES','ROLE_USER')" />
+        <intercept-url pattern="/auxrecurso/**" access="hasRole('ROLE_USER')" />
+        <intercept-url pattern="/MovimentoMesa.xhtml"  access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/MovimentoCaixa.xhtml"  access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/VendasMesa.xhtml"  access="hasRole('ROLE_USER')"/>
+        <form-login login-page="/login.xhtml"  
+         default-target-url="/Index.xhtml" always-use-default-target="true"
+         authentication-failure-url="/login.xhtml?invalid=true"
         /> 
-    
+    <logout logout-success-url="/login.xhtml" logout-url="/j_spring_security_logout"/>
     </http>
     
-  
+  <authentication-manager>
+		<authentication-provider user-service-ref="appUserDetailsService">
+			<!-- <password-encoder hash="md5" /> -->
+		</authentication-provider>
+	</authentication-manager>
     
-    <authentication-manager>
-        <authentication-provider>
-            <jdbc-user-service data-source-ref="dataSource"
-               users-by-username-query="SELECT username, password, enable FROM usuario WHERE username=?"
-               authorities-by-username-query="SELECT Usuario_username as username, autorizacoes_nome as authority FROM usuario_autorizacao WHERE Usuario_username=?"
-            />
-        </authentication-provider>
-    </authentication-manager>
-
-    <b:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
-        <b:property name="url" value="jdbc:mysql://localhost:3306/aluno" />
-        <b:property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <b:property name="username" value="root" />
-        <b:property name="password" value="8898" />
-    </b:bean>
+    
 
 </b:beans>

@@ -33,7 +33,7 @@ public class UfMyorder implements Serializable {
     }
 	
 	public List<Uf>todos(){
-		TypedQuery<Uf> query = manager.createQuery("from Uf",Uf.class);
+		TypedQuery<Uf> query = manager.createQuery("from Uf v join fetch v.pais",Uf.class);
 		return query.getResultList();
 	}
 	

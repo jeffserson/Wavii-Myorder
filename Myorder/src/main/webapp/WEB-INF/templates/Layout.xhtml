@@ -21,12 +21,35 @@
 	<h:outputScript target="body" library="algaworks" name="javascripts/app.js" />
 </h:head>
  	
-    <h:form>
-     <p:growl id="messages" showDetail="true" sticky="true" />
-     <p:idleMonitor timeout="60000">
-        <p:ajax event="active" listener="#{loginController.timeout()}" update="messages" />
-    </p:idleMonitor>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	<p:ajaxStatus  style="display:block; margin-bottom:3em;height:24px;">
     
+    </p:ajaxStatus>
+ 
+<p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+ 
+
+ 		
+ 	
+    <h:form>
+    
+    <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+    <p:graphicImage name="/algaworks/images/loading.gif" />
+   </p:dialog>
+    
+    
+     <p:idleMonitor timeout="60000">
+        <p:ajax event="active" listener="#{loginController.timeout()}" />
+    </p:idleMonitor>
     </h:form>
 	
 	
@@ -38,8 +61,11 @@
 		<a href="#" class="aw-toggle  js-toggle">
 		<i class="fa fa-bars" ></i>
 		</a>
+		
+		
 	</header>
 	
+		
 	<aside class="aw-sidebar  js-sidebar">
 		<ui:include src="Menu.xhtml" />
 	</aside>

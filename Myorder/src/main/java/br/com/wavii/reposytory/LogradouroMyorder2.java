@@ -25,7 +25,7 @@ public class LogradouroMyorder2 implements Serializable {
 		this.manager = manager;
 	}
 	
-	public Logradouro PorId(Long id){
+	public Logradouro porId(Long id){
     	return manager.find(Logradouro.class, id);
     }
 	public List<Logradouro>todos(){

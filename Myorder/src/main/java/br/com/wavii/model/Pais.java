@@ -1,6 +1,7 @@
 package br.com.wavii.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,28 +19,36 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import br.com.wavii.converter.BaseEntity;
+
+
+
+
+
+
 
 @NamedQuery(name= "Pais.buscarPaises" , query = "select e from Pais e ")
 
 @Entity
 @Table(name="tb_pais")
-public class Pais implements BaseEntity, Serializable{
+public class Pais implements BaseEntity,  Serializable{
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	
+	@NotBlank
 	@Column(length = 60,nullable = false)
 	private String codigo;
-	
+	@NotBlank
 	@Column(length = 150,nullable = false)
 	private String nome;
 	
 	@OneToMany(mappedBy="pais")
-	private List<Uf> federacoes;
+	private List<Uf> federacoes = new ArrayList<>();
 	
 	
 	

@@ -1,7 +1,10 @@
 package br.com.wavii.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,23 +17,33 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import br.com.wavii.converter.BaseEntity;
+
+
 
 
 @Entity
 @Table(name="tb_cep")
-public class Cep implements BaseEntity, Serializable {
+public class Cep implements BaseEntity,  Serializable {
 
 	private static final long serialVersionUID = 1L;
      
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
 	@ManyToOne
 	@JoinColumn(name="tb_sublocalidade")
 	private Sublocalidade sublocalidade;
+	
+	@ManyToOne
+	@JoinColumn(name="tb_logradouro")
+	private Logradouro Tipologradouro;
+	
+	
 	
 	@ManyToOne
 	@JoinColumn(name="tb_localidade")
@@ -41,12 +54,16 @@ public class Cep implements BaseEntity, Serializable {
 	@ManyToOne
 	@JoinColumn(name="tb_pais")
 	private Pais pais;
+	@NotBlank(message="Cep É Obrigatorio")
 	@Column(length = 10,nullable = false)
 	private String cep;
 	@Column(length = 150,nullable = false)
 	private String logradouro;
 	@Column(length = 200,nullable = false)
 	private String complemento;
+	
+	
+	
 	
 	public Long getId() {
 		return id;
@@ -57,6 +74,12 @@ public class Cep implements BaseEntity, Serializable {
 	
 	
 	
+	public Logradouro getTipologradouro() {
+		return Tipologradouro;
+	}
+	public void setTipologradouro(Logradouro tipologradouro) {
+		Tipologradouro = tipologradouro;
+	}
 	public Sublocalidade getSublocalidade() {
 		return sublocalidade;
 	}
@@ -99,10 +122,12 @@ public class Cep implements BaseEntity, Serializable {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((Tipologradouro == null) ? 0 : Tipologradouro.hashCode());
 		result = prime * result + ((cep == null) ? 0 : cep.hashCode());
 		result = prime * result + ((complemento == null) ? 0 : complemento.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -122,6 +147,11 @@ public class Cep implements BaseEntity, Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Cep other = (Cep) obj;
+		if (Tipologradouro == null) {
+			if (other.Tipologradouro != null)
+				return false;
+		} else if (!Tipologradouro.equals(other.Tipologradouro))
+			return false;
 		if (cep == null) {
 			if (other.cep != null)
 				return false;
@@ -168,5 +198,8 @@ public class Cep implements BaseEntity, Serializable {
 	public String getNome() {
 		// TODO Auto-generated method stub
 		return null;
-	}	
+	}
+
+	
+		
 }

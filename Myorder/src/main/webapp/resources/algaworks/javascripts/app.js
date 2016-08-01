@@ -2,7 +2,6 @@ $(function() {
 	$('.js-toggle').bind('click', function(event) {
 		$('.js-sidebar, .js-content').toggleClass('is-toggled');
 		event.preventDefault();
-		window.location="http://localhost:8080/Myorder/login.xhtml"
 	});
 });
 

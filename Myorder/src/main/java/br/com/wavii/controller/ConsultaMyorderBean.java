@@ -27,6 +27,7 @@ import br.com.wavii.reposytory.LogradouroMyorder2;
 import br.com.wavii.reposytory.PaisMyorder2;
 import br.com.wavii.reposytory.SubLocalidadeMyorder;
 import br.com.wavii.reposytory.UfMyorder;
+import br.com.wavii.util.FacesUtil;
 import br.com.wavii.util.JpaUtil;
 
 
@@ -40,6 +41,18 @@ public class ConsultaMyorderBean  implements Serializable{
 	
 	String cep;
 	
+	String fantasia;
+	
+	
+	
+	public String getFantasia() {
+		return fantasia;
+	}
+
+	public void setFantasia(String fantasia) {
+		this.fantasia = fantasia;
+	}
+
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
@@ -259,8 +272,7 @@ public class ConsultaMyorderBean  implements Serializable{
     	empresa = manager.find(Empresa.class, empresa.getId());
     	manager.remove(empresa);
     	trx.commit();
-    	FacesMessage msg = new FacesMessage("Cadastro excluido com sucesso!");
-		FacesContext.getCurrentInstance().addMessage(null, msg);
+    	FacesUtil.addInfoMessage("Empresa Excluida Com Sucesso");
     }
 	public void excluirloc(Localidade localidade){
 		EntityManager manager = JpaUtil.getEntityManager();
@@ -269,10 +281,58 @@ public class ConsultaMyorderBean  implements Serializable{
     	localidade = manager.find(Localidade.class, localidade.getId());
     	manager.remove(localidade);
     	trx.commit();
-    	FacesMessage msg = new FacesMessage("Cidade excluida com sucesso!");
-		FacesContext.getCurrentInstance().addMessage(null, msg);
+    	FacesUtil.addInfoMessage("Cidade Excluida Com Sucesso");
+    }
+	public void excluirloc(Sublocalidade sublocalidade){
+		EntityManager manager = JpaUtil.getEntityManager();
+		EntityTransaction trx = manager.getTransaction();
+		trx.begin();
+    	sublocalidade = manager.find(Sublocalidade.class, sublocalidade.getId());
+    	manager.remove(sublocalidade);
+    	trx.commit();
+    	FacesUtil.addInfoMessage("Bairro Excluido Com Sucesso");
+    }
+	public void excluirloc(Cep cep){
+		EntityManager manager = JpaUtil.getEntityManager();
+		EntityTransaction trx = manager.getTransaction();
+		trx.begin();
+    	cep = manager.find(Cep.class,cep.getId());
+    	manager.remove(cep);
+    	trx.commit();
+    	FacesUtil.addInfoMessage("Cep Excluido Com Sucesso");
+    }
+	public void excluirloc(Pais pais){
+		EntityManager manager = JpaUtil.getEntityManager();
+		EntityTransaction trx = manager.getTransaction();
+		trx.begin();
+    	pais = manager.find(Pais.class, pais.getId());
+    	manager.remove(pais);
+    	trx.commit();
+    	FacesUtil.addInfoMessage("Pais Excluido Com Sucesso");
     }
     
+	public void excluirloc(Uf uf){
+		EntityManager manager = JpaUtil.getEntityManager();
+		EntityTransaction trx = manager.getTransaction();
+		trx.begin();
+    	uf = manager.find(Uf.class, uf.getId());
+    	manager.remove(uf);
+    	trx.commit();
+    	FacesUtil.addInfoMessage("Estado Excluido Com Sucesso");
+    }
+	public void excluirloc(Logradouro logradouro){
+		EntityManager manager = JpaUtil.getEntityManager();
+		EntityTransaction trx = manager.getTransaction();
+		trx.begin();
+    	logradouro = manager.find(Logradouro.class, logradouro.getId());
+    	manager.remove(logradouro);
+    	trx.commit();
+    	FacesUtil.addInfoMessage("Tipo De Logradouro Excluido Com Sucesso");
+    }
+    
+	
+	
+	
 	
 	public void pesquisarpais(){
 		paises = paismy.porNomeSemelhante(nome);
@@ -286,5 +346,10 @@ public class ConsultaMyorderBean  implements Serializable{
 	public void pesquisarcidade(){
 		localidades = cidmy.porNomeSemelhante(nome);
 	}
-	
+	public void pesquisarempresa(){
+		empresas = empresamy.porNomeSemelhante(fantasia);
+	}
+	public void pesquisarbairro(){
+		sublocalidades = baimy.porNomeSemelhante(nome);
+	}
 }

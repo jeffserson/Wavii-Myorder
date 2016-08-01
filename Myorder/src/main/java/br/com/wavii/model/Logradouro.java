@@ -14,9 +14,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.wavii.converter.BaseEntity;
+
+
+
+
 
 
 @Entity
@@ -25,27 +30,17 @@ public class Logradouro implements BaseEntity, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name="tb_logradouro")
-	private Empresa empresa;
 	
 	
-	public Empresa getEmpresa() {
-		return empresa;
-	}
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
-	}
-	
-	@NotEmpty
+	@NotBlank
 	@Column(length = 60,nullable=false)
 	private String codigo;
     
 	
-	@NotEmpty
+	@NotBlank
 	@Column(length = 150,nullable = false)
 	private String nome;
 	
@@ -72,7 +67,6 @@ public class Logradouro implements BaseEntity, Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
-		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
@@ -90,11 +84,6 @@ public class Logradouro implements BaseEntity, Serializable {
 			if (other.codigo != null)
 				return false;
 		} else if (!codigo.equals(other.codigo))
-			return false;
-		if (empresa == null) {
-			if (other.empresa != null)
-				return false;
-		} else if (!empresa.equals(other.empresa))
 			return false;
 		if (id == null) {
 			if (other.id != null)

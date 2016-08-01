@@ -4,6 +4,39 @@
 	xmlns:p="http://primefaces.org/ui">
 	
 	
+	
+	
+	<script>
+            PrimeFaces.locales['pt'] = {
+                closeText: 'Fechar',
+                prevText: 'Anterior',
+                nextText: 'Próximo',
+                currentText: 'Começo',
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+                weekHeader: 'Semana',
+                firstDay: 0,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Só Horas',
+                timeText: 'Tempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                ampm: false,
+                month: 'Mês',
+                week: 'Semana',
+                day: 'Dia',
+                allDayText: 'Todo o Dia'
+            };
+        </script>
+	
+	
+	
 		<h:form>
 		
 		<nav class="aw-menu">
@@ -11,16 +44,38 @@
 		<p:menubar>  
 		<p:submenu label="Menu">
 			<p:submenu label="Cadastros">
-				<p:menuitem value="Empresa" action="/MyorderCadastro?faces-redirect=true"/> 
+			<p:menuitem value="Empresa" outcome="/cadastros/EmpresasCadastradas" /> 
+			<p:menuitem value="Produto" outcome="/cadastros/ProdutosCadastrados" /> 
+			<p:menuitem value="Cliente" outcome="/cadastros/ClientesCadastrados" />
+			<p:menuitem value="Funcionario" outcome="/cadastros/FuncionariosCadastrados" />
 			</p:submenu>
+			<p:submenu label="Processo">
+			<p:submenu label="Movimento Mesa">
+			<p:menuitem  value="Mesa" action="/MovimentoMesa?faces-redirect=true"  />
+			<p:menuitem  value="Caixa" action="/MovimentoCaixa?faces-redirect=true"  />
+			</p:submenu>
+			</p:submenu>
+			<p:submenu label="Auxiliares">
 			<p:submenu label="Aux tabelas">
-			<p:menuitem value="Pais" action="/PaisesCadastrados?faces-redirect=true"></p:menuitem>
-			<p:menuitem value="Uf"   action="/UfCadastrados?faces-redirect=true"></p:menuitem>
-			<p:menuitem value="Localidade"  action="/LocaisCadastrados?faces-redirect=true"></p:menuitem>
-			<p:menuitem value="Sublocalidade" action="/BairrosCadastrados?faces-redirect=true" />
-			<p:menuitem value="Tipo Logradouro"  action="/LogradourosCadastrados2?faces-redirect=true"/>
-			<p:menuitem value="Cep"  action="/CepsCadastrados?faces-redirect=true" />
+			<p:menuitem value="Pais"   outcome="/auxcadastro/PaisesCadastrados"></p:menuitem>
+			<p:menuitem value="Uf"  outcome="/auxcadastro/UfCadastrados" ></p:menuitem>
+			<p:menuitem value="Localidade" outcome="/auxcadastro/LocaisCadastrados" ></p:menuitem>
+			<p:menuitem value="Sublocalidade"  outcome="/auxcadastro/BairrosCadastrados" />
+			<p:menuitem value="Tipo Logradouro" outcome="/auxcadastro/LogradourosCadastrados2" />
+			<p:menuitem value="Cep"  outcome="/auxcadastro/CepsCadastrados" />
 			</p:submenu>
+			<p:submenu label="Aux Recursos">
+			<p:submenu label="Preço">
+			<p:menuitem  value="Tabela de preço"  outcome ="/auxrecurso/TabelasCadastradas"/>
+			<p:menuitem  value="Precificacão"  outcome ="/auxrecurso/CadastroPreço"/>
+			</p:submenu>
+			<p:submenu label="Mesa - Caixa">
+			<p:menuitem  value="Mesas Cadastradas"  outcome ="/CadastroMesa"/>
+			<p:menuitem  value="Caixas Cadastrados"  outcome ="/CadastroCaixa"/>
+			</p:submenu>
+			</p:submenu>
+			</p:submenu>
+			<p:menuitem value="Sair" url="/j_spring_security_logout"/>
 			</p:submenu>
 			
 		</p:menubar>

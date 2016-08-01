@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.swing.JOptionPane;
 
 @ManagedBean
 @RequestScoped
@@ -20,7 +21,7 @@ public class LoginController implements Serializable {
 	            .invalidateSession();
 	    FacesContext.getCurrentInstance().getExternalContext()
 	            .redirect("login.xhtml");
-	   
+	    
 
 	}
 	

@@ -8,8 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
-
-
+import br.com.wavii.model.Logradouro;
 import br.com.wavii.model.Sublocalidade;
 
 
@@ -39,5 +38,10 @@ public class SubLocalidadeMyorder implements Serializable {
 		trx.begin();
 		this.manager.merge(sublocalidade);
 		trx.commit();
+	}
+	public List<Sublocalidade> porNomeSemelhante(String nome) {
+		return manager.createQuery("from Sublocalidade where nome like :nome", Sublocalidade.class)
+				.setParameter("nome", "%" + nome + "%")
+				.getResultList();
 	}
 }

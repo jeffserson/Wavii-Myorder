@@ -1,6 +1,7 @@
 package br.com.wavii.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,26 +17,30 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.wavii.converter.BaseEntity;
 
+
 @Entity
 @Table(name="tb_localidade")
-public class Localidade implements BaseEntity, Serializable {
+public class Localidade implements BaseEntity,  Serializable {
 
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank
 	@Column(length = 30,nullable = false)
     private String codigo;
+	@NotBlank
 	@Column(length = 150,nullable = false)
     private String nome;
 	@Column(length = 30,nullable = false)
     private String ibge;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="tb_uf_id")
 	private Uf uf;
 	
@@ -47,8 +52,8 @@ public class Localidade implements BaseEntity, Serializable {
 	public void setUf(Uf uf) {
 		this.uf = uf;
 	}
-	@OneToMany(mappedBy="localidade")
-	private List<Sublocalidade> sublocalidades;
+	@OneToMany(mappedBy="localidade",cascade=CascadeType.ALL)
+	private List<Sublocalidade> sublocalidades = new ArrayList<>();
 	
 	public List<Sublocalidade> getSublocalidades() {
 		return sublocalidades;

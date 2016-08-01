@@ -34,7 +34,7 @@ public class LocalidadeMyorder implements Serializable {
     }
 	
 	public List<Localidade>todos(){
-		TypedQuery<Localidade> query = manager.createQuery("from Localidade",Localidade.class);
+		TypedQuery<Localidade> query = manager.createQuery("from Localidade v join fetch v.uf",Localidade.class);
 		return query.getResultList();
 	}
 	

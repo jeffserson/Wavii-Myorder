@@ -3,6 +3,7 @@ package br.com.wavii.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +15,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import br.com.wavii.converter.BaseEntity;
+
+
 
 @Entity
 @Table(name="tb_sublocalidade")
@@ -23,10 +28,12 @@ public class Sublocalidade implements BaseEntity,  Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank
 	@Column(length = 30,nullable = false)
 	private String codigo;
+	@NotBlank
 	@Column(length = 150,nullable = false)
 	private String nome;
 	@ManyToOne
@@ -35,6 +42,10 @@ public class Sublocalidade implements BaseEntity,  Serializable {
 	@ManyToOne
 	@JoinColumn(name="tb_localidade")
 	private Localidade localidade;
+	@OneToMany(mappedBy="subloclidade" , cascade = CascadeType.ALL)
+	private List<Empresa> empresa;
+	
+	
 	public Localidade getLocalidade() {
 		return localidade;
 	}
@@ -46,6 +57,7 @@ public class Sublocalidade implements BaseEntity,  Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigo == null) ? 0 : codigo.hashCode());
+		result = prime * result + ((empresa == null) ? 0 : empresa.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((localidade == null) ? 0 : localidade.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
@@ -65,6 +77,11 @@ public class Sublocalidade implements BaseEntity,  Serializable {
 			if (other.codigo != null)
 				return false;
 		} else if (!codigo.equals(other.codigo))
+			return false;
+		if (empresa == null) {
+			if (other.empresa != null)
+				return false;
+		} else if (!empresa.equals(other.empresa))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -112,6 +129,12 @@ public class Sublocalidade implements BaseEntity,  Serializable {
 	}
 	public void setUf(Uf uf) {
 		this.uf = uf;
+	}
+	public List<Empresa> getEmpresa() {
+		return empresa;
+	}
+	public void setEmpresa(List<Empresa> empresa) {
+		this.empresa = empresa;
 	}
 
 	

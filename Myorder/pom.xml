@@ -10,10 +10,19 @@
 	</properties>
 
 	<dependencies>
+	
+	
+     
+	<dependency>
+    <groupId>net.bootsfaces</groupId>
+    <artifactId>bootsfaces</artifactId>
+    <version>0.7.0</version>
+     </dependency>
+	
 		<dependency>
 			<groupId>org.primefaces</groupId>
 			<artifactId>primefaces</artifactId>
-			<version>5.3</version>
+			<version>6.0</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
@@ -118,7 +127,26 @@
 		</dependency>
 		
 		
+		<dependency>
+ <groupId>com.xpert</groupId>
+ <artifactId>xpert-framework</artifactId>
+ <version>1.8.1</version>
+</dependency>
 		
+		
+		
+   
+		
+
+		
+		
+		
+		
+		<dependency>
+    <groupId>dom4j</groupId>
+    <artifactId>dom4j</artifactId>
+    <version>1.6.1</version>
+</dependency>
 		
 		
 	</dependencies>
@@ -143,6 +171,14 @@
 			<url>http://repository.primefaces.org</url>
 			<layout>default</layout>
 		</repository>
+		
+		<repository>
+    <id>xpert-framework</id>
+    <name>xpert-framework</name>
+    <url>http://xpert-framework.github.io/maven/</url>
+</repository>
+		
+		
 	</repositories>
 
 </project>

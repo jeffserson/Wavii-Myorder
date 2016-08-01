@@ -1,6 +1,7 @@
 package br.com.wavii.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,23 +17,31 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import br.com.wavii.converter.BaseEntity;
+
+
+
+
+
+
 
 @NamedQuery(name= "Uf.buscaruf" , query = "select e from Uf e")
 @Entity
 @Table(name="tb_uf")
-public class Uf implements BaseEntity, Serializable {
+public class Uf implements BaseEntity,  Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	
+	@NotBlank
 	private String codigo;
 	
 	
-	
+	@NotBlank
 	@Column(length = 60,nullable = false)
 	private String nome;
 	
@@ -42,15 +51,18 @@ public class Uf implements BaseEntity, Serializable {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name="tb_pais")
 	private Pais pais;
 	
 	@OneToMany(mappedBy="uf", cascade=CascadeType.ALL)
-	private List<Localidade> localidade;
+	private List<Localidade> localidade = new ArrayList<>();
+	
+	
+	
 	
 	@OneToMany(mappedBy="uf", cascade=CascadeType.ALL)
-	private List<Empresa> empresas;
+	private List<Empresa> empresas = new ArrayList<>();
 	
 	public List<Empresa> getEmpresas() {
 		return empresas;
@@ -85,6 +97,8 @@ public class Uf implements BaseEntity, Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
