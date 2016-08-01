@@ -1,0 +1,120 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/Layout.xhtml">
+	
+	<ui:define name="content">
+	                                                        
+		<h1 class="aw-page-title">Ceps Cadastrados</h1>
+		          
+		<h:form id="frm">
+			<p:messages autoUpdate="true" />
+			<f:metadata>
+			 <f:viewAction action="#{consultaMyorderBean.consultar8}" /> 
+			 </f:metadata>
+		
+		<div  style="margin-top: 5px; margin-bottom: 20px">
+    		<p:inputText id="nome" size="40" value="#{consultaMyorderBean.cep}" placeholder="Numero do cep">
+    		</p:inputText>
+    		<p:spacer width="10px"/>
+    		<p:commandButton value="Pesquisar" action="#{consultaMyorderBean.pesquisarcep}" update="@form"/>
+    	    </div>
+    	    
+		<p:dataTable value="#{consultaMyorderBean.ceps}" 
+		 var="cep"   
+		 paginator="true" 
+		 rows="10" 
+		 paginatorPosition="bottom"
+		 >
+		 
+		  <p:column  headerText="#" width="40">
+		  <h:outputText  value="#{cep.id}"></h:outputText>
+		  </p:column>
+		  
+		  <p:column headerText="Cep:" sortBy="#{cep.cep}">
+		  <h:outputText value="#{cep.cep}"></h:outputText>
+		  </p:column>
+		  
+		  <p:column headerText="Tipo Logradouro:" sortBy="#{cep.tipologradouro.nome}">
+		  <h:outputText value="#{cep.tipologradouro.nome}"></h:outputText>
+		  </p:column>
+		  
+		  
+		<p:column headerText="Logradouro:" sortBy="#{cep.logradouro}">
+		  <h:outputText value="#{cep.logradouro}"></h:outputText>
+		  </p:column>
+		 
+		  <p:column headerText="Complemento:" sortBy="#{cep.complemento}">
+		  <h:outputText value="#{cep.complemento}"></h:outputText>
+		  </p:column>
+		  
+		   <p:column>
+		   <p:button value="editar" icon="ui-icon-pencil" title="Editar" outcome="/auxcadastro/CadastroCep">
+						<f:param name="id" value="#{cep.id}" />
+			</p:button>
+		   
+		  
+		  <p:commandButton process="@this" value="excluir" actionListener="#{consultaMyorderBean.excluirloc(cep)}"
+		  icon="ui-icon-trash"  action="#{consultaMyorderBean.consultar8}" update="@form"   >
+	      <p:confirm header="Confirmacão" message="deseja excluir?" icon="ui-icon-alert" />
+		  </p:commandButton>
+		  
+		  
+		  
+		  
+		  <p:confirmDialog global="true" showEffect="explode" hideEffect="fade">
+        <p:commandButton value="sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" actionListener="#{consultaMyorderBean.excluirloc(cep)}" />
+        <p:commandButton value="Não"  icon="ui-icon-close" action="/auxcadastro/CepsCadastrados?faces-redirect=true" process="@this"/>
+        </p:confirmDialog>
+		   </p:column>
+		</p:dataTable>
+		
+		
+		<div class="ui-fluid">
+		
+		<p:dialog  header="Informacão" widgetVar="carDialog" modal="true" 
+		    resizable="false"  dynamic="true" responsive="true">
+         
+          
+            <p:panelGrid columns="2" columnClasses="label,value"  layout="tabular"  >
+               
+                <p:outputLabel value="id:" />
+                <p:inputText value="#{cadastroMyordemBean.cep.id}"></p:inputText>
+ 
+                <p:outputLabel value="Codigo:" />
+                <p:inputText value="#{cadastroMyordemBean.cep.cep}"></p:inputText>
+ 
+                <p:outputLabel value="Complemento:" />
+                <p:inputText styleClass="up" value="#{cadastroMyordemBean.cep.complemento}"></p:inputText>
+ 
+ 
+                <p:outputLabel value="Logradouro:" />
+                <p:inputText styleClass="up" value="#{cadastroMyordemBean.cep.logradouro}"></p:inputText>
+ 
+             
+ 
+                <p:commandButton value="editar" actionListener="#{cadastroMyordemBean.salvarcep}" 
+                 action="/PaisesCadastrados?faces-redirect=true"></p:commandButton>
+                 <p:commandButton value="cancelar"></p:commandButton>
+            </p:panelGrid>
+           
+    </p:dialog>
+    </div>
+		</h:form>
+		
+		<h:form>
+		<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton icon="	fa fa-plus-circle" value="Novo" action="/auxcadastro/CadastroCep?faces-redirect=true"
+						  />
+				</p:toolbarGroup>
+				
+			</p:toolbar>
+		</h:form>
+		
+		
+		
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,113 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/Layout.xhtml">
+	
+	<ui:define name="content">
+	                                                        
+		<h1 class="aw-page-title">Bairros Cadastrados</h1>
+		          
+		<h:form id="frm">
+			<p:messages autoUpdate="true" />
+			<f:metadata>
+			 <f:viewAction action="#{consultaMyorderBean.consultar7}" /> 
+			 </f:metadata>
+		
+		<div  style="margin-top: 5px; margin-bottom: 20px">
+    		<p:inputText  id="nome" size="40" value="#{consultaMyorderBean.nome}"  placeholder="Nome do Bairro">
+    		</p:inputText>
+    		<p:spacer width="10px"/>
+    		<p:commandButton value="Pesquisar"  action="#{consultaMyorderBean.pesquisarbairro}"  update="@form"/>
+    	   </div>
+		
+		
+		
+		
+		<p:dataTable value="#{consultaMyorderBean.sublocalidades}" 
+		 emptyMessage="Nenhum Bairro Cadastrado"
+		 var="sublocalidade"   
+		 paginator="true" 
+		 rows="10" 
+		 paginatorPosition="bottom"
+		 >
+		 
+		 <p:column headerText="#:" width="40">
+		  <h:outputText value="#{sublocalidade.id}"></h:outputText>
+		  </p:column>
+		 
+		 
+		  <p:column headerText="Codigo:" sortBy="#{sublocalidade.codigo}">
+		  <h:outputText value="#{sublocalidade.codigo}"></h:outputText>
+		  </p:column>
+		<p:column headerText="Bairro:" sortBy="#{sublocalidade.nome}">
+		  <h:outputText value="#{sublocalidade.nome}"></h:outputText>
+		  </p:column>
+		 
+		 
+		  
+		   <p:column>
+		  
+		  <p:button value="editar" icon="ui-icon-pencil" title="Editar" outcome="/auxcadastro/CadastroSublocalidade">
+						<f:param name="id" value="#{sublocalidade.id}" />
+			</p:button>
+		   
+		  
+		  
+		  <p:commandButton process="@this" value="excluir" actionListener="#{consultaMyorderBean.excluirloc(sublocalidade)}"
+		  icon="ui-icon-trash"  action="#{consultaMyorderBean.consultar7}" update="@form"   >
+	      <p:confirm header="Confirmacão" message="deseja excluir?" icon="ui-icon-alert" />
+		  </p:commandButton>
+		  
+		  
+		  <p:confirmDialog global="true" showEffect="explode" hideEffect="fade">
+        <p:commandButton value="sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" actionListener="#{consultaMyorderBean.excluirloc(sublocalidade)}" />
+        <p:commandButton value="Não"  icon="ui-icon-close" action="/auxcadastro/BairrosCadastrados?faces-redirect=true" process="@this"/>
+        </p:confirmDialog>
+		  
+		  
+		   </p:column>
+		</p:dataTable>
+		
+		
+		<div class="ui-fluid">
+		
+		<p:dialog  header="Informacão" widgetVar="carDialog" modal="true" 
+		    showEffect="explode" hideEffect="bounce" resizable="false"  dynamic="true" responsive="true">
+         
+          
+            <p:panelGrid  columns="2" columnClasses="label,value"  layout="tabular">
+               
+                <p:outputLabel value="id:" />
+                <p:outputLabel value="#{cadastroMyordemBean.sublocalidade.id}"></p:outputLabel>
+ 
+                <p:outputLabel value="Codigo:" />
+                <p:inputText value="#{cadastroMyordemBean.sublocalidade.codigo}"></p:inputText>
+ 
+                <p:outputLabel value="Bairro:" />
+                <p:inputText value="#{cadastroMyordemBean.sublocalidade.nome}"></p:inputText>
+ 
+                <p:commandButton process="@this" value="editar"  actionListener="#{cadastroMyordemBean.salvarsubloc}" 
+                action="/BairrosCadastrados?faces-redirect=true" update="@form"></p:commandButton>
+                 <p:commandButton value="cancelar" action="/BairrosCadastrados?faces-redirect=true"></p:commandButton>
+            </p:panelGrid>
+           
+    </p:dialog>
+    </div>
+		</h:form>
+		
+		<h:form>
+		<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton icon="	fa fa-plus-circle" value="Novo" action="/auxcadastro/CadastroSublocalidade?faces-redirect=true"
+						  />
+				</p:toolbarGroup>
+				
+			</p:toolbar>
+		</h:form>
+		
+		
+		
+	</ui:define>
+</ui:composition>

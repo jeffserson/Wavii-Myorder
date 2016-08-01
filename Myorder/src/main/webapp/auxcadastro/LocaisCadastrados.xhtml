@@ -1,0 +1,91 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/Layout.xhtml">
+	
+	<ui:define name="content">
+	                                                        
+		<h1 class="aw-page-title">Cidades Cadastradas</h1>
+		          
+		<h:form id="frm">
+			<p:messages autoUpdate="true" />
+			<f:metadata>
+			 <f:viewAction action="#{consultaMyorderBean.consultar6}" />
+			 </f:metadata>
+		
+		<div  style="margin-top: 5px; margin-bottom: 20px">
+    		<p:inputText id="nome" size="40" value="#{consultaMyorderBean.nome}" placeholder="Nome da cidade">
+    		</p:inputText>
+    		<p:spacer width="10px"/>
+    		<p:commandButton value="Pesquisar" action="#{consultaMyorderBean.pesquisarcidade}" update="@form"/>
+    	    </div>
+		
+		
+		<p:dataTable value="#{consultaMyorderBean.localidades}" 
+		 var="localidade"
+		 paginator="true" 
+		 rows="10" 
+		 paginatorPosition="bottom"
+		 >
+		 
+		  <p:column headerText="#:" width="40">
+		  <h:outputText value="#{localidade.id}"></h:outputText>
+		  </p:column>
+		 
+		 
+		  <p:column headerText="Codigo:" sortBy="#{localidade.codigo}">
+		  <h:outputText value="#{localidade.codigo}"></h:outputText>
+		  </p:column>
+		  
+		  <p:column headerText="Estado:" sortBy="#{localidade.uf.nome}">
+		  <h:outputText styleClass="up" value="#{localidade.uf.nome}"></h:outputText>
+		  </p:column>
+		  
+		  
+		  <p:column headerText="Cidade:" sortBy="#{localidade.nome}">
+		  <h:outputText styleClass="up" value="#{localidade.nome}"></h:outputText>
+		  </p:column>
+		 
+		  
+		    <p:column headerText="IBGE:" sortBy="#{localidade.ibge}">
+		  <h:outputText value="#{localidade.ibge}"></h:outputText>
+		  </p:column>
+		 
+		  
+		   <p:column>
+		   
+		     <p:button value="Editar" icon="ui-icon-pencil" title="Editar" outcome="/auxcadastro/CadastroLocalidade">
+						<f:param name="id" value="#{localidade.id}" />
+					</p:button>
+		  
+		  <p:commandButton process="@this" value="excluir" actionListener="#{consultaMyorderBean.excluirloc(localidade)}"
+		  icon="ui-icon-trash"  action="#{consultaMyorderBean.consultar6}" update="@form"   >
+	      <p:confirm header="Confirmacão" message="deseja excluir?" icon="ui-icon-alert" />
+		  </p:commandButton>
+		  
+		  
+		<p:confirmDialog global="true" showEffect="explode" hideEffect="fade">
+        <p:commandButton value="sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" actionListener="#{consultaMyorderBean.excluirloc(localidade)}" />
+        <p:commandButton value="Não"  icon="ui-icon-close" action="/auxcadastro/LocaisCadastrados?faces-redirect=true" process="@this"/>
+        </p:confirmDialog>
+		
+		   </p:column>
+		</p:dataTable>
+		</h:form>
+		
+		<h:form>
+		<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton icon="	fa fa-plus-circle" value="Novo" action="/auxcadastro/CadastroLocalidade?faces-redirect=true"
+						  />
+				</p:toolbarGroup>
+				
+			</p:toolbar>
+		</h:form>
+		
+		
+		
+	</ui:define>
+</ui:composition>

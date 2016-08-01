@@ -1,0 +1,66 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+	<p:panelGrid style="margin-top: 20px" columns="4" layout="grid" styleClass="panelgrid-noborder"
+		columnClasses="ui-grid-col-1, ui-grid-col-4, ui-grid-col-1, ui-grid-col-2">
+		 
+		 
+		    
+		    <p:outputLabel value="Total:" style="font-weight: bold; font-size: 1.1em"/>
+           <h:outputText value="#{cadastroMyorderBean2.movimentomesa.total}" 
+        	style="font-weight: bold; font-size: 1.1em" id="totalmesa">
+        	<f:convertNumber type="currency" />
+           </h:outputText>
+		
+		   
+			  <p:outputLabel value="Status:"/>
+              <h:outputText value="#{cadastroMyorderBean2.movimentomesa.statusmesa.descricao}" />
+                 
+                
+                 
+                 
+		      
+		    
+		        <h:outputText value="Cliente: " />
+                <p:selectOneMenu   id="cliente"  value="#{cadastroMyorderBean2.movimentomesa.cliente}" 
+                  effect="fade" disabled="#{cadastroMyorderBean2.movimentomesa.naoAlteravel}"
+                 filter="true" filterMatchMode="startsWith" converter="converter" required="true">
+                <f:selectItems    value="#{cadastroMyorderBean2.clientes}" var="cliente"
+                itemDisabled="#{cliente}" itemLabel="#{cliente.nome}"  /> 
+                </p:selectOneMenu>
+		    
+		    
+		        <h:outputText value="Mesa: " />
+                <p:selectOneMenu  id="mesa"  value="#{cadastroMyorderBean2.movimentomesa.mesa}" 
+                 editable="true" disabled="#{cadastroMyorderBean2.movimentomesa.naoAlteravel}"
+                 filter="true" filterMatchMode="startsWith" converter="converter" required="true" requiredMessage="Informe A Mesa">
+                <f:selectItem itemLabel="Selecione" noSelectionOption="true" />
+                <f:selectItems   value="#{cadastroMyorderBean2.mesas}" var="mesa"
+                itemValue="#{mesa}" itemLabel="#{mesa.nome}"  /> 
+                </p:selectOneMenu>
+		    
+		    
+		    
+			 
+			
+		 <p:outputLabel value="Inicio:" rendered="#{cadastroMyorderBean2.movimentomesa.existente}"/>
+        <h:outputText value="#{cadastroMyorderBean2.movimentomesa.inicio}"  rendered="#{cadastroMyorderBean2.movimentomesa.existente}">
+        	<f:convertDateTime timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy HH:mm:ss" />
+        </h:outputText>
+			
+	    <p:outputLabel value="Fim:" rendered="#{cadastroMyorderBean2.movimentomesa.naoAlteravel}"/>
+        <h:outputText value="#{cadastroMyorderBean2.movimentomesa.fim}"  rendered="#{cadastroMyorderBean2.movimentomesa.naoAlteravel}">
+        	<f:convertDateTime timeZone="America/Sao_Paulo" pattern="dd/MM/yyyy HH:mm:ss" />
+        </h:outputText> 
+			
+			
+			
+			
+			
+			
+			</p:panelGrid>
+  	
+</ui:composition>
