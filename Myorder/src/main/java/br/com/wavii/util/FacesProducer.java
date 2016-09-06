@@ -12,16 +12,16 @@ public class FacesProducer {
 	public FacesContext getFacesContext() {
 		return FacesContext.getCurrentInstance();
 	}
-	
+
 	@Produces
 	@RequestScoped
 	public ExternalContext getExternalContext() {
 		return getFacesContext().getExternalContext();
 	}
-	
+
 	@Produces
 	@RequestScoped
 	public HttpServletResponse getHttpServletResponse() {
-		return ((HttpServletResponse) getExternalContext().getResponse());	
+		return ((HttpServletResponse) getExternalContext().getResponse());
 	}
 }

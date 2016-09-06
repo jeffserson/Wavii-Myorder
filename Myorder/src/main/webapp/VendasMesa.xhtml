@@ -13,6 +13,7 @@
     	
 	    	<h1>Pesquisa de Vendas</h1>
 	    	<h:form id="form">
+	    	
 	    	<p:toolbar style="margin-top: 20px">
 	    		<p:toolbarGroup>
 	    			<p:commandButton value="Pesquisar" action="#{pesquisaPedidosBean.pesquisar}"
@@ -46,12 +47,13 @@
 	    		
 	    		<p:outputLabel value="Cliente" />
 	    		<p:inputText size="40" value="#{pesquisaPedidosBean.filtro.nomeCliente}" />
-	    		
+	    			
 	    		<p:outputLabel value="Status" />
-	    		<p:selectManyCheckbox value="#{pesquisaPedidosBean.filtro.statuses}">
+	    		<p:selectManyCheckbox  value="#{pesquisaPedidosBean.filtro.statuses}">
 	    			<f:selectItems value="#{pesquisaPedidosBean.statuses}" var="status"
 	    				itemValue="#{status}" itemLabel="#{status.descricao}" />
 	    		</p:selectManyCheckbox>
+	    			
 	    	</p:panelGrid>
 	    	
 	    	

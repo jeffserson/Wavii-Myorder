@@ -30,21 +30,15 @@ import br.com.wavii.reposytory.UfMyorder;
 import br.com.wavii.util.FacesUtil;
 import br.com.wavii.util.JpaUtil;
 
-
-
-
-
 @Named
 @ViewScoped
-public class ConsultaMyorderBean  implements Serializable{
+public class ConsultaMyorderBean implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	String cep;
-	
+
 	String fantasia;
-	
-	
-	
+
 	public String getFantasia() {
 		return fantasia;
 	}
@@ -58,18 +52,18 @@ public class ConsultaMyorderBean  implements Serializable{
 	}
 
 	public String getNome() {
-		
-		
+
 		return nome;
 	}
 
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	String nome;
-	
+
 	private Uf uf;
-	
+
 	public Uf getUf() {
 		return uf;
 	}
@@ -85,19 +79,18 @@ public class ConsultaMyorderBean  implements Serializable{
 	public void setUfs(List<Uf> ufs) {
 		this.ufs = ufs;
 	}
+
 	private List<Uf> ufs;
-	
+
 	private Empresa empresa;
-	
+
 	private Pais pais;
-	
+
 	private Logradouro logradouro;
-	
+
 	private Localidade localidade;
-	
+
 	private Cep cep1;
-	
-	
 
 	public Cep getCep1() {
 		return cep1;
@@ -118,8 +111,9 @@ public class ConsultaMyorderBean  implements Serializable{
 	public void setCeps(List<Cep> ceps) {
 		this.ceps = ceps;
 	}
+
 	private List<Cep> ceps;
-	
+
 	public Localidade getLocalidade() {
 		return localidade;
 	}
@@ -151,14 +145,13 @@ public class ConsultaMyorderBean  implements Serializable{
 	public void setSublocalidades(List<Sublocalidade> sublocalidades) {
 		this.sublocalidades = sublocalidades;
 	}
+
 	private List<Localidade> localidades;
-	
-	
+
 	private Sublocalidade sublocalidade;
-	
+
 	private List<Sublocalidade> sublocalidades;
-	
-	
+
 	public Pais getPais() {
 		return pais;
 	}
@@ -174,8 +167,9 @@ public class ConsultaMyorderBean  implements Serializable{
 	public void setPaises(List<Pais> paises) {
 		this.paises = paises;
 	}
+
 	private List<Pais> paises;
-	
+
 	public Empresa getEmpresa() {
 		return empresa;
 	}
@@ -183,8 +177,9 @@ public class ConsultaMyorderBean  implements Serializable{
 	public void setEmpresa(Empresa empresa) {
 		this.empresa = empresa;
 	}
+
 	private List<Empresa> empresas;
-	
+
 	public List<Empresa> getEmpresas() {
 		return empresas;
 	}
@@ -192,9 +187,7 @@ public class ConsultaMyorderBean  implements Serializable{
 	public void setEmpresas(List<Empresa> empresas) {
 		this.empresas = empresas;
 	}
-	
-	
-	
+
 	@Inject
 	private EmpresaMyorder empresamy;
 	@Inject
@@ -209,10 +202,9 @@ public class ConsultaMyorderBean  implements Serializable{
 	private SubLocalidadeMyorder baimy;
 	@Inject
 	private CepMyorder cepmy;
-	
-	
+
 	private List<Logradouro> logradouros;
-	
+
 	public Logradouro getLogradouro() {
 		return logradouro;
 	}
@@ -229,127 +221,132 @@ public class ConsultaMyorderBean  implements Serializable{
 		this.logradouros = logradouros;
 	}
 
-	
-	public void consultar2(){
+	public void consultar2() {
 		this.empresas = empresamy.todos();
 		empresa = new Empresa();
 	}
-	
-	public void consultar3(){
+
+	public void consultar3() {
 		this.paises = paismy.todos();
 		pais = new Pais();
 	}
-	
-	public void consultar4(){
+
+	public void consultar4() {
 		this.logradouros = log1.todos();
 		logradouro = new Logradouro();
 	}
-	
-	public void consultar5(){
+
+	public void consultar5() {
 		this.ufs = umy.todos();
 		uf = new Uf();
 	}
-	public void consultar6(){
+
+	public void consultar6() {
 		this.localidades = cidmy.todos();
 		localidade = new Localidade();
 	}
-	public void consultar7(){
+
+	public void consultar7() {
 		this.sublocalidades = baimy.todos();
 		sublocalidade = new Sublocalidade();
 	}
-	
-	public void consultar8(){
+
+	public void consultar8() {
 		this.ceps = cepmy.todos();
 		cep1 = new Cep();
 	}
-	
-	
-	
-	public void excluir(Empresa empresa){
+
+	public void excluir(Empresa empresa) {
 		EntityManager manager = JpaUtil.getEntityManager();
 		EntityTransaction trx = manager.getTransaction();
 		trx.begin();
-    	empresa = manager.find(Empresa.class, empresa.getId());
-    	manager.remove(empresa);
-    	trx.commit();
-    	FacesUtil.addInfoMessage("Empresa Excluida Com Sucesso");
-    }
-	public void excluirloc(Localidade localidade){
+		empresa = manager.find(Empresa.class, empresa.getId());
+		manager.remove(empresa);
+		trx.commit();
+		FacesUtil.addInfoMessage("Empresa Excluida Com Sucesso");
+	}
+
+	public void excluirloc(Localidade localidade) {
 		EntityManager manager = JpaUtil.getEntityManager();
 		EntityTransaction trx = manager.getTransaction();
 		trx.begin();
-    	localidade = manager.find(Localidade.class, localidade.getId());
-    	manager.remove(localidade);
-    	trx.commit();
-    	FacesUtil.addInfoMessage("Cidade Excluida Com Sucesso");
-    }
-	public void excluirloc(Sublocalidade sublocalidade){
+		localidade = manager.find(Localidade.class, localidade.getId());
+		manager.remove(localidade);
+		trx.commit();
+		FacesUtil.addInfoMessage("Cidade Excluida Com Sucesso");
+	}
+
+	public void excluirloc(Sublocalidade sublocalidade) {
 		EntityManager manager = JpaUtil.getEntityManager();
 		EntityTransaction trx = manager.getTransaction();
 		trx.begin();
-    	sublocalidade = manager.find(Sublocalidade.class, sublocalidade.getId());
-    	manager.remove(sublocalidade);
-    	trx.commit();
-    	FacesUtil.addInfoMessage("Bairro Excluido Com Sucesso");
-    }
-	public void excluirloc(Cep cep){
+		sublocalidade = manager.find(Sublocalidade.class, sublocalidade.getId());
+		manager.remove(sublocalidade);
+		trx.commit();
+		FacesUtil.addInfoMessage("Bairro Excluido Com Sucesso");
+	}
+
+	public void excluirloc(Cep cep) {
 		EntityManager manager = JpaUtil.getEntityManager();
 		EntityTransaction trx = manager.getTransaction();
 		trx.begin();
-    	cep = manager.find(Cep.class,cep.getId());
-    	manager.remove(cep);
-    	trx.commit();
-    	FacesUtil.addInfoMessage("Cep Excluido Com Sucesso");
-    }
-	public void excluirloc(Pais pais){
+		cep = manager.find(Cep.class, cep.getId());
+		manager.remove(cep);
+		trx.commit();
+		FacesUtil.addInfoMessage("Cep Excluido Com Sucesso");
+	}
+
+	public void excluirloc(Pais pais) {
 		EntityManager manager = JpaUtil.getEntityManager();
 		EntityTransaction trx = manager.getTransaction();
 		trx.begin();
-    	pais = manager.find(Pais.class, pais.getId());
-    	manager.remove(pais);
-    	trx.commit();
-    	FacesUtil.addInfoMessage("Pais Excluido Com Sucesso");
-    }
-    
-	public void excluirloc(Uf uf){
+		pais = manager.find(Pais.class, pais.getId());
+		manager.remove(pais);
+		trx.commit();
+		FacesUtil.addInfoMessage("Pais Excluido Com Sucesso");
+	}
+
+	public void excluirloc(Uf uf) {
 		EntityManager manager = JpaUtil.getEntityManager();
 		EntityTransaction trx = manager.getTransaction();
 		trx.begin();
-    	uf = manager.find(Uf.class, uf.getId());
-    	manager.remove(uf);
-    	trx.commit();
-    	FacesUtil.addInfoMessage("Estado Excluido Com Sucesso");
-    }
-	public void excluirloc(Logradouro logradouro){
+		uf = manager.find(Uf.class, uf.getId());
+		manager.remove(uf);
+		trx.commit();
+		FacesUtil.addInfoMessage("Estado Excluido Com Sucesso");
+	}
+
+	public void excluirloc(Logradouro logradouro) {
 		EntityManager manager = JpaUtil.getEntityManager();
 		EntityTransaction trx = manager.getTransaction();
 		trx.begin();
-    	logradouro = manager.find(Logradouro.class, logradouro.getId());
-    	manager.remove(logradouro);
-    	trx.commit();
-    	FacesUtil.addInfoMessage("Tipo De Logradouro Excluido Com Sucesso");
-    }
-    
-	
-	
-	
-	
-	public void pesquisarpais(){
+		logradouro = manager.find(Logradouro.class, logradouro.getId());
+		manager.remove(logradouro);
+		trx.commit();
+		FacesUtil.addInfoMessage("Tipo De Logradouro Excluido Com Sucesso");
+	}
+
+	public void pesquisarpais() {
 		paises = paismy.porNomeSemelhante(nome);
 	}
-	public void pesquisarcep(){
+
+	public void pesquisarcep() {
 		ceps = cepmy.porNomeSemelhante(cep);
 	}
-	public void pesquisaruf(){
+
+	public void pesquisaruf() {
 		ufs = umy.porNomeSemelhante(nome);
 	}
-	public void pesquisarcidade(){
+
+	public void pesquisarcidade() {
 		localidades = cidmy.porNomeSemelhante(nome);
 	}
-	public void pesquisarempresa(){
+
+	public void pesquisarempresa() {
 		empresas = empresamy.porNomeSemelhante(fantasia);
 	}
-	public void pesquisarbairro(){
+
+	public void pesquisarbairro() {
 		sublocalidades = baimy.porNomeSemelhante(nome);
 	}
 }

@@ -19,39 +19,38 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.wavii.converter.BaseEntity;
 
-
-
 @Entity
-@Table(name="tb_sublocalidade")
-public class Sublocalidade implements BaseEntity,  Serializable {
+@Table(name = "tb_sublocalidade")
+public class Sublocalidade implements BaseEntity, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotBlank
-	@Column(length = 30,nullable = false)
+	@Column(length = 30, nullable = false)
 	private String codigo;
 	@NotBlank
-	@Column(length = 150,nullable = false)
+	@Column(length = 150, nullable = false)
 	private String nome;
 	@ManyToOne
-	@JoinColumn(name="tb_uf")
+	@JoinColumn(name = "tb_uf")
 	private Uf uf;
 	@ManyToOne
-	@JoinColumn(name="tb_localidade")
+	@JoinColumn(name = "tb_localidade")
 	private Localidade localidade;
-	@OneToMany(mappedBy="subloclidade" , cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "subloclidade", cascade = CascadeType.ALL)
 	private List<Empresa> empresa;
-	
-	
+
 	public Localidade getLocalidade() {
 		return localidade;
 	}
+
 	public void setLocalidade(Localidade localidade) {
 		this.localidade = localidade;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -64,6 +63,7 @@ public class Sublocalidade implements BaseEntity,  Serializable {
 		result = prime * result + ((uf == null) ? 0 : uf.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -105,38 +105,45 @@ public class Sublocalidade implements BaseEntity,  Serializable {
 			return false;
 		return true;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getCodigo() {
 		return codigo;
 	}
+
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public Uf getUf() {
 		return uf;
 	}
+
 	public void setUf(Uf uf) {
 		this.uf = uf;
 	}
+
 	public List<Empresa> getEmpresa() {
 		return empresa;
 	}
+
 	public void setEmpresa(List<Empresa> empresa) {
 		this.empresa = empresa;
 	}
 
-	
-	
 }

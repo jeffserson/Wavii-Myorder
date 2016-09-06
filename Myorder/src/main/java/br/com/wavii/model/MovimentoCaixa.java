@@ -21,87 +21,98 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import br.com.wavii.converter.BaseEntity;
+
 @Entity
-@Table(name="tb_movcaixa")
+@Table(name = "tb_movcaixa")
 public class MovimentoCaixa implements BaseEntity, Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@ManyToOne(optional=false)
-	@JoinColumn(name="tb_caixa")
-	private Caixa caixa;
-	@ManyToOne(optional=false)
-	@JoinColumn(name="tb_funcionario")
+	@OneToMany
+	private List<Caixa> caixa;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "tb_funcionario")
 	private Funcionario funcionario;
-	@Temporal(TemporalType.DATE) 
+	@ManyToOne
+	private Usuario1 usuario;
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_abertura", nullable = false)
 	private Date abertura;
-	@Temporal(TemporalType.DATE) 
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_fechamento", nullable = false)
 	private Date fechamento;
 	@Column(precision = 10, scale = 0, nullable = false)
 	private BigDecimal total = BigDecimal.ZERO;
-	@OneToMany(mappedBy="movimentocaixa", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY )
-	private List<MovimentoMesa> movimentomesas = new ArrayList<>();
-	@OneToMany
-	private List<Mesa> mesa = new ArrayList<>();
+	@OneToMany(mappedBy = "movcaixa")
+	private List<MovimentoMesa> movimentomesa;
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	
-	public Caixa getCaixa() {
+	public Usuario1 getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario1 usuario) {
+		this.usuario = usuario;
+	}
+
+	public List<Caixa> getCaixa() {
 		return caixa;
 	}
-	public void setCaixa(Caixa caixa) {
+
+	public void setCaixa(List<Caixa> caixa) {
 		this.caixa = caixa;
 	}
+
 	public Funcionario getFuncionario() {
 		return funcionario;
 	}
+
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 	}
+
 	public Date getAbertura() {
 		return abertura;
 	}
+
 	public void setAbertura(Date abertura) {
 		this.abertura = abertura;
 	}
+
 	public Date getFechamento() {
 		return fechamento;
 	}
+
 	public void setFechamento(Date fechamento) {
 		this.fechamento = fechamento;
 	}
+
 	public BigDecimal getTotal() {
-		
-		
-		
-		
+
 		return total;
 	}
+
 	public void setTotal(BigDecimal total2) {
 		this.total = total2;
 	}
-	
-	public List<MovimentoMesa> getMovimentomesas() {
-		return movimentomesas;
+
+	public List<MovimentoMesa> getMovimentomesa() {
+		return movimentomesa;
 	}
-	public void setMovimentomesas(List<MovimentoMesa> movimentomesas) {
-		this.movimentomesas = movimentomesas;
+
+	public void setMovimentomesa(List<MovimentoMesa> movimentomesa) {
+		this.movimentomesa = movimentomesa;
 	}
-	
-	
-	public List<Mesa> getMesa() {
-		return mesa;
-	}
-	public void setMesa(List<Mesa> mesa) {
-		this.mesa = mesa;
-	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -111,10 +122,11 @@ public class MovimentoCaixa implements BaseEntity, Serializable {
 		result = prime * result + ((fechamento == null) ? 0 : fechamento.hashCode());
 		result = prime * result + ((funcionario == null) ? 0 : funcionario.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((movimentomesas == null) ? 0 : movimentomesas.hashCode());
+		result = prime * result + ((movimentomesa == null) ? 0 : movimentomesa.hashCode());
 		result = prime * result + ((total == null) ? 0 : total.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -149,10 +161,10 @@ public class MovimentoCaixa implements BaseEntity, Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (movimentomesas == null) {
-			if (other.movimentomesas != null)
+		if (movimentomesa == null) {
+			if (other.movimentomesa != null)
 				return false;
-		} else if (!movimentomesas.equals(other.movimentomesas))
+		} else if (!movimentomesa.equals(other.movimentomesa))
 			return false;
 		if (total == null) {
 			if (other.total != null)
@@ -161,17 +173,11 @@ public class MovimentoCaixa implements BaseEntity, Serializable {
 			return false;
 		return true;
 	}
-	
 
-		
-		
-		
-	
 	@Override
 	public String getNome() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	
+
 }

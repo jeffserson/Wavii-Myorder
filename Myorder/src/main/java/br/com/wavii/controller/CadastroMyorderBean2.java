@@ -46,12 +46,10 @@ import br.com.wavii.util.FacesUtil;
 @ViewScoped
 public class CadastroMyorderBean2 implements Serializable {
 
-  public	CadastroMyorderBean2(){
-	  limpar();
-  }
-	
-	
-	
+	public CadastroMyorderBean2() {
+		limpar();
+	}
+
 	private static final long serialVersionUID = 1L;
 
 	@Inject
@@ -101,52 +99,47 @@ public class CadastroMyorderBean2 implements Serializable {
 	private List<Preço> preços = new ArrayList<>();
 	private List<Cliente> clientes = new ArrayList<>();
 	private List<Produto> produtos = new ArrayList<>();
-    private List<Cep> ceps = new ArrayList<>();
+	private List<Cep> ceps = new ArrayList<>();
 	private List<Funcionario> funcionarios = new ArrayList<>();
-    private List<MovimentoMesa> movimentomesas = new ArrayList<>();
+	private List<MovimentoMesa> movimentomesas = new ArrayList<>();
 	private List<Integer> itens;
-	
-	
-	
+
 	public void MovimentomesaAlterado(@Observes Movimentomesaalteredevent event) {
 		this.movimentomesa = event.getMovimentomesa();
 	}
-	
+
 	public void inicializar() {
-		if(FacesUtil.isNotPostback()){
-			
+		if (FacesUtil.isNotPostback()) {
+
 			this.movimentomesa.adicionarItemVazio();
 			this.recalcularMesa();
 		}
-		
+
 	}
-	
+
 	private void limpar() {
 		movimentomesa = new MovimentoMesa();
-		
+
 	}
-	
-	
-	
-	
+
 	public void carregarprodutoporcodigo() {
 		if (StringUtils.isNotEmpty(this.codigo)) {
 			this.produto = this.produtomy.porcodigo(this.codigo);
 			this.carregarProdutoLinhaEditavel();
 		}
 	}
-	    
+
 	public void carregarProdutoLinhaEditavel() {
 		// TODO Auto-generated method stub
-          ItensDaMesa item = this.movimentomesa.getItens().get(0);
-		
+		ItensDaMesa item = this.movimentomesa.getItens().get(0);
+
 		if (this.produto != null) {
 			if (this.existeMesaComProduto(this.produto)) {
 				FacesUtil.addErrorMessage("Esse produto já existe na Mesa");
 			} else {
 				item.setProduto(this.produto);
-			    item.setUnitario(this.produto.getPreco1().getValor());
-				
+				item.setUnitario(this.produto.getPreco1().getValor());
+
 				this.movimentomesa.adicionarItemVazio();
 				this.produto = null;
 				this.codigo = null;
@@ -154,8 +147,7 @@ public class CadastroMyorderBean2 implements Serializable {
 			}
 		}
 	}
-		
-	
+
 	public void atualizarQuantidade(ItensDaMesa item, int linha) {
 		if (item.getQuantidade() < 1) {
 			if (linha == 0) {
@@ -164,19 +156,16 @@ public class CadastroMyorderBean2 implements Serializable {
 				this.getMovimentomesa().getItens().remove(linha);
 			}
 		}
-		
+
 		this.movimentomesa.recalcularValorTotal();
 	}
 
-	
-	
 	public void recalcularMesa() {
 		if (this.movimentomesa != null) {
 			this.movimentomesa.recalcularValorTotal();
 		}
 	}
-	
-	
+
 	private boolean existeMesaComProduto(Produto produto) {
 		boolean existeItem = false;
 		for (ItensDaMesa item : this.getMovimentomesa().getItens()) {
@@ -185,185 +174,176 @@ public class CadastroMyorderBean2 implements Serializable {
 				break;
 			}
 		}
-		
+
 		return existeItem;
 	}
-	
-	
-	
-	public void buscarcep(AjaxBehaviorEvent event){
-		ceps = cepmy.todos();
-        for (Cep cep1 : ceps) {
 
-            if (this.funcionario.getCep().equals(cep1.getCep())) {
-            	funcionario.setLogradouro(cep1.getLogradouro());
-                funcionario.setComplemento(cep1.getComplemento());
-            }else{
-            	FacesUtil.addErrorMessage("Cep não encontrado"); 
-            }
- }
- }
-	
-	
-	public void buscarcep1(AjaxBehaviorEvent event){
+	public void buscarcep(AjaxBehaviorEvent event) {
 		ceps = cepmy.todos();
-        for (Cep cep1 : ceps) {
+		for (Cep cep1 : ceps) {
 
-            if (this.cliente.getCep().equals(cep1.getCep())) {
-            	cliente.setLogradouro(cep1.getLogradouro());
-                cliente.setComplemento(cep1.getComplemento());
-            }else{
-            	
-            	FacesUtil.addErrorMessage("Cep não encontrado"); 
-                    
-            }
- }
- }
-	
-	
-	
-	public String salvarpreço(){	
+			if (this.funcionario.getCep().equals(cep1.getCep())) {
+				funcionario.setLogradouro(cep1.getLogradouro());
+				funcionario.setComplemento(cep1.getComplemento());
+			} else {
+				FacesUtil.addErrorMessage("Cep não encontrado");
+			}
+		}
+	}
+
+	public void buscarcep1(AjaxBehaviorEvent event) {
+		ceps = cepmy.todos();
+		for (Cep cep1 : ceps) {
+
+			if (this.cliente.getCep().equals(cep1.getCep())) {
+				cliente.setLogradouro(cep1.getLogradouro());
+				cliente.setComplemento(cep1.getComplemento());
+			} else {
+
+				FacesUtil.addErrorMessage("Cep não encontrado");
+
+			}
+		}
+	}
+
+	public String salvarpreço() {
 		salvarcliente2.salvarpreço(preço);
-		this.preço = new  Preço();
+		this.preço = new Preço();
 		FacesUtil.addInfoMessage("Preço Salvo Com Sucesso");
 		return "/auxrecurso/CadastroPreço?faces-redirect=true";
-		
-		
-		}
-	
-	
-	public String salvarfuncionario(){
+
+	}
+
+	public String salvarfuncionario() {
 		salvarcliente2.SalvarFuncionario(funcionario);
 		this.funcionario = new Funcionario();
 		FacesUtil.addInfoMessage("Funcionario Salvo Com Sucesso");
 		return "/cadastros/FuncionariosCadastrados?faces-redirect=true";
 	}
-	
-	public String salvarcliente(){
+
+	public String salvarcliente() {
 		salvarcliente2.salvarcliente(cliente);
 		this.cliente = new Cliente();
 		FacesUtil.addInfoMessage("Cliente Salvo Com Sucesso");
 		return "/cadastros/ClientesCadastrados?faces-redirect=true";
 	}
-	
-	public String salvartabela(){
+
+	public String salvartabela() {
 		salvarcliente2.salvartabela(tabela);
 		this.tabela = new Tabela();
 		FacesUtil.addInfoMessage("Tabela Salva Com Sucesso");
 		return "/auxrecurso/TabelasCadastradas?faces-redirect=true";
 	}
-	
 
-	public String salvarproduto(){
-	    this.produto = salvarcliente2.salvarproduto(this.produto);
+	public String salvarproduto() {
+		this.produto = salvarcliente2.salvarproduto(this.produto);
 		this.produto = new Produto();
 		FacesUtil.addInfoMessage("Produto Salvo Com Sucesso");
 		return "/cadastros/ProdutosCadastrados?faces-redirect=true";
-		}
-		
-	public void salvarmesa(){
+	}
+
+	public void salvarmesa() {
 		salvarcliente2.salvarmesa(mesa);
 		this.mesa = new Mesa();
 		FacesUtil.addInfoMessage("Mesa Salva Com Sucesso");
 	}
-	public void salvarcaixa(){
+
+	public void salvarcaixa() {
 		salvarcliente2.salvarcaixa(caixa);
 		this.caixa = new Caixa();
 		FacesUtil.addInfoMessage("Caixa Salvo com Sucesso");
 	}
-	
-	public void salvarmovmesa(){
+
+	public void salvarmovmesa() {
 		this.movimentomesa.removerItemVazio();
-		
+
 		try {
 			this.movimentomesa = this.salvarcliente2.salvarmovimentomesa(movimentomesa);
 			FacesUtil.addInfoMessage("Venda Salva Com Sucesso");
-			
+
 		} finally {
 			this.movimentomesa.adicionarItemVazio();
 		}
-		}
-	
-	
-	
-	public void prepararpreço(){
-		
+	}
+
+	public void prepararpreço() {
+
 		this.preços = preçomy.todos();
-		if(this.preço == null){
+		if (this.preço == null) {
 			this.preço = new Preço();
 		}
 	}
-	
-	public void prepararcaixa(){
+
+	public void prepararcaixa() {
 		this.caixas = caixamy.todos();
-		if(this.caixa == null){
+		if (this.caixa == null) {
 			this.caixa = new Caixa();
 		}
 	}
-	
-	public void prepararmesa(){
+
+	public void prepararmesa() {
 		this.mesas = mesamy.todos();
-		if(this.mesa == null){
-		    this.mesa = new Mesa();
+		if (this.mesa == null) {
+			this.mesa = new Mesa();
 		}
 	}
-	
-	public void prepararfuncionario(){
+
+	public void prepararfuncionario() {
 		this.funcionarios = funcionariomy.todos();
-		if(this.funcionario == null){
-			this.funcionario = new  Funcionario();
+		if (this.funcionario == null) {
+			this.funcionario = new Funcionario();
 		}
 	}
-	
-	public void prepararproduto(){
+
+	public void prepararproduto() {
 		this.produtos = produtomy.todos();
-		if(this.produto == null){
+		if (this.produto == null) {
 			this.produto = new Produto();
 		}
 	}
-	
-	public void prepararcliente(){
+
+	public void prepararcliente() {
 		this.clientes = clientemy.todos();
-		if(this.cliente == null){
+		if (this.cliente == null) {
 			this.cliente = new Cliente();
 		}
 	}
-	public void preparartabela(){
+
+	public void preparartabela() {
 		this.tabelas = tabelamy.todos();
-		if(this.tabela == null){
+		if (this.tabela == null) {
 			this.tabela = new Tabela();
 		}
 	}
-	public void prepararmovimentocaixa(){
+
+	public void prepararmovimentocaixa() {
+		this.funcionarios = funcionariomy.todos();
 		this.caixas = caixamy.todos();
 		this.mesas = mesamy.todos();
 		this.movimentomesas = movmesa.todos();
 		this.movimentos = movmy.todos();
-		if(this.movicaixa == null){
+		if (this.movicaixa == null) {
 			this.movicaixa = new MovimentoCaixa();
 		}
 	}
-	
-	public void prepararmovimentomesa(){
-		this.caixas = caixamy.todos();
+
+	public void prepararmovimentomesa() {
 		this.clientes = clientemy.todos();
 		this.mesas = mesamy.todos();
 		this.movimentomesas = movmesa.todos();
-		if(this.movimentomesa == null){
+		if (this.movimentomesa == null) {
 			this.movimentomesa = new MovimentoMesa();
 		}
 	}
-	
-	
-	public List<Funcionario>completarfunc(String nome){
+
+	public List<Funcionario> completarfunc(String nome) {
 		List<Funcionario> funcionarios = funcionariomy.buscarpelonome(nome);
-		if(funcionarios.size()==0){
+		if (funcionarios.size() == 0) {
 			FacesUtil.addErrorMessage("Funcionario Não Encontrado");
 		}
 		return funcionarios;
 	}
-	
-	
+
 	public Funcionario getFuncionario() {
 		return funcionario;
 	}
@@ -372,15 +352,9 @@ public class CadastroMyorderBean2 implements Serializable {
 		this.funcionario = funcionario;
 	}
 
-
-
-
 	public List<Funcionario> getFuncionarios() {
 		return funcionarios;
 	}
-
-
-
 
 	public void setFuncionarios(List<Funcionario> funcionarios) {
 		this.funcionarios = funcionarios;
@@ -402,49 +376,33 @@ public class CadastroMyorderBean2 implements Serializable {
 		this.ceps = ceps;
 	}
 
-
-
 	public Produto getProduto() {
 		return produto;
 	}
-
-
 
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
 
-
-
 	public List<Produto> getProdutos() {
 		return produtos;
 	}
-
-
 
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
 
-
-
 	public Cliente getCliente() {
 		return cliente;
 	}
-
-
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
-
-
 	public List<Cliente> getClientes() {
 		return clientes;
 	}
-
-
 
 	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
@@ -466,185 +424,152 @@ public class CadastroMyorderBean2 implements Serializable {
 		this.preços = preços;
 	}
 
-
 	public Tabela getTabela() {
 		return tabela;
 	}
-
 
 	public void setTabela(Tabela tabela) {
 		this.tabela = tabela;
 	}
 
-
 	public List<Tabela> getTabelas() {
 		return tabelas;
 	}
 
-
 	public void setTabelas(List<Tabela> tabelas) {
 		this.tabelas = tabelas;
 	}
-	
-	
+
 	public Mesa getMesa() {
 		return mesa;
 	}
-
 
 	public void setMesa(Mesa mesa) {
 		this.mesa = mesa;
 	}
 
-
 	public List<Mesa> getMesas() {
 		return mesas;
 	}
-
 
 	public void setMesas(List<Mesa> mesas) {
 		this.mesas = mesas;
 	}
 
-
 	public Caixa getCaixa() {
 		return caixa;
 	}
-
 
 	public void setCaixa(Caixa caixa) {
 		this.caixa = caixa;
 	}
 
-
 	public List<Caixa> getCaixas() {
 		return caixas;
 	}
 
-
 	public void setCaixas(List<Caixa> caixas) {
 		this.caixas = caixas;
 	}
-    
-	
 
 	public MovimentoCaixa getMovicaixa() {
 		return movicaixa;
 	}
 
-
 	public void setMovicaixa(MovimentoCaixa movicaixa) {
 		this.movicaixa = movicaixa;
 	}
-
 
 	public List<MovimentoCaixa> getMovimentos() {
 		return movimentos;
 	}
 
-
 	public void setMovimentos(List<MovimentoCaixa> movimentos) {
 		this.movimentos = movimentos;
 	}
 
-	
-	public List<Mesa> completarmesa(String nome){
+	public List<Mesa> completarmesa(String nome) {
 		List<Mesa> mesas = mesamy.buscarpelonome(nome);
-		if(mesas.size()==0){
+		if (mesas.size() == 0) {
 			FacesUtil.addErrorMessage("Mesa Não Encontrada");
 		}
-		return mesas ;
+		return mesas;
 	}
-	
-	
 
-	public List<Produto> completarproduto(String nome){
+	public List<Produto> completarproduto(String nome) {
 		List<Produto> produtos = produtomy.buscarpelonome(nome);
-		if(produtos.size()==0){
+		if (produtos.size() == 0) {
 			FacesUtil.addErrorMessage("Produto Não Encontrado");
 		}
 		return produtos;
 	}
-	
-	public List<Tabela> completartabela(String nome){
+
+	public List<Tabela> completartabela(String nome) {
 		List<Tabela> tabelas = tabelamy.buscarpelonome(nome);
-		if(tabelas.size()==0){
+		if (tabelas.size() == 0) {
 			FacesUtil.addErrorMessage("Tabela Não Encontrada");
 		}
 		return tabelas;
 	}
-	public List<Cliente>completarcliente(String nome){
+
+	public List<Cliente> completarcliente(String nome) {
 		List<Cliente> clientes = clientemy.buscarpelonome(nome);
-		if(clientes.size()==0){
+		if (clientes.size() == 0) {
 			FacesUtil.addErrorMessage("Cliente Não Encontrado");
 		}
 		return clientes;
 	}
 
-
 	public MovimentoMesa getMovimentomesa() {
 		return movimentomesa;
 	}
-
 
 	public void setMovimentomesa(MovimentoMesa movimentomesa) {
 		this.movimentomesa = movimentomesa;
 	}
 
-
 	public List<MovimentoMesa> getMovimentomesas() {
 		return movimentomesas;
 	}
-
 
 	public void setMovimentomesas(List<MovimentoMesa> movimentomesas) {
 		this.movimentomesas = movimentomesas;
 	}
 
-
 	public ItensDaMesa getItendamesa() {
 		return itendamesa;
 	}
-
 
 	public void setItendamesa(ItensDaMesa itendamesa) {
 		this.itendamesa = itendamesa;
 	}
 
-
 	public List<ItensDaMesa> getItensmesa() {
 		return itensmesa;
 	}
-
 
 	public void setItensmesa(List<ItensDaMesa> itensmesa) {
 		this.itensmesa = itensmesa;
 	}
 
-
 	public String getCodigo() {
 		return codigo;
 	}
-
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
-
 	public List<Integer> getItens() {
 		return itens;
 	}
-
 
 	public void setItens(List<Integer> itens) {
 		this.itens = itens;
 	}
 
-
 	public boolean isEditando() {
 		return this.movimentomesa.getId() != null;
 	}
-     
 
 }

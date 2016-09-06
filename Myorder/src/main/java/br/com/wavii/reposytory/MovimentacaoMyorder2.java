@@ -21,25 +21,26 @@ public class MovimentacaoMyorder2 implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	EntityManager manager;
-	
+
 	@Inject
-	public MovimentacaoMyorder2(EntityManager manager){
+	public MovimentacaoMyorder2(EntityManager manager) {
 		this.manager = manager;
 	}
-	
-	public Movimentacao porid(Long id){
+
+	public Movimentacao porid(Long id) {
 		return manager.find(Movimentacao.class, id);
 	}
-	
-	public List<Movimentacao> todos(){
+
+	public List<Movimentacao> todos() {
 		TypedQuery<Movimentacao> query = manager.createQuery("from Movimentacao", Movimentacao.class);
 		return query.getResultList();
 	}
-	public void adcionar(Movimentacao movimentacao){
+
+	public void adcionar(Movimentacao movimentacao) {
 		EntityTransaction trx = this.manager.getTransaction();
 		trx.begin();
 		this.manager.merge(movimentacao);
 		trx.commit();
 	}
-	
+
 }

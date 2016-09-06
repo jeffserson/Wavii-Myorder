@@ -21,108 +21,113 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.wavii.converter.BaseEntity;
 
-
-
-
 @Entity
-@Table(name="tb_cep")
-public class Cep implements BaseEntity,  Serializable {
+@Table(name = "tb_cep")
+public class Cep implements BaseEntity, Serializable {
 
 	private static final long serialVersionUID = 1L;
-     
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="tb_sublocalidade")
+	@JoinColumn(name = "tb_sublocalidade")
 	private Sublocalidade sublocalidade;
-	
+
 	@ManyToOne
-	@JoinColumn(name="tb_logradouro")
+	@JoinColumn(name = "tb_logradouro")
 	private Logradouro Tipologradouro;
-	
-	
-	
+
 	@ManyToOne
-	@JoinColumn(name="tb_localidade")
+	@JoinColumn(name = "tb_localidade")
 	private Localidade localidade;
 	@ManyToOne
-	@JoinColumn(name="tb_uf")
+	@JoinColumn(name = "tb_uf")
 	private Uf uf;
 	@ManyToOne
-	@JoinColumn(name="tb_pais")
+	@JoinColumn(name = "tb_pais")
 	private Pais pais;
-	@NotBlank(message="Cep É Obrigatorio")
-	@Column(length = 10,nullable = false)
+	@NotBlank(message = "Cep É Obrigatorio")
+	@Column(length = 10, nullable = false)
 	private String cep;
-	@Column(length = 150,nullable = false)
+	@Column(length = 150, nullable = false)
 	private String logradouro;
-	@Column(length = 200,nullable = false)
+	@Column(length = 200, nullable = false)
 	private String complemento;
-	
-	
-	
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
-	
+
 	public Logradouro getTipologradouro() {
 		return Tipologradouro;
 	}
+
 	public void setTipologradouro(Logradouro tipologradouro) {
 		Tipologradouro = tipologradouro;
 	}
+
 	public Sublocalidade getSublocalidade() {
 		return sublocalidade;
 	}
+
 	public void setSublocalidade(Sublocalidade sublocalidade) {
 		this.sublocalidade = sublocalidade;
 	}
+
 	public Localidade getLocalidade() {
 		return localidade;
 	}
+
 	public void setLocalidade(Localidade localidade) {
 		this.localidade = localidade;
 	}
+
 	public Uf getUf() {
 		return uf;
 	}
+
 	public void setUf(Uf uf) {
 		this.uf = uf;
 	}
+
 	public Pais getPais() {
 		return pais;
 	}
+
 	public void setPais(Pais pais) {
 		this.pais = pais;
 	}
+
 	public String getCep() {
 		return cep;
 	}
+
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
+
 	public String getLogradouro() {
 		return logradouro;
 	}
+
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
 	}
+
 	public String getComplemento() {
 		return complemento;
 	}
+
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -138,6 +143,7 @@ public class Cep implements BaseEntity,  Serializable {
 		result = prime * result + ((uf == null) ? 0 : uf.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -194,12 +200,11 @@ public class Cep implements BaseEntity,  Serializable {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String getNome() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	
-		
 }

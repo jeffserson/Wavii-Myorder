@@ -14,37 +14,44 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="tb_movimentacão")
+@Table(name = "tb_movimentacão")
 public class Movimentacao implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Temporal(TemporalType.DATE) 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "data_movimento", nullable = false)
 	private Date movimento;
 	@NotNull
-	@Column(name="quantidade", nullable = false)
+	@Column(name = "quantidade", nullable = false)
 	private Integer quantidade;
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public Date getMovimento() {
 		return movimento;
 	}
+
 	public void setMovimento(Date movimento) {
 		this.movimento = movimento;
 	}
+
 	public Integer getQuantidade() {
 		return quantidade;
 	}
+
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -54,6 +61,7 @@ public class Movimentacao implements Serializable {
 		result = prime * result + ((quantidade == null) ? 0 : quantidade.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -80,5 +88,5 @@ public class Movimentacao implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }

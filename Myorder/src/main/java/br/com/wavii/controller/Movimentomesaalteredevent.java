@@ -3,8 +3,8 @@ package br.com.wavii.controller;
 import br.com.wavii.model.MovimentoMesa;
 
 public class Movimentomesaalteredevent {
-private MovimentoMesa movimentomesa;
-	
+	private MovimentoMesa movimentomesa;
+
 	public Movimentomesaalteredevent(MovimentoMesa movimentoMesa) {
 		this.movimentomesa = movimentoMesa;
 	}
@@ -14,9 +14,3 @@ private MovimentoMesa movimentomesa;
 	}
 
 }
-
-	
-	
-	
-
-

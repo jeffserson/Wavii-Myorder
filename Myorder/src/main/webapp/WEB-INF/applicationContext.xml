@@ -24,41 +24,29 @@
 	    <b:property name="redirectStrategy" ref="jsfRedirectStrategy" />
 	</b:bean>
 	
-
-
-	<b:bean id="jsfRedirectStrategy" class="br.com.wavii.securyti.JsfRedirectStrategy"/>     
-                            
+	<b:bean id="jsfRedirectStrategy" class="br.com.wavii.securyti.JsfRedirectStrategy"/>                    
              <http pattern="/login.xhtml" security="none" />
              <http pattern="/Erro.xhtml" security="none" />
              <http pattern="/javax.faces.resource/**" security="none" />
-        <http auto-config="false" use-expressions="true">
-        
+             <http auto-config="false" use-expressions="true">
         <custom-filter ref="exceptionTranslationFilter" before="FILTER_SECURITY_INTERCEPTOR" />
-        
-        <intercept-url pattern="/index.xhtml"   access="hasAnyRole('ROLE_USER','VENDEDORES')"/>
-        <intercept-url pattern="/CadastroCaixa.xhtml"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/CadastroMesa.xhtml"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/CadastroTabela.xhtml"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/CadastroCliente1.xhtml"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/CadastroProduto.xhtml"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/CadastroEmpresa.xhtml"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/CadastroFuncionario"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/auxcadastro/**" access="hasRole('ROLE_USER')" />
-        <intercept-url pattern="/cadastros/**" access="hasAnyRole('VENDEDORES','ROLE_USER')" />
-        <intercept-url pattern="/auxrecurso/**" access="hasRole('ROLE_USER')" />
-        <intercept-url pattern="/MovimentoMesa.xhtml"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/MovimentoCaixa.xhtml"  access="hasRole('ROLE_USER')"/>
-        <intercept-url pattern="/VendasMesa.xhtml"  access="hasRole('ROLE_USER')"/>
+        <intercept-url pattern="/index.xhtml"   access="hasAnyRole('ADMINISTRADOR','VENDEDOR')"/>
+        <intercept-url pattern="/cadastroprincipal/**" access="hasAnyRole('ADMINISTRADOR')" />
+        <intercept-url pattern="/auxcadastro/**" access="hasAnyRole('ADMINISTRADOR','VENDEDOR')" />
+        <intercept-url pattern="/cadastros/**" access="hasAnyRole('VENDEDOR','ROLE_USER','ADMINISTRADOR')" />
+        <intercept-url pattern="/auxrecurso/**" access="hasAnyRole('ADMINISTRADOR')" />
+        <intercept-url pattern="/MovimentoMesa.xhtml"  access="hasAnyRole('VENDEDOR','ADMINISTRADOR')"/>
+        <intercept-url pattern="/MovimentoCaixa.xhtml"  access="hasAnyRole('VENDEDOR','ADMINISTRADOR')"/>
+        <intercept-url pattern="/VendasMesa.xhtml"  access="hasAnyRole('VENDEDOR','ADMINISTRADOR')"/>
         <form-login login-page="/login.xhtml"  
          default-target-url="/Index.xhtml" always-use-default-target="true"
-         authentication-failure-url="/login.xhtml?invalid=true"
-        /> 
+         authentication-failure-url="/login.xhtml?invalid=true"/> 
     <logout logout-success-url="/login.xhtml" logout-url="/j_spring_security_logout"/>
     </http>
     
-  <authentication-manager>
+  <authentication-manager >
 		<authentication-provider user-service-ref="appUserDetailsService">
-			<!-- <password-encoder hash="md5" /> -->
+			<password-encoder  hash="sha-256" />
 		</authentication-provider>
 	</authentication-manager>
     

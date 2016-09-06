@@ -10,17 +10,16 @@ import br.com.wavii.model.Sublocalidade;
 import br.com.wavii.reposytory.LocalidadeMyorder;
 import br.com.wavii.reposytory.SubLocalidadeMyorder;
 
-
 @FacesConverter(forClass = Sublocalidade.class)
 public class SubLocalidadeConverter implements Converter {
 
 	@Inject
 	private SubLocalidadeMyorder empresa;;
-	
+
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		Sublocalidade retorno = null;
-		
+
 		if (value != null && !"".equals(value)) {
 			retorno = this.empresa.PorId(new Long(value));
 		}
@@ -31,11 +30,10 @@ public class SubLocalidadeConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-	          Sublocalidade lancamento = ((Sublocalidade) value); 
+			Sublocalidade lancamento = ((Sublocalidade) value);
 			return lancamento.getId() == null ? null : lancamento.getId().toString();
 		}
 		return "";
 	}
-	
-	
+
 }

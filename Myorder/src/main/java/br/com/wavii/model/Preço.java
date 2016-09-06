@@ -17,65 +17,76 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="tb_preço")
+@Table(name = "tb_preço")
 public class Preço implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@OneToOne
-	@JoinColumn(name="tb_preço_produto")
+	@JoinColumn(name = "tb_preço_produto")
 	private Produto produto1;
 	@ManyToOne
-	@JoinColumn(name="tb_preço_tabela")
+	@JoinColumn(name = "tb_preço_tabela")
 	private Tabela tabela;
 	@Column(precision = 10, scale = 2, nullable = false)
 	private BigDecimal valor;
-	@Temporal(TemporalType.DATE) 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "data_inicio", nullable = false)
 	private Date inicio;
-	@Temporal(TemporalType.DATE) 
-	@Column(name = "data_fim" , nullable=true)
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_fim", nullable = true)
 	private Date fim;
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public Produto getProduto1() {
 		return produto1;
 	}
+
 	public void setProduto1(Produto produto1) {
 		this.produto1 = produto1;
 	}
+
 	public Tabela getTabela() {
 		return tabela;
 	}
+
 	public void setTabela(Tabela tabela) {
 		this.tabela = tabela;
 	}
-	
+
 	public BigDecimal getValor() {
 		return valor;
 	}
+
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
+
 	public Date getInicio() {
 		return inicio;
 	}
+
 	public void setInicio(Date inicio) {
 		this.inicio = inicio;
 	}
+
 	public Date getFim() {
 		return fim;
 	}
+
 	public void setFim(Date fim) {
 		this.fim = fim;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -88,6 +99,7 @@ public class Preço implements Serializable {
 		result = prime * result + ((valor == null) ? 0 : valor.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -115,7 +127,7 @@ public class Preço implements Serializable {
 		if (produto1 == null) {
 			if (other.produto1 != null)
 				return false;
-		} else 
+		} else
 			return false;
 		if (tabela == null) {
 			if (other.tabela != null)
@@ -129,15 +141,5 @@ public class Preço implements Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

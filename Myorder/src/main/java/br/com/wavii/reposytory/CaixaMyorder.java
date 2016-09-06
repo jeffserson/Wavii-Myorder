@@ -18,25 +18,26 @@ public class CaixaMyorder implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	EntityManager manager;
-	
+
 	@Inject
-	public CaixaMyorder(EntityManager manager){
+	public CaixaMyorder(EntityManager manager) {
 		this.manager = manager;
 	}
-	
-	public Caixa porid(Long id){
+
+	public Caixa porid(Long id) {
 		return manager.find(Caixa.class, id);
 	}
-	
-	public List<Caixa> todos(){
+
+	public List<Caixa> todos() {
 		TypedQuery<Caixa> query = manager.createQuery("from Caixa", Caixa.class);
 		return query.getResultList();
 	}
-	public void adcionar(Caixa caixa){
+
+	public void adcionar(Caixa caixa) {
 		EntityTransaction trx = this.manager.getTransaction();
 		trx.begin();
 		this.manager.merge(caixa);
 		trx.commit();
 	}
-	
+
 }

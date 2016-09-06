@@ -1,7 +1,5 @@
 package br.com.wavii.model;
 
-
-
 import java.beans.Transient;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -17,64 +15,77 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="tb_itens_mesa")
+@Table(name = "tb_itens_mesa")
 public class ItensDaMesa implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne
-	@JoinColumn(name="tb_mov_itens_mesa")
+	@JoinColumn(name = "tb_mov_itens_mesa")
 	private MovimentoMesa movimentomesa;
 	@ManyToOne
-	@JoinColumn(name="tb_produto_itens")
+	@JoinColumn(name = "tb_produto_itens")
 	private Produto produto;
 	@NotNull
-	@Column(name="quantidade", nullable = false)
+	@Column(name = "quantidade", nullable = false)
 	private Integer quantidade = 1;
 	@NotNull
-	@Column(name="valor_unitario", nullable = false, precision = 10, scale = 2)
+	@Column(name = "valor_unitario", nullable = false, precision = 10, scale = 2)
 	private BigDecimal unitario = BigDecimal.ZERO;
-	@Column(name="valor_total", nullable = true, precision = 10, scale = 2)
+	@Column(name = "valor_total", nullable = true, precision = 10, scale = 2)
 	private BigDecimal total = BigDecimal.ZERO;
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public MovimentoMesa getMovimentomesa() {
 		return movimentomesa;
 	}
+
 	public void setMovimentomesa(MovimentoMesa movimentomesa) {
 		this.movimentomesa = movimentomesa;
 	}
+
 	public Produto getProduto() {
 		return produto;
 	}
+
 	public void setProduto(Produto produto) {
 		this.produto = produto;
 	}
+
 	public Integer getQuantidade() {
 		return quantidade;
 	}
+
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
+
 	public BigDecimal getUnitario() {
 		return unitario;
 	}
+
 	public void setUnitario(BigDecimal unitario) {
 		this.unitario = unitario;
 	}
+
 	public BigDecimal getTotal() {
 		return this.getUnitario().multiply(new BigDecimal(this.getQuantidade()));
 	}
+
 	public void setTotal(BigDecimal total) {
 		this.total = total;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -87,6 +98,7 @@ public class ItensDaMesa implements Serializable {
 		result = prime * result + ((unitario == null) ? 0 : unitario.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -128,16 +140,10 @@ public class ItensDaMesa implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 	@Transient
 	public boolean isProdutoAssociado() {
 		return this.getProduto() != null && this.getProduto().getId() != null;
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }

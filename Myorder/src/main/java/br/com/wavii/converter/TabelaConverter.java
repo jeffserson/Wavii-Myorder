@@ -6,9 +6,6 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 
-
-
-
 import br.com.wavii.model.Produto;
 import br.com.wavii.model.Tabela;
 import br.com.wavii.reposytory.EmpresaMyorder;
@@ -20,11 +17,11 @@ public class TabelaConverter implements Converter {
 
 	@Inject
 	private TabelaMyorder tabela;
-	
+
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		Tabela retorno = null;
-		
+
 		if (value != null && !"".equals(value)) {
 			retorno = this.tabela.porid(new Long(value));
 		}
@@ -35,11 +32,10 @@ public class TabelaConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-			Tabela lancamento = ((Tabela) value); 
+			Tabela lancamento = ((Tabela) value);
 			return lancamento.getId() == null ? null : lancamento.getId().toString();
 		}
 		return "";
 	}
-	
-	
+
 }

@@ -89,7 +89,9 @@
 		 <p:tab title="Tabela - #{tabela.nome}">
 		   <p:dataTable 
 		    selectionMode="single"
-		    
+		     paginator="true"
+		     rows="7"
+		     paginatorAlwaysVisible="false"
 		      rowKey="#{preco.id}"
 		     var="preco" value="#{tabela.preços}"
 		     emptyMessage="Nenhum Dado Encontrado"

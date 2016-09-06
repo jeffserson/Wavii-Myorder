@@ -14,41 +14,37 @@
     </h:head>
     <h:body>
            
-         <f:metadata>
+        <f:metadata>
     		<f:viewParam name="dummy" />
-    		<f:event listener="#{loginBean.preRender()}" type="preRenderView"  />
+    		<f:event listener="#{loginBean.preRender}" type="preRenderView" />
     	</f:metadata>
-
-    
-    	<div id="login-dialog">
-    		<h:form  id="frm" prependId="false">
+         
+      <div id="login-dialog">
+    		<b:panel title="login" look="primary">
+    		<h:form id="frm" prependId="false">
     			
-    			<p:messages  id="messages" autoUpdate="false" closable="true" />
-    			
-    		      <b:panel  title="Login"   look="primary">
-   
-    				<p:outputLabel value="Nome" />
-    				
-    				<b:inputText size="20" placeholder="Nome" id="j_username" value="#{loginBean.email}">
-    				<f:facet name="prepend">
-                    <b:iconAwesome name="user" />
-                    </f:facet>
+    			<p:messages id="messages" autoUpdate="true" closable="true" />
+    		  
+    				<p:outputLabel value="E-mail" />
+    				<b:inputText size="30" id="j_username" autocomplete="false" placeholder="Email" value="#{loginBean.email}">
+    				 <f:facet name="prepend">
+                     <h:outputText value="@" />
+                      </f:facet>
     				</b:inputText>
     				
-    				
     				<p:outputLabel value="Senha" />
-    				<b:inputSecret size="20"  placeholder="Senha" id="j_password">
-    				<f:facet name="prepend">
-                    <b:iconAwesome name="key" />
+    				<b:inputSecret  size="30" placeholder="Senha" id="j_password">
+    				 <f:facet name="prepend">
+                     <b:iconAwesome name="key" />
                     </f:facet>
     				</b:inputSecret>
-    				
     				<h:panelGroup/>
-    				<b:commandButton look="primary" value="Login" action="#{loginBean.login()}" ajax="false" />
-    			
-    			</b:panel>
-    			 
+    				<b:commandButton look="primary" value="Login" action="#{loginBean.login}" ajax="false" />
+    		
     		</h:form>
+    		</b:panel>
     	</div>
+    
+    	
     </h:body>
 </html>

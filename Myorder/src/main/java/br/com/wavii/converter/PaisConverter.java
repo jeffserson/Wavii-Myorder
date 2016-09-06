@@ -15,11 +15,11 @@ public class PaisConverter implements Converter {
 
 	@Inject
 	private PaisMyorder2 empresa;;
-	
+
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		Pais retorno = null;
-		
+
 		if (value != null && !"".equals(value)) {
 			retorno = this.empresa.PorId(new Long(value));
 		}
@@ -30,11 +30,10 @@ public class PaisConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-			Pais lancamento = ((Pais) value); 
+			Pais lancamento = ((Pais) value);
 			return lancamento.getId() == null ? null : lancamento.getId().toString();
 		}
 		return "";
 	}
-	
-	
+
 }

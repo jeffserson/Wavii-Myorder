@@ -23,85 +23,94 @@ import org.hibernate.validator.constraints.br.CNPJ;
 
 import br.com.wavii.converter.BaseEntity;
 
-
-
-
-
-
-
-
 @Entity
-@Table(name="tb_empresa")
-public class Empresa implements BaseEntity,  Serializable{
+@Table(name = "tb_empresa")
+public class Empresa implements BaseEntity, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	private String nome;
-	
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getCnpj() {
 		return cnpj;
 	}
+
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
+
 	public String getFantasia() {
 		return fantasia;
 	}
+
 	public void setFantasia(String fantasia) {
 		this.fantasia = fantasia;
 	}
+
 	public String getRazao() {
 		return razao;
 	}
+
 	public void setRazao(String razao) {
 		this.razao = razao;
 	}
+
 	public String getInscestadual() {
 		return inscestadual;
 	}
+
 	public void setInscestadual(String inscestadual) {
 		this.inscestadual = inscestadual;
 	}
+
 	public String getInscmunicipal() {
 		return inscmunicipal;
 	}
+
 	public void setInscmunicipal(String inscmunicipal) {
 		this.inscmunicipal = inscmunicipal;
 	}
+
 	public String getCep() {
 		return cep;
 	}
+
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	
-	
+
 	public String getComplemento() {
 		return complemento;
 	}
+
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
+
 	public String getNumero() {
 		return numero;
 	}
+
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
@@ -109,71 +118,78 @@ public class Empresa implements BaseEntity,  Serializable{
 	public Uf getUf() {
 		return uf;
 	}
+
 	public void setUf(Uf uf) {
 		this.uf = uf;
 	}
-	
+
 	public String getFone() {
 		return fone;
 	}
+
 	public void setFone(String fone) {
 		this.fone = fone;
 	}
+
 	public String getHomepage() {
 		return homepage;
 	}
+
 	public void setHomepage(String homepage) {
 		this.homepage = homepage;
 	}
+
 	public String getEmail() {
 		return Email;
 	}
+
 	public void setEmail(String email) {
 		Email = email;
 	}
+
 	@CNPJ
-	@Column(length = 60,nullable = false)
+	@Column(length = 60, nullable = false)
 	private String cnpj;
-	@NotBlank(message="Nome Fantasia Obrigatorio")
-	@Column(length = 60,nullable = false)
+	@NotBlank(message = "Nome Fantasia Obrigatorio")
+	@Column(length = 60, nullable = false)
 	private String fantasia;
 	@NotBlank
-	@Column(length = 150,nullable = false)
+	@Column(length = 150, nullable = false)
 	private String razao;
-	@Column(length = 30,nullable = false)
+	@Column(length = 30, nullable = false)
 	private String inscestadual;
-	@Column(length = 30,nullable = false)
+	@Column(length = 30, nullable = false)
 	private String inscmunicipal;
 	@NotBlank
-	@Column(length = 10,nullable = false)
+	@Column(length = 10, nullable = false)
 	private String cep;
-	
-	@Column(length = 150,nullable = false)
+
+	@Column(length = 150, nullable = false)
 	private String logradouro;
-	@Column(length = 200,nullable = false)
+	@Column(length = 200, nullable = false)
 	private String complemento;
-	@Column(length = 10,nullable = false)
+	@Column(length = 10, nullable = false)
 	private String numero;
-	@Column(length = 30,nullable = false)
+	@Column(length = 30, nullable = false)
 	private String fone;
-	@Column(length = 80,nullable = false)
+	@Column(length = 80, nullable = false)
 	private String homepage;
 	@NotBlank
-	@Column(length = 80,nullable = false)
+	@Column(length = 80, nullable = false)
 	private String Email;
-	
+
 	@ManyToOne
-	@JoinColumn(name="tb_sublocalidade")
+	@JoinColumn(name = "tb_sublocalidade")
 	private Sublocalidade subloclidade;
-	
+
 	@ManyToOne
-	@JoinColumn(name="tb_pais")
+	@JoinColumn(name = "tb_pais")
 	private Pais pais;
-	
-	
+
 	public Pais getPais() {
 		return pais;
 	}
+
 	public void setPais(Pais pais) {
 		this.pais = pais;
 	}
@@ -181,44 +197,46 @@ public class Empresa implements BaseEntity,  Serializable{
 	@ManyToOne
 	@JoinColumn(name = "logradouro_id")
 	private Logradouro tblogradouro;
-	
-	
+
 	public Logradouro getTblogradouro() {
 		return tblogradouro;
 	}
+
 	public void setTblogradouro(Logradouro tblogradouro) {
 		this.tblogradouro = tblogradouro;
 	}
-	@ManyToOne
-	@JoinColumn(name="tb_uf")
-	private Uf uf;
-	
-	@ManyToOne
-	@JoinColumn(name="tb_localidade")
-	private Localidade tblocalidade;
-	
 
-	
-	
+	@ManyToOne
+	@JoinColumn(name = "tb_uf")
+	private Uf uf;
+
+	@ManyToOne
+	@JoinColumn(name = "tb_localidade")
+	private Localidade tblocalidade;
+
 	public Sublocalidade getSubloclidade() {
 		return subloclidade;
 	}
+
 	public void setSubloclidade(Sublocalidade subloclidade) {
 		this.subloclidade = subloclidade;
 	}
+
 	public Localidade getTblocalidade() {
 		return tblocalidade;
 	}
+
 	public void setTblocalidade(Localidade tblocalidade) {
 		this.tblocalidade = tblocalidade;
 	}
+
 	public String getLogradouro() {
 		return logradouro;
 	}
+
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
 	}
-	
 
 	@Override
 	public int hashCode() {
@@ -245,6 +263,7 @@ public class Empresa implements BaseEntity,  Serializable{
 		result = prime * result + ((uf == null) ? 0 : uf.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -351,9 +370,5 @@ public class Empresa implements BaseEntity,  Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-}
 
+}

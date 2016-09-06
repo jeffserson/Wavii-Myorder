@@ -16,7 +16,7 @@ public class TransactionInterceptor implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private @Inject EntityManager manager;
-	
+
 	@AroundInvoke
 	public Object invoke(InvocationContext context) throws Exception {
 		EntityTransaction trx = manager.getTransaction();
@@ -25,13 +25,14 @@ public class TransactionInterceptor implements Serializable {
 		try {
 			if (!trx.isActive()) {
 				// truque para fazer rollback no que já passou
-				// (senão, um futuro commit, confirmaria até mesmo operações sem transação)
+				// (senão, um futuro commit, confirmaria até mesmo operações sem
+				// transação)
 				trx.begin();
 				trx.rollback();
-				
+
 				// agora sim inicia a transação
 				trx.begin();
-				
+
 				criador = true;
 			}
 
@@ -48,5 +49,5 @@ public class TransactionInterceptor implements Serializable {
 			}
 		}
 	}
-	
+
 }

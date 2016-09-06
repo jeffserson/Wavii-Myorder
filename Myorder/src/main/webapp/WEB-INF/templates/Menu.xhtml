@@ -44,10 +44,11 @@
 		<p:menubar>  
 		<p:submenu label="Menu">
 			<p:submenu label="Cadastros">
-			<p:menuitem value="Empresa" outcome="/cadastros/EmpresasCadastradas" /> 
-			<p:menuitem value="Produto" outcome="/cadastros/ProdutosCadastrados" /> 
+			<p:menuitem value="Empresa"  rendered="#{request.isUserInRole('ADMINISTRADOR')}" outcome="/cadastros/EmpresasCadastradas" /> 
+			<p:menuitem value="Produto"  outcome="/cadastros/ProdutosCadastrados" /> 
 			<p:menuitem value="Cliente" outcome="/cadastros/ClientesCadastrados" />
-			<p:menuitem value="Funcionario" outcome="/cadastros/FuncionariosCadastrados" />
+			<p:menuitem value="Funcionario" rendered="#{request.isUserInRole('ADMINISTRADOR')}" outcome="/cadastros/FuncionariosCadastrados" />
+			<p:menuitem value="Usuario" rendered="#{request.isUserInRole('ADMINISTRADOR')}" outcome="/cadastros/UsuariosCadastrados" />
 			</p:submenu>
 			<p:submenu label="Processo">
 			<p:submenu label="Movimento Mesa">
@@ -55,9 +56,9 @@
 			<p:menuitem  value="Caixa" action="/MovimentoCaixa?faces-redirect=true"  />
 			</p:submenu>
 			</p:submenu>
-			<p:submenu label="Auxiliares">
-			<p:submenu label="Aux tabelas">
-			<p:menuitem value="Pais"   outcome="/auxcadastro/PaisesCadastrados"></p:menuitem>
+			<p:submenu label="Auxiliares" >
+			<p:submenu label="Aux tabelas" rendered="#{request.isUserInRole('ADMINISTRADOR')}">
+			<p:menuitem value="Pais"    outcome="/auxcadastro/PaisesCadastrados"></p:menuitem>
 			<p:menuitem value="Uf"  outcome="/auxcadastro/UfCadastrados" ></p:menuitem>
 			<p:menuitem value="Localidade" outcome="/auxcadastro/LocaisCadastrados" ></p:menuitem>
 			<p:menuitem value="Sublocalidade"  outcome="/auxcadastro/BairrosCadastrados" />
@@ -70,8 +71,8 @@
 			<p:menuitem  value="Precificacão"  outcome ="/auxrecurso/CadastroPreço"/>
 			</p:submenu>
 			<p:submenu label="Mesa - Caixa">
-			<p:menuitem  value="Mesas Cadastradas"  outcome ="/CadastroMesa"/>
-			<p:menuitem  value="Caixas Cadastrados"  outcome ="/CadastroCaixa"/>
+			<p:menuitem  value="Mesas Cadastradas"  outcome ="/cadastroprincipal/CadastroMesa"/>
+			<p:menuitem  value="Caixas Cadastrados"  outcome ="/cadastroprincipal/CadastroCaixa"/>
 			</p:submenu>
 			</p:submenu>
 			</p:submenu>

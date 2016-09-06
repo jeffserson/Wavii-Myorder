@@ -1,11 +1,8 @@
 package br.com.wavii.reposytory;
 
-
-
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
-
-
 
 import br.com.wavii.model.StatusMesa;
 
@@ -20,6 +17,7 @@ public class MovimentoMesaFilter implements Serializable {
 	private String mesa;
 	private String nomeCliente;
 	private StatusMesa[] statuses;
+	private BigDecimal totalmesa;
 
 	public Long getNumeroDe() {
 		return numeroDe;
@@ -75,6 +73,14 @@ public class MovimentoMesaFilter implements Serializable {
 
 	public void setMesa(String mesa) {
 		this.mesa = mesa;
+	}
+
+	public BigDecimal getTotalmesa() {
+		return totalmesa;
+	}
+
+	public void setTotalmesa(BigDecimal totalmesa) {
+		this.totalmesa = totalmesa;
 	}
 
 }

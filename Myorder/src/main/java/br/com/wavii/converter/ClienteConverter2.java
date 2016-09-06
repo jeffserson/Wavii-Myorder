@@ -19,11 +19,11 @@ public class ClienteConverter2 implements Converter {
 
 	@Inject
 	private ClienteMyorder clientemy;
-	
+
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		Cliente retorno = null;
-		
+
 		if (value != null && !"".equals(value)) {
 			retorno = this.clientemy.porid(new Long(value));
 		}
@@ -34,11 +34,10 @@ public class ClienteConverter2 implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-			Cliente lancamento = ((Cliente) value); 
+			Cliente lancamento = ((Cliente) value);
 			return lancamento.getId() == null ? null : lancamento.getId().toString();
 		}
 		return "";
 	}
-	
-	
+
 }

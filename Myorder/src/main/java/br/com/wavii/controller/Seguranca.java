@@ -17,18 +17,16 @@ public class Seguranca {
 
 	@Inject
 	private ExternalContext externalContext;
-	
-	
-	
+
 	public String getNomeUsuario() {
 		String nome = null;
-		
+
 		UsuarioSistema usuarioLogado = getUsuarioLogado();
-		
+
 		if (usuarioLogado != null) {
 			nome = usuarioLogado.getUsuario().getNome();
 		}
-		
+
 		return nome;
 	}
 
@@ -36,27 +34,23 @@ public class Seguranca {
 	@UsuarioLogado
 	public UsuarioSistema getUsuarioLogado() {
 		UsuarioSistema usuario = null;
-		
-		UsernamePasswordAuthenticationToken auth = (UsernamePasswordAuthenticationToken) 
-				FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
-		
+
+		UsernamePasswordAuthenticationToken auth = (UsernamePasswordAuthenticationToken) FacesContext
+				.getCurrentInstance().getExternalContext().getUserPrincipal();
+
 		if (auth != null && auth.getPrincipal() != null) {
 			usuario = (UsuarioSistema) auth.getPrincipal();
 		}
-		
+
 		return usuario;
 	}
-	
-	
-	
+
 	public boolean isEmitirPedidoPermitido() {
-		return externalContext.isUserInRole("ROLE_USER") 
-				|| externalContext.isUserInRole("ROLE_USER");
+		return externalContext.isUserInRole("ROLE_USER") || externalContext.isUserInRole("ROLE_USER");
 	}
-	
+
 	public boolean isCancelarPedidoPermitido() {
-		return externalContext.isUserInRole("ROLE_USER") 
-				|| externalContext.isUserInRole("ROLE_USER");
+		return externalContext.isUserInRole("ROLE_USER") || externalContext.isUserInRole("ROLE_USER");
 	}
-	
+
 }

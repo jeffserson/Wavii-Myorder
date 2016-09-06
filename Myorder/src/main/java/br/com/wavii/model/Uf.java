@@ -21,84 +21,81 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.wavii.converter.BaseEntity;
 
-
-
-
-
-
-
-@NamedQuery(name= "Uf.buscaruf" , query = "select e from Uf e")
+@NamedQuery(name = "Uf.buscaruf", query = "select e from Uf e")
 @Entity
-@Table(name="tb_uf")
-public class Uf implements BaseEntity,  Serializable {
+@Table(name = "tb_uf")
+public class Uf implements BaseEntity, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank
 	private String codigo;
-	
-	
+
 	@NotBlank
-	@Column(length = 60,nullable = false)
+	@Column(length = 60, nullable = false)
 	private String nome;
-	
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	@ManyToOne
-	@JoinColumn(name="tb_pais")
+	@JoinColumn(name = "tb_pais")
 	private Pais pais;
-	
-	@OneToMany(mappedBy="uf", cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "uf", cascade = CascadeType.ALL)
 	private List<Localidade> localidade = new ArrayList<>();
-	
-	
-	
-	
-	@OneToMany(mappedBy="uf", cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "uf", cascade = CascadeType.ALL)
 	private List<Empresa> empresas = new ArrayList<>();
-	
+
 	public List<Empresa> getEmpresas() {
 		return empresas;
 	}
+
 	public void setEmpresas(List<Empresa> empresas) {
 		this.empresas = empresas;
 	}
+
 	public List<Localidade> getLocalidade() {
 		return localidade;
 	}
+
 	public void setLocalidade(List<Localidade> localidade) {
 		this.localidade = localidade;
 	}
+
 	public Pais getPais() {
 		return pais;
 	}
+
 	public void setPais(Pais pais) {
 		this.pais = pais;
 	}
-	
 
-	
 	public String getCodigo() {
 		return codigo;
 	}
+
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -111,6 +108,7 @@ public class Uf implements BaseEntity,  Serializable {
 		result = prime * result + ((pais == null) ? 0 : pais.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -152,7 +150,5 @@ public class Uf implements BaseEntity,  Serializable {
 			return false;
 		return true;
 	}
-	
-	
-}
 
+}

@@ -23,50 +23,46 @@ import br.com.wavii.model.Uf;
 public class CepMyorder implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private EntityManager manager;
-	
-	
+
 	@Inject
-	public CepMyorder(EntityManager manager){
+	public CepMyorder(EntityManager manager) {
 		this.manager = manager;
 	}
-	
-	public Cep PorId(Long id){
-    	return manager.find(Cep.class, id);
-    }
-	
-	public List<Cep>todos(){
-		TypedQuery<Cep> query = manager.createQuery("from Cep",Cep.class);
+
+	public Cep PorId(Long id) {
+		return manager.find(Cep.class, id);
+	}
+
+	public List<Cep> todos() {
+		TypedQuery<Cep> query = manager.createQuery("from Cep", Cep.class);
 		return query.getResultList();
 	}
-	
-	public void adcionar(Cep cep){
+
+	public void adcionar(Cep cep) {
 		EntityTransaction trx = this.manager.getTransaction();
 		trx.begin();
 		this.manager.merge(cep);
 		trx.commit();
 	}
+
 	public List<Cep> porNomeSemelhante(String cep) {
-		return manager.createQuery("from Cep where cep like :cep", Cep.class)
-				.setParameter("cep", "%" + cep + "%")
+		return manager.createQuery("from Cep where cep like :cep", Cep.class).setParameter("cep", "%" + cep + "%")
 				.getResultList();
 	}
+
 	@SuppressWarnings("unchecked")
-	public List<Cep>buscaruf(Empresa empresa){
-		Session session = this .manager.unwrap(Session.class);
+	public List<Cep> buscaruf(Empresa empresa) {
+		Session session = this.manager.unwrap(Session.class);
 		Criteria criteria = session.createCriteria(Uf.class);
-		
-		if(empresa != null){
+
+		if (empresa != null) {
 			criteria.add(Restrictions.eq("empresa", empresa));
 		}
-		
-		
-		return criteria.list();
-		
-	}
-	
-	
-	
-	 }
 
+		return criteria.list();
+
+	}
+
+}

@@ -20,25 +20,26 @@ public class ItensDaNesaMyorder implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	EntityManager manager;
-	
+
 	@Inject
-	public ItensDaNesaMyorder(EntityManager manager){
+	public ItensDaNesaMyorder(EntityManager manager) {
 		this.manager = manager;
 	}
-	
-	public ItensDaMesa porid(Long id){
+
+	public ItensDaMesa porid(Long id) {
 		return manager.find(ItensDaMesa.class, id);
 	}
-	
-	public List<ItensDaMesa> todos(){
+
+	public List<ItensDaMesa> todos() {
 		TypedQuery<ItensDaMesa> query = manager.createQuery("from ItensDaMesa", ItensDaMesa.class);
 		return query.getResultList();
 	}
-	public void adcionar(ItensDaMesa itensdamesa){
+
+	public void adcionar(ItensDaMesa itensdamesa) {
 		EntityTransaction trx = this.manager.getTransaction();
 		trx.begin();
 		this.manager.merge(itensdamesa);
 		trx.commit();
 	}
-	
+
 }

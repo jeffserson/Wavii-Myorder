@@ -7,40 +7,60 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import br.com.wavii.converter.BaseEntity;
 
 @Entity
-@Table(name="tb_caixa")
+@Table(name = "tb_caixa")
 public class Caixa implements BaseEntity, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(length = 30,nullable = false)
+	@Column(length = 30, nullable = false)
 	private String codigo;
-	@Column(length = 150,nullable = false)
+	@Column(length = 150, nullable = false)
 	private String nome;
+	@ManyToOne
+	@JoinColumn(name = "tb_caixa")
+	private MovimentoCaixa movimentocaixa;
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getCodigo() {
 		return codigo;
 	}
+
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
+	public MovimentoCaixa getMovimentocaixa() {
+		return movimentocaixa;
+	}
+
+	public void setMovimentocaixa(MovimentoCaixa movimentocaixa) {
+		this.movimentocaixa = movimentocaixa;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -50,6 +70,7 @@ public class Caixa implements BaseEntity, Serializable {
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -76,6 +97,5 @@ public class Caixa implements BaseEntity, Serializable {
 			return false;
 		return true;
 	}
-	
-	
+
 }

@@ -21,72 +21,78 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.wavii.converter.BaseEntity;
 
-
 @Entity
-@Table(name="tb_localidade")
-public class Localidade implements BaseEntity,  Serializable {
-
+@Table(name = "tb_localidade")
+public class Localidade implements BaseEntity, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotBlank
-	@Column(length = 30,nullable = false)
-    private String codigo;
+	@Column(length = 30, nullable = false)
+	private String codigo;
 	@NotBlank
-	@Column(length = 150,nullable = false)
-    private String nome;
-	@Column(length = 30,nullable = false)
-    private String ibge;
-	
+	@Column(length = 150, nullable = false)
+	private String nome;
+	@Column(length = 30, nullable = false)
+	private String ibge;
+
 	@ManyToOne
-	@JoinColumn(name="tb_uf_id")
+	@JoinColumn(name = "tb_uf_id")
 	private Uf uf;
-	
-	
-	
+
 	public Uf getUf() {
 		return uf;
 	}
+
 	public void setUf(Uf uf) {
 		this.uf = uf;
 	}
-	@OneToMany(mappedBy="localidade",cascade=CascadeType.ALL)
+
+	@OneToMany(mappedBy = "localidade", cascade = CascadeType.ALL)
 	private List<Sublocalidade> sublocalidades = new ArrayList<>();
-	
+
 	public List<Sublocalidade> getSublocalidades() {
 		return sublocalidades;
 	}
+
 	public void setSublocalidades(List<Sublocalidade> sublocalidades) {
 		this.sublocalidades = sublocalidades;
 	}
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
+
 	public String getCodigo() {
 		return codigo;
 	}
+
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getIbge() {
 		return ibge;
 	}
+
 	public void setIbge(String ibge) {
 		this.ibge = ibge;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -99,6 +105,7 @@ public class Localidade implements BaseEntity,  Serializable {
 		result = prime * result + ((uf == null) ? 0 : uf.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -140,8 +147,5 @@ public class Localidade implements BaseEntity,  Serializable {
 			return false;
 		return true;
 	}
-	
 
-	
-	
 }

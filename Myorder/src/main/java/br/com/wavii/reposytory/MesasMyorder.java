@@ -30,53 +30,48 @@ public class MesasMyorder implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	EntityManager manager;
-	
+
 	@Inject
-	public MesasMyorder(EntityManager manager){
+	public MesasMyorder(EntityManager manager) {
 		this.manager = manager;
 	}
-	
-	public Mesa porid(Long id){
+
+	public Mesa porid(Long id) {
 		return manager.find(Mesa.class, id);
 	}
-	
-	public List<Mesa> todos(){
-		TypedQuery<Mesa> query = manager.createQuery(
-				"from Mesa", Mesa.class);
+
+	public List<Mesa> todos() {
+		TypedQuery<Mesa> query = manager.createQuery("from Mesa", Mesa.class);
 		return query.getResultList();
 	}
-	public void adcionar(Mesa mesa){
+
+	public void adcionar(Mesa mesa) {
 		EntityTransaction trx = this.manager.getTransaction();
 		trx.begin();
 		this.manager.merge(mesa);
 		trx.commit();
 	}
-	
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Mesa>buscarpelonome(String nome){
-		Session session = this .manager.unwrap(Session.class);
+	public List<Mesa> buscarpelonome(String nome) {
+		Session session = this.manager.unwrap(Session.class);
 		Criteria criteria = session.createCriteria(Mesa.class);
-		
-		if(StringUtils.isNotBlank(nome)){
+
+		if (StringUtils.isNotBlank(nome)) {
 			criteria.add(Restrictions.ilike("nome", nome.toUpperCase(), MatchMode.START));
 		}
-		
+
 		return criteria.list();
 	}
-	
-	
 
 	public Mesa porcodigo(String codigo) {
 		try {
 			return manager.createQuery("from Mesa where upper(codigo) = :codigo", Mesa.class)
-				.setParameter("codigo", codigo.toUpperCase())
-				.getSingleResult();
+					.setParameter("codigo", codigo.toUpperCase()).getSingleResult();
 		} catch (NoResultException e) {
 			return null;
 		}
-		
-		
+
 	}
-	
+
 }

@@ -17,12 +17,9 @@ public class LoginController implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public void timeout() throws IOException {
-	    FacesContext.getCurrentInstance().getExternalContext()
-	            .invalidateSession();
-	    FacesContext.getCurrentInstance().getExternalContext()
-	            .redirect("login.xhtml");
-	    
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
 
 	}
-	
+
 }

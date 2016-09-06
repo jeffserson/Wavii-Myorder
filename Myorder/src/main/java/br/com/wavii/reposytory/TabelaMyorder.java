@@ -24,41 +24,39 @@ public class TabelaMyorder implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	EntityManager manager;
-	
+
 	@Inject
-	public TabelaMyorder(EntityManager manager){
+	public TabelaMyorder(EntityManager manager) {
 		this.manager = manager;
 	}
-	
-	public Tabela porid(Long id){
+
+	public Tabela porid(Long id) {
 		return manager.find(Tabela.class, id);
 	}
-	
-	public List<Tabela> todos(){
+
+	public List<Tabela> todos() {
 		TypedQuery<Tabela> query = manager.createQuery("from Tabela", Tabela.class);
 		return query.getResultList();
 	}
-	public void adcionar(Tabela tabela){
+
+	public void adcionar(Tabela tabela) {
 		EntityTransaction trx = this.manager.getTransaction();
 		trx.begin();
 		this.manager.merge(tabela);
 		trx.commit();
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Tabela>buscarpelonome(String nome){
-		Session session = this .manager.unwrap(Session.class);
+	public List<Tabela> buscarpelonome(String nome) {
+		Session session = this.manager.unwrap(Session.class);
 		Criteria criteria = session.createCriteria(Tabela.class);
-		
-		if(StringUtils.isNotBlank(nome)){
+
+		if (StringUtils.isNotBlank(nome)) {
 			criteria.add(Restrictions.ilike("nome", nome.toUpperCase(), MatchMode.START));
 		}
-		
-		
+
 		return criteria.list();
-		
+
 	}
-	
-	
-	
+
 }

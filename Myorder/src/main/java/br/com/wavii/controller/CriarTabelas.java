@@ -1,10 +1,21 @@
 package br.com.wavii.controller;
 
+import java.math.BigDecimal;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
 
 import br.com.wavii.model.Grupo;
+import br.com.wavii.model.MovimentoCaixa;
+import br.com.wavii.model.MovimentoMesa;
 import br.com.wavii.model.Usuario1;
 import br.com.wavii.util.JpaUtil;
 
@@ -14,49 +25,11 @@ public class CriarTabelas {
 		EntityManager manager = JpaUtil.getEntityManager();
 		EntityTransaction trx = manager.getTransaction();
 		trx.begin();
-		
-		
-		Grupo vendedor = new Grupo();
-		vendedor.setNome("VENDEDOR");
-		vendedor.setDescricao("ana camila ");
-		
-		Grupo usuario = new Grupo();
-		usuario.setNome("ROLE_USER");
-		usuario.setDescricao("jefferson carvalho");
-		
-		manager.persist(vendedor);
-		manager.persist(usuario);
-		
-		
-		Usuario1 usuario1 = new Usuario1();
-		usuario1.setEmail("anacamilalc@gmail.com.br");
-		usuario1.getGrupos().add(vendedor);
-		usuario1.setNome("camila");
-		usuario1.setSenha("luancalebe");
-		
-		
-		Usuario1 usuario2 = new Usuario1();
-		usuario2.setEmail("mariaalice@gmail.com.br");
-		usuario2.getGrupos().add(usuario);
-		usuario2.setNome("alice");
-		usuario2.setSenha("rian");
-		
-		manager.persist(usuario2);
-		manager.persist(usuario1);
-		
+
 		trx.commit();
-		
+
 		manager.close();
-	   
+
 	}
-		
 
-}	
-	
-		
-	
-
-
-	
-
-
+}

@@ -19,49 +19,47 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import br.com.wavii.converter.BaseEntity;
 
-
-
-
-
-
 @Entity
-@Table(name="tb_logradouro")
+@Table(name = "tb_logradouro")
 public class Logradouro implements BaseEntity, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	
-	
+
 	@NotBlank
-	@Column(length = 60,nullable=false)
+	@Column(length = 60, nullable = false)
 	private String codigo;
-    
-	
+
 	@NotBlank
-	@Column(length = 150,nullable = false)
+	@Column(length = 150, nullable = false)
 	private String nome;
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getCodigo() {
 		return codigo;
 	}
+
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -71,6 +69,7 @@ public class Logradouro implements BaseEntity, Serializable {
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

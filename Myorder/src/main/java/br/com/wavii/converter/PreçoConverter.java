@@ -19,11 +19,11 @@ public class PreçoConverter implements Converter {
 
 	@Inject
 	private PreçoMyorder preco;
-	
+
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		Preço retorno = null;
-		
+
 		if (value != null && !"".equals(value)) {
 			retorno = this.preco.porid(new Long(value));
 		}
@@ -34,11 +34,10 @@ public class PreçoConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-			Preço lancamento = ((Preço) value); 
+			Preço lancamento = ((Preço) value);
 			return lancamento.getId() == null ? null : lancamento.getId().toString();
 		}
 		return "";
 	}
-	
-	
+
 }

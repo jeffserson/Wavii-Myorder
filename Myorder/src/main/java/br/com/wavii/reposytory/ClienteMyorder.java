@@ -25,43 +25,39 @@ public class ClienteMyorder implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private EntityManager manager;
+
 	@Inject
-	public ClienteMyorder (EntityManager manager){
+	public ClienteMyorder(EntityManager manager) {
 		this.manager = manager;
 	}
-	
-	public Cliente porid(Long id){
+
+	public Cliente porid(Long id) {
 		return manager.find(Cliente.class, id);
 	}
-	
-	public List<Cliente>todos(){
-		TypedQuery<Cliente> query = manager.createQuery("from Cliente",Cliente.class);
+
+	public List<Cliente> todos() {
+		TypedQuery<Cliente> query = manager.createQuery("from Cliente", Cliente.class);
 		return query.getResultList();
 	}
-	
-	public void adcionar(Cliente cliente){
+
+	public void adcionar(Cliente cliente) {
 		EntityTransaction trx = this.manager.getTransaction();
 		trx.begin();
 		this.manager.merge(cliente);
 		trx.commit();
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Cliente>buscarpelonome(String nome){
-		Session session = this .manager.unwrap(Session.class);
+	public List<Cliente> buscarpelonome(String nome) {
+		Session session = this.manager.unwrap(Session.class);
 		Criteria criteria = session.createCriteria(Cliente.class);
-		
-		if(StringUtils.isNotBlank(nome)){
+
+		if (StringUtils.isNotBlank(nome)) {
 			criteria.add(Restrictions.ilike("nome", nome.toUpperCase(), MatchMode.START));
 		}
-		
-		
+
 		return criteria.list();
-		
+
 	}
-	
-	
-	
-	
-	
+
 }

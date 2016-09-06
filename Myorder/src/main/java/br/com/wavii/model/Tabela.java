@@ -20,64 +20,76 @@ import org.hibernate.validator.constraints.NotBlank;
 import br.com.wavii.converter.BaseEntity;
 
 @Entity
-@Table(name="tb_tabela")
+@Table(name = "tb_tabela")
 public class Tabela implements BaseEntity, Serializable {
 
 	private static final long serialVersionUID = 1L;
-    
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(length=30,nullable=false)
+	@Column(length = 30, nullable = false)
 	private String codigo;
-	@Column(length=150,nullable=false)
+	@Column(length = 150, nullable = false)
 	private String nome;
-	@OneToMany(mappedBy="tabela")
+	@OneToMany(mappedBy = "tabela")
 	private List<Preço> preços = new ArrayList<>();
-	
-	@Temporal(TemporalType.DATE) 
+
+	@Temporal(TemporalType.DATE)
 	@Column(name = "inicio", nullable = false)
 	private Date inicio;
-	@Temporal(TemporalType.DATE) 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "Fim")
 	private Date fim;
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getCodigo() {
 		return codigo;
 	}
+
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public Date getInicio() {
 		return inicio;
 	}
+
 	public void setInicio(Date inicio) {
 		this.inicio = inicio;
 	}
+
 	public Date getFim() {
 		return fim;
 	}
+
 	public void setFim(Date fim) {
 		this.fim = fim;
 	}
-	
+
 	public List<Preço> getPreços() {
 		return preços;
 	}
+
 	public void setPreços(List<Preço> preços) {
 		this.preços = preços;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -90,6 +102,7 @@ public class Tabela implements BaseEntity, Serializable {
 		result = prime * result + ((preços == null) ? 0 : preços.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -131,10 +144,5 @@ public class Tabela implements BaseEntity, Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
+
 }

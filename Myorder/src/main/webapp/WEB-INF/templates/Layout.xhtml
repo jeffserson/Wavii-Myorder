@@ -29,8 +29,6 @@
  	
  	
  	
- 	
- 	
  	<p:ajaxStatus  style="display:block; margin-bottom:3em;height:24px;">
     
     </p:ajaxStatus>
@@ -40,8 +38,7 @@
 
  		
  	
-    <h:form>
-    
+    <h:form> 	
     <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
     <p:graphicImage name="/algaworks/images/loading.gif" />
    </p:dialog>
@@ -61,7 +58,11 @@
 		<a href="#" class="aw-toggle  js-toggle">
 		<i class="fa fa-bars" ></i>
 		</a>
-		
+		<div style="float: right; margin-right: 110px">
+				<span style="float: left; font-size:5mm; color:white; height: 30px; line-height: 30px; margin-right: 60px">
+				Olá #{seguranca.nomeUsuario}!
+				</span>
+			</div>
 		
 	</header>
 	

@@ -23,42 +23,46 @@ import org.hibernate.validator.constraints.NotBlank;
 import br.com.wavii.converter.BaseEntity;
 
 @Entity
-@Table(name="tb_mesas")
+@Table(name = "tb_mesas")
 public class Mesa implements BaseEntity, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotBlank
-	@Column(length = 30,nullable = false)
+	@Column(length = 30, nullable = false)
 	private String codigo;
 	@NotBlank
-	@Column(length = 150,nullable = false)
+	@Column(length = 150, nullable = false)
 	private String nome;
 	@OneToMany
-	private  List<MovimentoMesa> movimentomesa = new ArrayList<>();
-	
-	
-	
+	private List<MovimentoMesa> movimentomesa = new ArrayList<>();
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getCodigo() {
 		return codigo;
 	}
+
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -68,6 +72,7 @@ public class Mesa implements BaseEntity, Serializable {
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -94,17 +99,13 @@ public class Mesa implements BaseEntity, Serializable {
 			return false;
 		return true;
 	}
+
 	public List<MovimentoMesa> getMovimentomesa() {
 		return movimentomesa;
 	}
+
 	public void setMovimentomesa(List<MovimentoMesa> movimentomesa) {
 		this.movimentomesa = movimentomesa;
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }

@@ -12,7 +12,7 @@
 		<h1 class="aw-page-title"></h1>
              <f:metadata>
              <o:viewParam name="movimentomesa" value="#{cadastroMyorderBean2.movicaixa}" />
-			  <f:viewAction action="#{cadastroMyorderBean2.prepararmovimentocaixa}" />                                           
+			  <f:viewAction action="#{pesquisaPedidosBean.pesquisar1}" />                                           
 			  
 			 </f:metadata>
     
@@ -21,20 +21,22 @@
           <p:toolbar style="margin-top: 20px">
 	    		<p:toolbarGroup>
 	    			<p:commandButton value="Pesquisar" 
-	    				update="@form" />
+	    				update="@form" action="#{pesquisaPedidosBean.pesquisar}"/>
 	    		</p:toolbarGroup>
 	    	</p:toolbar>
-    
-    
-    
 		<p:messages autoUpdate="true" />
          
-       
-       
-       <p:panelGrid style="margin-top: 20px" columns="4" layout="grid" styleClass="panelgrid-noborder"
+       <p:panelGrid  style="margin-top: 20px" columns="4" layout="grid" styleClass="panelgrid-noborder"
 		columnClasses="ui-grid-col-1, ui-grid-col-4, ui-grid-col-1, ui-grid-col-2">
-		 
-		        <h:outputText value="Funcionario: " />
+		           
+		           
+		    <p:outputLabel value="Usuario" style="font-weight: bold; font-size: 1.1em"/>
+           <h:outputText value="#{seguranca.nomeUsuario}" 
+        	style="font-weight: bold; font-size: 1.1em" id="usuario">
+        	<f:convertNumber type="currency" />
+           </h:outputText>  
+		
+	    		 <h:outputText value="Funcionario: " />
                 <p:selectOneMenu   id="cliente"  value="#{cadastroMyorderBean2.movicaixa.funcionario}" 
                  effect="fade" 
                  filter="true" filterMatchMode="startsWith" converter="converter">
@@ -47,7 +49,7 @@
 		        <h:outputText value="Caixa: " />
                 <p:selectOneMenu  id="caixa"  value="#{cadastroMyorderBean2.movicaixa.caixa}" 
                 effect="fade" editable="true" 
-                 filter="true" filterMatchMode="startsWith" converter="converter" required="true">
+                 filter="true" filterMatchMode="startsWith" converter="converter">
                 <f:selectItem itemLabel="Selecione" noSelectionOption="true" />
                 <f:selectItems   value="#{cadastroMyorderBean2.caixas}" var="caixa"
                 itemValue="#{caixa}" itemLabel="#{caixa.nome}"  /> 
@@ -57,23 +59,18 @@
 				<p:calendar  
 				 locale="pt" id="abertura" size="12" pattern="dd/MM/yyyy"	value="#{cadastroMyorderBean2.movicaixa.abertura}">
 				</p:calendar>
-			
-			    <p:outputLabel  value="Fechamento:" for="final"/>
-				<p:calendar  
-				 locale="pt" id="final" size="12" pattern="dd/MM/yyyy"	value="#{cadastroMyorderBean2.movicaixa.fechamento}">
-				</p:calendar>
-			
-			
-			
-			<p:outputLabel value="Total" style="font-weight: bold; font-size: 1.1em"/>
-           <h:outputText value="#{cadastroMyorderBean2.movicaixa.total}" 
+	    		
+	    	<p:outputLabel value="Total" style="font-weight: bold; font-size: 1.1em"/>
+           <h:outputText value="#{pesquisaPedidosBean.movicaixa.total}" 
         	style="font-weight: bold; font-size: 1.1em" id="totalcaixa">
         	<f:convertNumber type="currency" />
            </h:outputText>
-			
-		
-			
-			</p:panelGrid>
+	    		
+	    		
+	    	</p:panelGrid>
+	    	
+       
+     
 	
 	</h:form>
 	</ui:define>

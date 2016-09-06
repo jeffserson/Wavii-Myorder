@@ -17,11 +17,11 @@ public class FuncionarioConverter implements Converter {
 
 	@Inject
 	private FuncionarioMyorder funcmy;
-	
+
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		Funcionario retorno = null;
-		
+
 		if (value != null && !"".equals(value)) {
 			retorno = this.funcmy.porid(new Long(value));
 		}
@@ -32,11 +32,10 @@ public class FuncionarioConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-			Funcionario lancamento = ((Funcionario) value); 
+			Funcionario lancamento = ((Funcionario) value);
 			return lancamento.getId() == null ? null : lancamento.getId().toString();
 		}
 		return "";
 	}
-	
-	
+
 }

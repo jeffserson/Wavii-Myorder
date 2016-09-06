@@ -17,11 +17,11 @@ public class CepConverter implements Converter {
 
 	@Inject
 	private CepMyorder empresa;;
-	
+
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		Cep retorno = null;
-		
+
 		if (value != null && !"".equals(value)) {
 			retorno = this.empresa.PorId(new Long(value));
 		}
@@ -32,11 +32,10 @@ public class CepConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value != null) {
-			Cep lancamento = ((Cep) value); 
+			Cep lancamento = ((Cep) value);
 			return lancamento.getId() == null ? null : lancamento.getId().toString();
 		}
 		return "";
 	}
-	
-	
+
 }

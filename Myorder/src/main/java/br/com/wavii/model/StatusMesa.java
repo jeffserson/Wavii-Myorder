@@ -2,12 +2,10 @@ package br.com.wavii.model;
 
 public enum StatusMesa {
 
-	ABERTO("Aberto"), 
-	FINALIZADO("Finalizado"), 
-	CANCELADO("Cancelado");
-	
+	ABERTO("Aberto"), FINALIZADO("Finalizado"), CANCELADO("Cancelado");
+
 	private String descricao;
-	
+
 	StatusMesa(String descricao) {
 		this.descricao = descricao;
 	}
@@ -15,5 +13,5 @@ public enum StatusMesa {
 	public String getDescricao() {
 		return descricao;
 	}
-	
+
 }

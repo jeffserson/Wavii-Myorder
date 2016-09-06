@@ -21,100 +21,116 @@ import org.hibernate.validator.constraints.br.CPF;
 import br.com.wavii.converter.BaseEntity;
 
 @Entity
-@Table(name="tb_funcionario")
+@Table(name = "tb_funcionario")
 public class Funcionario implements BaseEntity, Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@CPF
-	@Column(length=30,nullable=false)
+	@Column(length = 30, nullable = false)
 	private String cpf;
 	@NotBlank
-	@Column(length=150,nullable=false)
+	@Column(length = 150, nullable = false)
 	private String nome;
-	@NotBlank(message="Cep É Obrigatorio")
-	@Column(length=30,nullable=false)
+	@NotBlank(message = "Cep É Obrigatorio")
+	@Column(length = 30, nullable = false)
 	private String cep;
-	@Column(length=150,nullable=false)
-	private String 	Logradouro;
-	@Column(length=200,nullable=false)
+	@Column(length = 150, nullable = false)
+	private String Logradouro;
+	@Column(length = 200, nullable = false)
 	private String Complemento;
-	@Column(length=30,nullable=false)
+	@Column(length = 30, nullable = false)
 	private String Numero;
-	@Column(length=30,nullable=false)
+	@Column(length = 30, nullable = false)
 	private String fone;
-	@Column(length=30,nullable=false)
+	@Column(length = 30, nullable = false)
 	private String celular;
 	@org.hibernate.validator.constraints.Email
-	@Column(length=60,nullable=false)
+	@Column(length = 60, nullable = false)
 	private String Email;
-	
-	
-	
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
 	public String getCpf() {
 		return cpf;
 	}
+
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getCep() {
 		return cep;
 	}
+
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
+
 	public String getLogradouro() {
 		return Logradouro;
 	}
+
 	public void setLogradouro(String logradouro) {
 		Logradouro = logradouro;
 	}
+
 	public String getComplemento() {
 		return Complemento;
 	}
+
 	public void setComplemento(String complemento) {
 		Complemento = complemento;
 	}
+
 	public String getNumero() {
 		return Numero;
 	}
+
 	public void setNumero(String numero) {
 		Numero = numero;
 	}
+
 	public String getFone() {
 		return fone;
 	}
+
 	public void setFone(String fone) {
 		this.fone = fone;
 	}
+
 	public String getCelular() {
 		return celular;
 	}
+
 	public void setCelular(String celular) {
 		this.celular = celular;
 	}
+
 	public String getEmail() {
 		return Email;
 	}
+
 	public void setEmail(String email) {
 		Email = email;
 	}
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -131,6 +147,7 @@ public class Funcionario implements BaseEntity, Serializable {
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -192,8 +209,5 @@ public class Funcionario implements BaseEntity, Serializable {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 }
