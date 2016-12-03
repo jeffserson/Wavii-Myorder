@@ -17,23 +17,30 @@ import br.com.wavii.model.Produto;
 public class PreçoMyorder implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	EntityManager manager;
-
 	@Inject
-	public PreçoMyorder(EntityManager manager) {
-		this.manager = manager;
-	}
+	private EntityManager manager;
+
+	
 
 	public Preço porid(Long id) {
 		return manager.find(Preço.class, id);
 	}
 
+	
+	public void remove(Preço preco){
+		this.manager.remove(preco);
+	}
+	
 	public List<Preço> todos() {
 		TypedQuery<Preço> query = manager.createQuery("from Preço", Preço.class);
 		return query.getResultList();
 	}
 
+	
+	public Preço guardar(Preço preço){
+		return manager.merge(preço);
+	}
+	
 	public void adcionar(Preço preço) {
 		EntityTransaction trx = this.manager.getTransaction();
 		trx.begin();

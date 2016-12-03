@@ -20,10 +20,11 @@
     	</f:metadata>
          
       <div id="login-dialog">
+      <p:messages id="messages" autoUpdate="true" closable="true" />
     		<b:panel title="login" look="primary">
     		<h:form id="frm" prependId="false">
     			
-    			<p:messages id="messages" autoUpdate="true" closable="true" />
+    			
     		  
     				<p:outputLabel value="E-mail" />
     				<b:inputText size="30" id="j_username" autocomplete="false" placeholder="Email" value="#{loginBean.email}">

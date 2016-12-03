@@ -14,12 +14,12 @@ import br.com.wavii.model.Pais;
 public class PaisMyorder2 implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	@Inject
 	private EntityManager manager;
 
-	@Inject
-	public PaisMyorder2(EntityManager manager) {
-		this.manager = manager;
+	
+	public void excluir(Pais pais){
+		this.manager.remove(pais);
 	}
 
 	public Pais PorId(Long id) {
@@ -31,11 +31,8 @@ public class PaisMyorder2 implements Serializable {
 		return query.getResultList();
 	}
 
-	public void adcionar(Pais pais) {
-		EntityTransaction trx = this.manager.getTransaction();
-		trx.begin();
-		this.manager.merge(pais);
-		trx.commit();
+	public Pais adcionar(Pais pais) {
+		return manager.merge(pais);
 	}
 
 	public List<Pais> porNomeSemelhante(String nome) {

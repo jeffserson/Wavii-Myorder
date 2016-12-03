@@ -8,34 +8,33 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
+import br.com.wavii.model.Localidade;
 import br.com.wavii.model.Logradouro;
 import br.com.wavii.model.Pais;
 
 public class LogradouroMyorder2 implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	@Inject
 	private EntityManager manager;
 
-	@Inject
-	public LogradouroMyorder2(EntityManager manager) {
-		this.manager = manager;
+	
+	
+	public void excluir(Logradouro logradouro){
+		this.manager.remove(logradouro);
 	}
-
-	public Logradouro porId(Long id) {
+	
+	
+	public Logradouro PorId(Long id) {
 		return manager.find(Logradouro.class, id);
 	}
-
 	public List<Logradouro> todos() {
 		TypedQuery<Logradouro> query = manager.createQuery("from Logradouro", Logradouro.class);
 		return query.getResultList();
 	}
 
-	public void adcionar(Logradouro logradouro) {
-		EntityTransaction trx = this.manager.getTransaction();
-		trx.begin();
-		this.manager.merge(logradouro);
-		trx.commit();
+	public Logradouro adcionar(Logradouro logradouro) {
+		return this.manager.merge(logradouro);
 	}
 
 	public List<Logradouro> porNomeSemelhante(String nome) {

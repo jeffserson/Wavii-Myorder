@@ -28,13 +28,8 @@ import br.com.wavii.model.Tabela;
 public class MesasMyorder implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	EntityManager manager;
-
 	@Inject
-	public MesasMyorder(EntityManager manager) {
-		this.manager = manager;
-	}
+	private EntityManager manager;
 
 	public Mesa porid(Long id) {
 		return manager.find(Mesa.class, id);
@@ -45,11 +40,8 @@ public class MesasMyorder implements Serializable {
 		return query.getResultList();
 	}
 
-	public void adcionar(Mesa mesa) {
-		EntityTransaction trx = this.manager.getTransaction();
-		trx.begin();
-		this.manager.merge(mesa);
-		trx.commit();
+	public Mesa adcionar(Mesa mesa) {
+	 return manager.merge(mesa);
 	}
 
 	@SuppressWarnings("unchecked")

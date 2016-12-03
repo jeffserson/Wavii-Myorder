@@ -22,28 +22,25 @@ import br.com.wavii.model.Tabela;
 public class TabelaMyorder implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	EntityManager manager;
-
 	@Inject
-	public TabelaMyorder(EntityManager manager) {
-		this.manager = manager;
-	}
+	private EntityManager manager;
+
 
 	public Tabela porid(Long id) {
 		return manager.find(Tabela.class, id);
 	}
 
+	public void excluir(Tabela tabela){
+	this.manager.remove(tabela);	
+	}
+	
 	public List<Tabela> todos() {
 		TypedQuery<Tabela> query = manager.createQuery("from Tabela", Tabela.class);
 		return query.getResultList();
 	}
 
-	public void adcionar(Tabela tabela) {
-		EntityTransaction trx = this.manager.getTransaction();
-		trx.begin();
-		this.manager.merge(tabela);
-		trx.commit();
+	public Tabela adcionar(Tabela tabela) {
+		return manager.merge(tabela);
 	}
 
 	@SuppressWarnings("unchecked")

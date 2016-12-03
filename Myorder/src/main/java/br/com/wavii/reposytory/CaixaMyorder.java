@@ -16,13 +16,11 @@ import br.com.wavii.model.Tabela;
 public class CaixaMyorder implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	EntityManager manager;
-
 	@Inject
-	public CaixaMyorder(EntityManager manager) {
-		this.manager = manager;
-	}
+	private EntityManager manager;
+
+	
+	
 
 	public Caixa porid(Long id) {
 		return manager.find(Caixa.class, id);
@@ -33,11 +31,8 @@ public class CaixaMyorder implements Serializable {
 		return query.getResultList();
 	}
 
-	public void adcionar(Caixa caixa) {
-		EntityTransaction trx = this.manager.getTransaction();
-		trx.begin();
-		this.manager.merge(caixa);
-		trx.commit();
+	public Caixa adcionar(Caixa caixa) {
+		return manager.merge(caixa);
 	}
 
 }

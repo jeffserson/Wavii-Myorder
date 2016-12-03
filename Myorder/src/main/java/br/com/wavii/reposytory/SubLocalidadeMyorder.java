@@ -14,12 +14,12 @@ import br.com.wavii.model.Sublocalidade;
 public class SubLocalidadeMyorder implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	@Inject
 	private EntityManager manager;
 
-	@Inject
-	public SubLocalidadeMyorder(EntityManager manager) {
-		this.manager = manager;
+	
+	public void excluir(Sublocalidade sublocalidade){
+		this.manager.remove(sublocalidade);
 	}
 
 	public Sublocalidade PorId(Long id) {
@@ -27,15 +27,14 @@ public class SubLocalidadeMyorder implements Serializable {
 	}
 
 	public List<Sublocalidade> todos() {
-		TypedQuery<Sublocalidade> query = manager.createQuery("from Sublocalidade", Sublocalidade.class);
+		TypedQuery<Sublocalidade> query = manager.createQuery("from Sublocalidade v join fetch v.localidade", Sublocalidade.class);
 		return query.getResultList();
 	}
 
-	public void adcionar(Sublocalidade sublocalidade) {
-		EntityTransaction trx = this.manager.getTransaction();
-		trx.begin();
-		this.manager.merge(sublocalidade);
-		trx.commit();
+	public Sublocalidade adcionar(Sublocalidade sublocalidade) {
+
+	return	this.manager.merge(sublocalidade);
+		
 	}
 
 	public List<Sublocalidade> porNomeSemelhante(String nome) {

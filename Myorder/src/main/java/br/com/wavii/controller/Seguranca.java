@@ -46,11 +46,11 @@ public class Seguranca {
 	}
 
 	public boolean isEmitirPedidoPermitido() {
-		return externalContext.isUserInRole("ROLE_USER") || externalContext.isUserInRole("ROLE_USER");
+		return externalContext.isUserInRole("ADMINISTRADOR") || externalContext.isUserInRole("ADMINISTRADOR");
 	}
 
 	public boolean isCancelarPedidoPermitido() {
-		return externalContext.isUserInRole("ROLE_USER") || externalContext.isUserInRole("ROLE_USER");
+		return externalContext.isUserInRole("ADMINISTRADOR") || externalContext.isUserInRole("ADMINISTRADOR");
 	}
 
 }

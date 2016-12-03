@@ -19,28 +19,24 @@ import br.com.wavii.model.Uf;
 public class LocalidadeMyorder implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	private EntityManager manager;
-
 	@Inject
-	public LocalidadeMyorder(EntityManager manager) {
-		this.manager = manager;
-	}
+	private EntityManager manager;
 
 	public Localidade PorId(Long id) {
 		return manager.find(Localidade.class, id);
 	}
 
+	public void excluir(Localidade localidade){
+		this.manager.remove(localidade);
+	}
+	
 	public List<Localidade> todos() {
 		TypedQuery<Localidade> query = manager.createQuery("from Localidade v join fetch v.uf", Localidade.class);
 		return query.getResultList();
 	}
 
-	public void adcionar(Localidade localidade) {
-		EntityTransaction trx = this.manager.getTransaction();
-		trx.begin();
-		this.manager.merge(localidade);
-		trx.commit();
+	public Localidade adcionar(Localidade localidade) {
+	  return	this.manager.merge(localidade);
 	}
 
 	@SuppressWarnings("unchecked")

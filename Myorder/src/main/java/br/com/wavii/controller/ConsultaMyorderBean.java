@@ -22,6 +22,7 @@ import br.com.wavii.model.Sublocalidade;
 import br.com.wavii.model.Uf;
 import br.com.wavii.reposytory.CepMyorder;
 import br.com.wavii.reposytory.EmpresaMyorder;
+import br.com.wavii.reposytory.ExcluirClienteMyorder;
 import br.com.wavii.reposytory.LocalidadeMyorder;
 import br.com.wavii.reposytory.LogradouroMyorder2;
 import br.com.wavii.reposytory.PaisMyorder2;
@@ -187,7 +188,9 @@ public class ConsultaMyorderBean implements Serializable {
 	public void setEmpresas(List<Empresa> empresas) {
 		this.empresas = empresas;
 	}
-
+    @Inject
+	private ExcluirClienteMyorder excluirmy;
+	
 	@Inject
 	private EmpresaMyorder empresamy;
 	@Inject
@@ -257,72 +260,37 @@ public class ConsultaMyorderBean implements Serializable {
 	}
 
 	public void excluir(Empresa empresa) {
-		EntityManager manager = JpaUtil.getEntityManager();
-		EntityTransaction trx = manager.getTransaction();
-		trx.begin();
-		empresa = manager.find(Empresa.class, empresa.getId());
-		manager.remove(empresa);
-		trx.commit();
+		this.excluirmy.excluirempresa(empresa);
 		FacesUtil.addInfoMessage("Empresa Excluida Com Sucesso");
 	}
 
 	public void excluirloc(Localidade localidade) {
-		EntityManager manager = JpaUtil.getEntityManager();
-		EntityTransaction trx = manager.getTransaction();
-		trx.begin();
-		localidade = manager.find(Localidade.class, localidade.getId());
-		manager.remove(localidade);
-		trx.commit();
+		excluirmy.excluirlocalidade(localidade);
 		FacesUtil.addInfoMessage("Cidade Excluida Com Sucesso");
 	}
 
 	public void excluirloc(Sublocalidade sublocalidade) {
-		EntityManager manager = JpaUtil.getEntityManager();
-		EntityTransaction trx = manager.getTransaction();
-		trx.begin();
-		sublocalidade = manager.find(Sublocalidade.class, sublocalidade.getId());
-		manager.remove(sublocalidade);
-		trx.commit();
+		excluirmy.excluirsublocalidade(sublocalidade);
 		FacesUtil.addInfoMessage("Bairro Excluido Com Sucesso");
 	}
 
 	public void excluirloc(Cep cep) {
-		EntityManager manager = JpaUtil.getEntityManager();
-		EntityTransaction trx = manager.getTransaction();
-		trx.begin();
-		cep = manager.find(Cep.class, cep.getId());
-		manager.remove(cep);
-		trx.commit();
+		excluirmy.excluircep(cep);
 		FacesUtil.addInfoMessage("Cep Excluido Com Sucesso");
 	}
 
 	public void excluirloc(Pais pais) {
-		EntityManager manager = JpaUtil.getEntityManager();
-		EntityTransaction trx = manager.getTransaction();
-		trx.begin();
-		pais = manager.find(Pais.class, pais.getId());
-		manager.remove(pais);
-		trx.commit();
+		excluirmy.excluirpais(pais);
 		FacesUtil.addInfoMessage("Pais Excluido Com Sucesso");
 	}
 
 	public void excluirloc(Uf uf) {
-		EntityManager manager = JpaUtil.getEntityManager();
-		EntityTransaction trx = manager.getTransaction();
-		trx.begin();
-		uf = manager.find(Uf.class, uf.getId());
-		manager.remove(uf);
-		trx.commit();
+		excluirmy.excluiruf(uf);
 		FacesUtil.addInfoMessage("Estado Excluido Com Sucesso");
 	}
 
 	public void excluirloc(Logradouro logradouro) {
-		EntityManager manager = JpaUtil.getEntityManager();
-		EntityTransaction trx = manager.getTransaction();
-		trx.begin();
-		logradouro = manager.find(Logradouro.class, logradouro.getId());
-		manager.remove(logradouro);
-		trx.commit();
+		excluirmy.excluirlogradouro(logradouro);
 		FacesUtil.addInfoMessage("Tipo De Logradouro Excluido Com Sucesso");
 	}
 

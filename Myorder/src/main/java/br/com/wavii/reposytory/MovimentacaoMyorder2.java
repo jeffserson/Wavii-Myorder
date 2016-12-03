@@ -19,13 +19,11 @@ import br.com.wavii.model.Tabela;
 public class MovimentacaoMyorder2 implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
-	EntityManager manager;
-
 	@Inject
-	public MovimentacaoMyorder2(EntityManager manager) {
-		this.manager = manager;
-	}
+	private EntityManager manager;
+
+	
+	
 
 	public Movimentacao porid(Long id) {
 		return manager.find(Movimentacao.class, id);
