@@ -14,7 +14,7 @@ function upperText(){
 		setTimeout(function(){
 			var text = jQuery(el).val();
 			el.val(text.toUpperCase());
-		},100);
+		},10);
 		
 	});
 	jQuery(".up").keypress(function() {
@@ -23,7 +23,7 @@ function upperText(){
 			var text = jQuery(el).val();
 			el.val(text.toUpperCase());
 			
-		},100);
+		},10);
 		
 	});
 	

@@ -24,11 +24,11 @@ public class CepMyorder implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@Inject
 	private EntityManager manager;
 
-	@Inject
-	public CepMyorder(EntityManager manager) {
-		this.manager = manager;
+	public void excluir(Cep cep){
+		this.manager.remove(cep);
 	}
 
 	public Cep PorId(Long id) {
@@ -40,11 +40,9 @@ public class CepMyorder implements Serializable {
 		return query.getResultList();
 	}
 
-	public void adcionar(Cep cep) {
-		EntityTransaction trx = this.manager.getTransaction();
-		trx.begin();
-		this.manager.merge(cep);
-		trx.commit();
+	public 	Cep adcionar(Cep cep) {
+		return this.manager.merge(cep);
+		
 	}
 
 	public List<Cep> porNomeSemelhante(String cep) {

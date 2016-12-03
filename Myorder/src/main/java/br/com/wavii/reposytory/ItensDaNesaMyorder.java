@@ -18,13 +18,11 @@ import br.com.wavii.model.Tabela;
 public class ItensDaNesaMyorder implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	@Inject
 	EntityManager manager;
 
-	@Inject
-	public ItensDaNesaMyorder(EntityManager manager) {
-		this.manager = manager;
-	}
+	
+
 
 	public ItensDaMesa porid(Long id) {
 		return manager.find(ItensDaMesa.class, id);
@@ -35,11 +33,8 @@ public class ItensDaNesaMyorder implements Serializable {
 		return query.getResultList();
 	}
 
-	public void adcionar(ItensDaMesa itensdamesa) {
-		EntityTransaction trx = this.manager.getTransaction();
-		trx.begin();
-		this.manager.merge(itensdamesa);
-		trx.commit();
+	public ItensDaMesa adcionar(ItensDaMesa itensdamesa) {
+		return this.manager.merge(itensdamesa);
 	}
 
 }

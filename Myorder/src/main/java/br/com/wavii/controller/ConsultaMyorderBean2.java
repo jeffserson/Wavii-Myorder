@@ -18,6 +18,7 @@ import br.com.wavii.model.Preço;
 import br.com.wavii.model.Produto;
 import br.com.wavii.model.Tabela;
 import br.com.wavii.reposytory.ClienteMyorder;
+import br.com.wavii.reposytory.ExcluirClienteMyorder;
 import br.com.wavii.reposytory.FuncionarioMyorder;
 import br.com.wavii.reposytory.MesasMyorder;
 import br.com.wavii.reposytory.MovimentoMesaMyorder;
@@ -35,16 +36,14 @@ public class ConsultaMyorderBean2 implements Serializable {
 
 	@Inject
 	private PreçoMyorder preçomy;
-
+	@Inject
+	private ExcluirClienteMyorder excluirmy;
 	@Inject
 	private FuncionarioMyorder funcionariomy;
-
 	@Inject
 	private ProdutoMyorder produtomy;
-
 	@Inject
 	private ClienteMyorder clientemy;
-
 	@Inject
 	private TabelaMyorder tabelamy;
 	@Inject
@@ -98,52 +97,27 @@ public class ConsultaMyorderBean2 implements Serializable {
 	}
 
 	public void excluir(Funcionario funcionario) {
-		EntityManager manager = JpaUtil.getEntityManager();
-		EntityTransaction trx = manager.getTransaction();
-		trx.begin();
-		funcionario = manager.find(Funcionario.class, funcionario.getId());
-		manager.remove(funcionario);
-		trx.commit();
+		excluirmy.excluirfuncionario(funcionario);
 		FacesUtil.addInfoMessage("Funcionario Excluido Com Sucesso");
 	}
 
 	public void excluircliente(Cliente cliente) {
-		EntityManager manager = JpaUtil.getEntityManager();
-		EntityTransaction trx = manager.getTransaction();
-		trx.begin();
-		cliente = manager.find(Cliente.class, cliente.getId());
-		manager.remove(cliente);
-		trx.commit();
+		excluirmy.excluircliente(cliente);
 		FacesUtil.addInfoMessage("Cliente Excluido Com Sucesso");
 	}
 
 	public void excluirproduto(Produto produto) {
-		EntityManager manager = JpaUtil.getEntityManager();
-		EntityTransaction trx = manager.getTransaction();
-		trx.begin();
-		produto = manager.find(Produto.class, produto.getId());
-		manager.remove(produto);
-		trx.commit();
-		FacesUtil.addInfoMessage("Produto Excluido Com Sucesso");
+		excluirmy.excluirproduto(produto);
+		FacesUtil.addInfoMessage("Produto excluido com sucesso");
 	}
 
 	public void excluirpreço(Preço preço) {
-		EntityManager manager = JpaUtil.getEntityManager();
-		EntityTransaction trx = manager.getTransaction();
-		trx.begin();
-		preço = manager.find(Preço.class, preço.getId());
-		manager.remove(preço);
-		trx.commit();
+		excluirmy.excluirpreço(preço);
 		FacesUtil.addInfoMessage("Produto Excluido Com Sucesso");
 	}
 
 	public void excluirtabela(Tabela tabela) {
-		EntityManager manager = JpaUtil.getEntityManager();
-		EntityTransaction trx = manager.getTransaction();
-		trx.begin();
-		tabela = manager.find(Tabela.class, tabela.getId());
-		manager.remove(tabela);
-		trx.commit();
+	    excluirmy.excluirtabela(tabela);
 		FacesUtil.addInfoMessage("Tabela Excluida Com Sucesso");
 	}
 

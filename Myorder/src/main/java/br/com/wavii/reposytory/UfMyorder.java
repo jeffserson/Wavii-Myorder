@@ -19,14 +19,15 @@ import br.com.wavii.model.Uf;
 public class UfMyorder implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	@Inject
 	private EntityManager manager;
 
-	@Inject
-	public UfMyorder(EntityManager manager) {
-		this.manager = manager;
+	
+	public void excluir(Uf uf){
+		this.manager.remove(uf);
 	}
-
+	
+	
 	public Uf PorId(Long id) {
 		return manager.find(Uf.class, id);
 	}
@@ -36,11 +37,9 @@ public class UfMyorder implements Serializable {
 		return query.getResultList();
 	}
 
-	public void adcionar(Uf uf) {
-		EntityTransaction trx = this.manager.getTransaction();
-		trx.begin();
-		this.manager.merge(uf);
-		trx.commit();
+	public Uf adcionar(Uf uf) {
+		return this.manager.merge(uf);
+		
 	}
 
 	@SuppressWarnings("unchecked")

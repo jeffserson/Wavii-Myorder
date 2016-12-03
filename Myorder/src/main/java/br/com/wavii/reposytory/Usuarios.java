@@ -11,6 +11,7 @@ import javax.persistence.NoResultException;
 import br.com.wavii.model.Grupo;
 import br.com.wavii.model.Produto;
 import br.com.wavii.model.Usuario1;
+import br.com.wavii.util.Transactional;
 
 public class Usuarios implements Serializable {
 
@@ -18,20 +19,10 @@ public class Usuarios implements Serializable {
 
 	@Inject
 	private EntityManager manager;
+   
 
 	public Usuario1 porId(Long id) {
 		return this.manager.find(Usuario1.class, id);
-	}
-	
-	
-	
-	public Usuario1 adcionar1(Usuario1 usuario) {
-		EntityTransaction trx = this.manager.getTransaction();
-		trx.begin();
-		this.manager.merge(usuario);
-		trx.commit();
-		return usuario;
-
 	}
 	
 	public Usuario1 adcionar(Usuario1 usuario) {
@@ -40,9 +31,9 @@ public class Usuarios implements Serializable {
 
 	public List<Usuario1> vendedores() {
 		// TODO filtrar apenas vendedores (por um grupo específico)
-		return this.manager.createQuery("from Usuario1", Usuario1.class).getResultList();
+		return this.manager.createQuery("from Usuario1 v join fetch v.grupos", Usuario1.class).getResultList();
 	}
-
+	
 	public List<Grupo> grupos() {
 		// TODO filtrar apenas vendedores (por um grupo específico)
 		return this.manager.createQuery("from Grupo", Grupo.class).getResultList();

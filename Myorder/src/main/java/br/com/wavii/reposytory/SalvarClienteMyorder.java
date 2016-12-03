@@ -93,9 +93,10 @@ public class SalvarClienteMyorder implements Serializable {
 
 	@Inject
 	private CaixaMyorder caixas;
-
-	public void commitar(Empresa empresa) {
-		this.empresa.adcionar(empresa);
+    
+	@Transactional
+	public Empresa commitar(Empresa empresa) {
+		return this.empresa.adcionar(empresa);
 
 	}
 	@Transactional
@@ -103,36 +104,36 @@ public class SalvarClienteMyorder implements Serializable {
 	return	this.usuariosmy.adcionar(usuario);
 
 	}
-	
-	public void salvarpais(Pais pais) {
-		this.pais.adcionar(pais);
+	@Transactional
+	public Pais salvarpais(Pais pais) {
+		return this.pais.adcionar(pais);
 
 	}
-
-	public void salvarlog(Logradouro logradouro) {
-		this.log1.adcionar(logradouro);
+    @Transactional
+	public Logradouro salvarlog(Logradouro logradouro) {
+		return this.log1.adcionar(logradouro);
 	}
-
-	public void Salvaruf(Uf uf) {
-		this.ufmy1.adcionar(uf);
+    @Transactional
+	public Uf Salvaruf(Uf uf) {
+	return	this.ufmy1.adcionar(uf);
 	}
-
-	public void Salvarlocalidade(Localidade localidade) {
-		this.locmy.adcionar(localidade);
+    @Transactional
+	public Localidade Salvarlocalidade(Localidade localidade) {
+		return this.locmy.adcionar(localidade);
 	}
-
-	public void Salvarsublocalidade(Sublocalidade sublocalidade) {
-		this.submy.adcionar(sublocalidade);
+    @Transactional
+	public Sublocalidade Salvarsublocalidade(Sublocalidade sublocalidade) {
+	return	this.submy.adcionar(sublocalidade);
 	}
-
-	public void Salvarcep(Cep cep) {
-		this.cepmy.adcionar(cep);
+    @Transactional
+	public Cep Salvarcep(Cep cep) {
+	  return	this.cepmy.adcionar(cep);
 	}
-
-	public void SalvarFuncionario(Funcionario funcionario) {
-		this.funcionariomy.adcionar(funcionario);
+    @Transactional
+	public Funcionario SalvarFuncionario(Funcionario funcionario) {
+	  return	this.funcionariomy.adcionar(funcionario);
 	}
-
+    @Transactional
 	public Produto salvarproduto(Produto produto) {
 		try {
 			Produto produtoExistente = produtomy.porcodigo(produto.getCodigo());
@@ -141,36 +142,36 @@ public class SalvarClienteMyorder implements Serializable {
 				throw new NegocioException("Já existe um produto com o Codigo informado.");
 			}
 
-			return produtomy.adcionar(produto);
+			return produtomy.guardar(produto);
 		} catch (OptimisticLockException e) {
 		    throw new NegocioException("Erro de Concorrência Esse Usuario ja foi alterado Anteriormente");
 		}
 	
 	}
-
-	public void salvarcliente(Cliente cliente) {
-		this.clientemy.adcionar(cliente);
+    @Transactional
+	public Cliente salvarcliente(Cliente cliente) {
+	return	this.clientemy.guardar(cliente);
 	}
-
-	public void salvarpreço(Preço preço) {
-		this.preçomy.adcionar(preço);
+    @Transactional
+	public 	Preço salvarpreço(Preço preço) {
+	  return this.preçomy.guardar(preço);
 	}
-
-	public void salvartabela(Tabela tabela) {
-		this.tabelamy.adcionar(tabela);
+    @Transactional
+	public Tabela salvartabela(Tabela tabela) {
+		return this.tabelamy.adcionar(tabela);
 	}
-
-	public void salvarmesa(Mesa mesa) {
-		this.mesas.adcionar(mesa);
+    @Transactional
+	public Mesa salvarmesa(Mesa mesa) {
+		return this.mesas.adcionar(mesa);
 
 	}
-
-	public void salvarcaixa(Caixa caixa) {
-		this.caixas.adcionar(caixa);
+    @Transactional
+	public Caixa salvarcaixa(Caixa caixa) {
+	  return	this.caixas.adcionar(caixa);
 	}
-
-	public void salvarmovimentocaixa(MovimentoCaixa movcaixa) {
-		this.movc.adcionar(movcaixa);
+    @Transactional
+	public MovimentoCaixa salvarmovimentocaixa(MovimentoCaixa movcaixa) {
+	 return	this.movc.adcionar(movcaixa);
 	}
 
 	@Transactional
@@ -200,7 +201,6 @@ public class SalvarClienteMyorder implements Serializable {
 
 	@Transactional
 	public MovimentoMesa finalizar(MovimentoMesa movmesa) throws NegocioException {
-
 		movmesa.setFim(new Date());
 		;
 
@@ -208,11 +208,8 @@ public class SalvarClienteMyorder implements Serializable {
 			throw new NegocioException(
 					"Mesa não pode ser finalizada com status " + movmesa.getStatusmesa().getDescricao() + ".");
 		}
-
 		movmesa.setStatusmesa(StatusMesa.FINALIZADO);
-
 		movmesa = this.movm.guardar(movmesa);
-
 		return movmesa;
 	}
 
@@ -229,9 +226,9 @@ public class SalvarClienteMyorder implements Serializable {
 		movmesa.setStatusmesa(StatusMesa.CANCELADO);
 		return movmesa;
 	}
-
-	public void salvaritensdamesa(ItensDaMesa itensdamesa) {
-		this.itensmy.adcionar(itensdamesa);
+    @Transactional
+	public ItensDaMesa salvaritensdamesa(ItensDaMesa itensdamesa) {
+	  return	this.itensmy.adcionar(itensdamesa);
 
 	}
 }

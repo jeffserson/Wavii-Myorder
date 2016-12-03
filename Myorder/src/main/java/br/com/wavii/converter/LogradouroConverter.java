@@ -21,7 +21,7 @@ public class LogradouroConverter implements Converter {
 		Logradouro retorno = null;
 
 		if (value != null && !"".equals(value)) {
-			retorno = this.empresa.porId(new Long(value));
+			retorno = this.empresa.PorId(new Long(value));
 		}
 
 		return retorno;

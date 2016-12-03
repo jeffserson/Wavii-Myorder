@@ -29,7 +29,7 @@
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="jefferson" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-	<property name="javax.persistence.schema-generation.create-source" value="metadata" />
+	        <property name="javax.persistence.schema-generation.create-source" value="metadata" />
       		<property name="hibernate.dialect" 
 				value="org.hibernate.dialect.MySQL5Dialect" />
 			<property name="hibernate.show_sql" value="true" />

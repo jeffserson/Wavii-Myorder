@@ -45,18 +45,18 @@
 		  
 		   <p:column >
 		   
-		    <p:button value="Editar" icon="ui-icon-pencil" title="Editar" outcome="/CadastroCliente1">
+		    <p:button value="Editar" icon="ui-icon-pencil" title="Editar" outcome="/cadastroprincipal/CadastroCliente1">
 						<f:param name="id" value="#{cliente.id}" />
 					</p:button>
 		  
 		  <p:commandButton process="@this" value="excluir" actionListener="#{consultaMyorderBean2.excluircliente(cliente)}"
-		  icon="ui-icon-trash"  action="#{consultaMyorderBean2.consultarcliente}" update="@form"   >
+		  icon="ui-icon-trash"  action="#{consultaMyorderBean2.consultarcliente}" update="@form">
 	      <p:confirm header="Confirmacão" message="deseja excluir?" icon="ui-icon-alert" />
 		  </p:commandButton>
 		  
 		  
 		<p:confirmDialog global="true" showEffect="explode" hideEffect="fade">
-        <p:commandButton value="sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" actionListener="#{consultaMyorderBean2.excluircliente(cliente)}" />
+        <p:commandButton value="sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
         <p:commandButton value="Não"  icon="ui-icon-close" action="/ClientesCadastrados?faces-redirect=true" process="@this"/>
         </p:confirmDialog>
 		  

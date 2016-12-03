@@ -25,18 +25,7 @@ public class Grupo implements BaseEntity, Serializable {
 	private String nome;
 	@Column(nullable = false, length = 80)
 	private String descricao;
-	@ManyToMany(mappedBy="grupos")
-	private List<Usuario1> usuarios = new ArrayList<>();
 	
-	
-	
-	public List<Usuario1> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(List<Usuario1> usuarios) {
-		this.usuarios = usuarios;
-	}
 
 	public Long getId() {
 		return id;

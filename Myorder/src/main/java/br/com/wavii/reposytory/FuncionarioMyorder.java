@@ -22,14 +22,13 @@ import br.com.wavii.model.Uf;
 public class FuncionarioMyorder implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	@Inject
 	private EntityManager manager;
 
-	@Inject
-	public FuncionarioMyorder(EntityManager manager) {
-		this.manager = manager;
+	public void excluir(Funcionario funcionario){
+		this.manager.remove(funcionario);
 	}
-
+	
 	public Funcionario porid(Long id) {
 		return manager.find(Funcionario.class, id);
 	}
@@ -39,11 +38,9 @@ public class FuncionarioMyorder implements Serializable {
 		return query.getResultList();
 	}
 
-	public void adcionar(Funcionario funcionario) {
-		EntityTransaction trx = this.manager.getTransaction();
-		trx.begin();
-		this.manager.merge(funcionario);
-		trx.commit();
+	public Funcionario adcionar(Funcionario funcionario) {
+	return	this.manager.merge(funcionario);
+		
 	}
 
 	@SuppressWarnings("unchecked")

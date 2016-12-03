@@ -52,14 +52,14 @@
 						<f:param name="id" value="#{produto.id}" />
 					</p:button>
 		  
-		  <p:commandButton process="@this" value="excluir" actionListener="#{consultaMyorderBean2.excluirproduto(produto)}"
+		  <p:commandButton process="@this" value="excluir" actionListener="#{consultaMyorderBean2.excluirproduto}"
 		  icon="ui-icon-trash"  action="#{consultaMyorderBean.consultar3}" update="@form"   >
 	      <p:confirm header="Confirmacão" message="deseja excluir?" icon="ui-icon-alert" />
 		  </p:commandButton>
 		  
 		  
 		<p:confirmDialog global="true" showEffect="explode" hideEffect="fade">
-        <p:commandButton value="sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" actionListener="#{consultaMyorderBean2.excluirproduto(produto)}" />
+        <p:commandButton value="sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
         <p:commandButton value="Não"  icon="ui-icon-close" action="/ProdutosCadastrados?faces-redirect=true" process="@this"/>
         </p:confirmDialog>
 		  

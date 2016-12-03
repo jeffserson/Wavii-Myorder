@@ -16,13 +16,40 @@
 	<h:outputStylesheet library="algaworks" name="styles/custom.css" />
 	<h:outputStylesheet library="algaworks" name="styles/layout.css" />
 	<h:outputStylesheet library="algaworks" name="styles/components.css" />
-	
+	<h:outputStylesheet library="algaworks" name="styles/estilo.css" />
 	<h:outputScript target="body" library="primefaces" name="jquery/jquery.js" />
 	<h:outputScript target="body" library="algaworks" name="javascripts/app.js" />
 </h:head>
  	
  	
- 	
+ 		<script>
+            PrimeFaces.locales['pt'] = {
+                closeText: 'Fechar',
+                prevText: 'Anterior',
+                nextText: 'Próximo',
+                currentText: 'Começo',
+                monthNames: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                monthNamesShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                dayNames: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'],
+                dayNamesShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
+                dayNamesMin: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
+                weekHeader: 'Semana',
+                firstDay: 0,
+                isRTL: false,
+                showMonthAfterYear: false,
+                yearSuffix: '',
+                timeOnlyTitle: 'Só Horas',
+                timeText: 'Tempo',
+                hourText: 'Hora',
+                minuteText: 'Minuto',
+                secondText: 'Segundo',
+                ampm: false,
+                month: 'Mês',
+                week: 'Semana',
+                day: 'Dia',
+                allDayText: 'Todo o Dia'
+            };
+        </script>
  	
  	
  	
@@ -55,12 +82,14 @@
         
        
 	<header class="aw-topbar">
+		
 		<a href="#" class="aw-toggle  js-toggle">
 		<i class="fa fa-bars" ></i>
 		</a>
-		<div style="float: right; margin-right: 110px">
-				<span style="float: left; font-size:5mm; color:white; height: 30px; line-height: 30px; margin-right: 60px">
-				Olá #{seguranca.nomeUsuario}!
+		
+		<div  style="float: right; margin-right: 100px">
+				<span class="menu"  style="float:  left; margin-top:5%;   font-size:5mm; color:white; height: 30px; line-height: 40px; margin-right: 5px">
+			      Olá #{seguranca.nomeUsuario}!
 				</span>
 			</div>
 		

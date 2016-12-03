@@ -20,13 +20,13 @@ import br.com.wavii.model.Uf;
 public class EmpresaMyorder implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	@Inject
 	private EntityManager manager;
 
-	@Inject
-	public EmpresaMyorder(EntityManager manager) {
-		this.manager = manager;
+	public void excluir(Empresa empresa){
+		this.manager.remove(empresa);
 	}
+	
 
 	public Empresa PorId(Long id) {
 		return manager.find(Empresa.class, id);
@@ -37,11 +37,8 @@ public class EmpresaMyorder implements Serializable {
 		return query.getResultList();
 	}
 
-	public void adcionar(Empresa empresa) {
-		EntityTransaction trx = this.manager.getTransaction();
-		trx.begin();
-		this.manager.merge(empresa);
-		trx.commit();
+	public Empresa adcionar(Empresa empresa) {
+	return	this.manager.merge(empresa);
 	}
 
 	public List<Empresa> porNomeSemelhante(String fantasia) {
