@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2017-04-15T10:56:11 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="movimentomesa" pageWidth="612" pageHeight="1008" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ad421ea2-27ba-4cc2-9913-39985e5a2308">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Myorder"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="477"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="523"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="906"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="80"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<parameter name="DATAINI" class="java.util.Date">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="DATAFIM" class="java.util.Date">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<queryString language="SQL">
+		<![CDATA[SELECT myorder.tb_cliente.nome AS nome,
+	myorder.tb_movimentomesa.inicio AS dataini,
+	myorder.tb_movimentomesa.`Fim` AS datafim,
+	myorder.tb_movimentomesa.total AS total,
+	myorder.tb_movimentomesa.statusmesa AS status
+FROM myorder.tb_movimentomesa
+	INNER JOIN myorder.tb_cliente ON 
+	 myorder.tb_movimentomesa.tb_movimentomesa_cliente = myorder.tb_cliente.id 
+WHERE 
+	 myorder.tb_movimentomesa.inicio BETWEEN $P{DATAINI} AND $P{DATAFIM} 
+	 AND myorder.tb_movimentomesa.statusmesa = 'Finalizado']]>
+	</queryString>
+	<field name="nome" class="java.lang.String"/>
+	<field name="dataini" class="java.sql.Timestamp"/>
+	<field name="datafim" class="java.sql.Timestamp"/>
+	<field name="total" class="java.math.BigDecimal"/>
+	<field name="status" class="java.lang.String"/>
+	<variable name="total1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="total2" class="java.math.BigDecimal" resetType="Group" resetGroup="pornome" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="total3" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="total4" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="total5" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<variable name="total6" class="java.math.BigDecimal" resetType="Group" resetGroup="PorData" calculation="Sum">
+		<variableExpression><![CDATA[$F{total}]]></variableExpression>
+	</variable>
+	<group name="pornome">
+		<groupExpression><![CDATA[$F{nome}]]></groupExpression>
+		<groupFooter>
+			<band height="30">
+				<textField pattern="¤#,###.###;¤(#,###.###-)">
+					<reportElement x="450" y="0" width="100" height="30" uuid="4a4f556c-17dc-495c-a78e-9240779e7ba9"/>
+					<textElement textAlignment="Center">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$V{total2}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Nome">
+		<groupExpression><![CDATA[$F{nome}]]></groupExpression>
+		<groupHeader>
+			<band height="36">
+				<textField>
+					<reportElement x="236" y="3" width="100" height="30" uuid="0db5c062-a6c1-4b9d-9f48-10937840ee0d"/>
+					<textElement textAlignment="Center">
+						<font size="16" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<group name="Group1">
+		<groupExpression><![CDATA[$V{PAGE_COUNT}]]></groupExpression>
+	</group>
+	<group name="PorData">
+		<groupExpression><![CDATA[$F{dataini}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="190" y="0" width="217" height="54" uuid="4126be7d-d9d3-4d6a-92b0-d96a02c5b5f4"/>
+				<textElement textAlignment="Center">
+					<font size="35"/>
+				</textElement>
+				<text><![CDATA[VENDAS ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="31" splitType="Stretch">
+			<staticText>
+				<reportElement x="50" y="5" width="132" height="20" uuid="33971d3f-f6d2-449a-9bbb-b0d75aae86c4"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[inicio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="240" y="5" width="132" height="20" uuid="f4275c94-7354-4998-b75a-99798881d439"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fim]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="444" y="5" width="132" height="20" uuid="5813337b-aae5-4053-9215-dbb0d95d7bae"/>
+				<textElement textAlignment="Center">
+					<font fontName="Serif" size="13" isBold="true"/>
+				</textElement>
+				<text><![CDATA[total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="46" splitType="Stretch">
+			<textField pattern="¤#,###.###;¤(#,###.###-)">
+				<reportElement x="440" y="-1" width="133" height="31" uuid="6d68c900-aeeb-4b4c-b548-5cbad2d0f052"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField pattern="M/d/yy" isBlankWhenNull="true">
+				<reportElement x="70" y="-1" width="120" height="31" uuid="d8287b4a-8ae6-45f1-85d0-c3181c6f8767"/>
+				<textElement textAlignment="Center">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dataini}]]></textFieldExpression>
+			</textField>
+			<textField pattern="M/d/yy">
+				<reportElement x="250" y="0" width="130" height="31" uuid="f965441a-a184-4aac-813b-bf431a046b41"/>
+				<textElement textAlignment="Center">
+					<font size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{datafim}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="36">
+			<textField>
+				<reportElement x="450" y="3" width="100" height="30" uuid="c88f00c3-8aca-4841-8807-cae4a8acbc3a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="0" y="6" width="100" height="30" uuid="c5a2a40a-9f5d-462d-91b7-e9a5fd541a13"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="166" splitType="Stretch">
+			<textField pattern="¤#,###.###;¤(#,###.###-)">
+				<reportElement x="460" y="10" width="100" height="30" uuid="ee8e3814-8e2f-43f2-8b13-e25b30761b16"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{total5}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

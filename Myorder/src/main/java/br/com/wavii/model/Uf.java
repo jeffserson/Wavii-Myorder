@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.NotBlank;
 
 import br.com.wavii.converter.BaseEntity;
@@ -33,7 +35,7 @@ public class Uf implements BaseEntity, Serializable {
 
 	@NotBlank
 	private String codigo;
-
+    
 	@NotBlank
 	@Column(length = 60, nullable = false)
 	private String nome;

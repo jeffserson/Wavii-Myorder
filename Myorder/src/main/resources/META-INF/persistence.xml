@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-	<persistence-unit name="Myorder">
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="Myorder" transaction-type="RESOURCE_LOCAL">
 	
 	<provider>org.hibernate.ejb.HibernatePersistence</provider>
       
@@ -30,16 +31,17 @@
 			<property name="javax.persistence.jdbc.password" value="jefferson" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 	        <property name="javax.persistence.schema-generation.create-source" value="metadata" />
+	       
       		<property name="hibernate.dialect" 
 				value="org.hibernate.dialect.MySQL5Dialect" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
-		</properties>
-	
-	
-	
-	
+			<property name="hibernate.connection.provider_class" value="org.hibernate.c3p0.internal.C3P0ConnectionProvider"/>
+           <property name="hibernate.c3p0.min_size" value="5" />
+            <property name="hibernate.c3p0.max_size" value="20" />
+           <property name="hibernate.c3p0.timeout" value="180" />	
+	</properties>
 	
 	
 	</persistence-unit>

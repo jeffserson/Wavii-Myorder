@@ -118,7 +118,7 @@ public class MovimentoMesaMyorder implements Serializable {
 			criteria.add(Restrictions.in("statusmesa", filtro.getStatuses()));
 		}
 
-		return criteria.addOrder(Order.asc("id")).list();
+		return criteria.list();
 	}
 
 	@SuppressWarnings("unchecked")

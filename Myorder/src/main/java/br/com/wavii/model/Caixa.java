@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import br.com.wavii.converter.BaseEntity;
 
 @Entity
-@Table(name = "tb_caixa")
+@Table(name = "tb_caixaa")
 public class Caixa implements BaseEntity, Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -28,7 +28,7 @@ public class Caixa implements BaseEntity, Serializable {
 	@ManyToOne
 	@JoinColumn(name = "tb_caixa")
 	private MovimentoCaixa movimentocaixa;
-
+     
 	public Long getId() {
 		return id;
 	}

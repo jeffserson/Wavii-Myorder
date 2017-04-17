@@ -31,7 +31,8 @@ public class Usuarios implements Serializable {
 
 	public List<Usuario1> vendedores() {
 		// TODO filtrar apenas vendedores (por um grupo específico)
-		return this.manager.createQuery("from Usuario1 v join fetch v.grupos", Usuario1.class).getResultList();
+		return this.manager.createQuery("select distinct(l) from Usuario1 l"
+	            + " join fetch l.grupos", Usuario1.class).getResultList();
 	}
 	
 	public List<Grupo> grupos() {

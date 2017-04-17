@@ -215,7 +215,7 @@ public class CadastroMyordemBean implements Serializable {
 	public List<Pais> getPaises() {
 		try {
 			if ((paises == null) || (paises.size() == 0)) {
-				paises = paiss.BuscarPais();
+				paises = paiss.todos();
 			}
 
 		} catch (Exception e) {

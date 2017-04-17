@@ -144,7 +144,7 @@ public class SalvarClienteMyorder implements Serializable {
 
 			return produtomy.guardar(produto);
 		} catch (OptimisticLockException e) {
-		    throw new NegocioException("Erro de Concorrência Esse Usuario ja foi alterado Anteriormente");
+		    throw new NegocioException("Erro de Concorrência Esse Produto ja foi alterado Anteriormente");
 		}
 	
 	}

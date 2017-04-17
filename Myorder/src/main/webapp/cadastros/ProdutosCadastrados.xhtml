@@ -52,8 +52,8 @@
 						<f:param name="id" value="#{produto.id}" />
 					</p:button>
 		  
-		  <p:commandButton process="@this" value="excluir" actionListener="#{consultaMyorderBean2.excluirproduto}"
-		  icon="ui-icon-trash"  action="#{consultaMyorderBean.consultar3}" update="@form"   >
+		  <p:commandButton process="@this" value="excluir" actionListener="#{consultaMyorderBean2.excluirproduto(produto)}"
+		  icon="ui-icon-trash"  action="#{consultaMyorderBean2.consultarproduto}" update="@form"   >
 	      <p:confirm header="Confirmacão" message="deseja excluir?" icon="ui-icon-alert" />
 		  </p:commandButton>
 		  

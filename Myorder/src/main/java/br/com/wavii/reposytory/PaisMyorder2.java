@@ -40,8 +40,5 @@ public class PaisMyorder2 implements Serializable {
 				.getResultList();
 	}
 
-	public List<Pais> BuscarPais() {
-		return manager.createNamedQuery("Pais.buscarPaises", Pais.class).getResultList();
-
-	}
+	
 }

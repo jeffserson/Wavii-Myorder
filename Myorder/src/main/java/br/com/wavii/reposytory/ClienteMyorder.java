@@ -40,7 +40,7 @@ public class ClienteMyorder implements Serializable {
 	}
 	
 	public List<Cliente> todos() {
-		TypedQuery<Cliente> query = manager.createQuery("from Cliente", Cliente.class);
+		TypedQuery<Cliente> query  = manager.createQuery("from Cliente", Cliente.class);
 		return query.getResultList();
 	}
 

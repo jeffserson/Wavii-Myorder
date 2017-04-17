@@ -60,8 +60,5 @@ public class UfMyorder implements Serializable {
 				.getResultList();
 	}
 
-	public List<Uf> Buscaruf() {
-		return manager.createNamedQuery("Uf.buscaruf", Uf.class).getResultList();
 
-	}
 }

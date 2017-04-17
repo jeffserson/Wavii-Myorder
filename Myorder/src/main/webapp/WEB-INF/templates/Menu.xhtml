@@ -2,58 +2,79 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-	
-	
-	
-	
 
-	
-	
-	
-		<h:form>
-		
+
+
+
+
+
+
+
+	<h:form>
+
 		<nav class="aw-menu">
-		<div class="ui-fluid">
-		<p:menubar>  
-		<p:submenu label="Menu">
-			<p:submenu label="Cadastros">
-			<p:menuitem value="Empresa"  rendered="#{request.isUserInRole('ADMINISTRADOR')}" outcome="/cadastros/EmpresasCadastradas" /> 
-			<p:menuitem value="Produto"  outcome="/cadastros/ProdutosCadastrados" /> 
-			<p:menuitem value="Cliente" outcome="/cadastros/ClientesCadastrados" />
-			<p:menuitem value="Funcionario" rendered="#{request.isUserInRole('VENDEDOR')}" outcome="/cadastros/FuncionariosCadastrados" />
-			<p:menuitem value="Usuario" rendered="#{request.isUserInRole('ADMINISTRADOR')}" outcome="/cadastros/UsuariosCadastrados" />
-			</p:submenu>
-			<p:submenu label="Processo">
-			<p:submenu label="Movimento Mesa">
-			<p:menuitem  value="Mesa" action="/MovimentoMesa?faces-redirect=true"  />
-			<p:menuitem  value="Caixa" action="/MovimentoCaixa?faces-redirect=true"  />
-			</p:submenu>
-			</p:submenu>
-			<p:submenu label="Auxiliares" >
-			<p:submenu label="Aux tabelas" rendered="#{request.isUserInRole('ADMINISTRADOR')}">
-			<p:menuitem value="Pais"    outcome="/auxcadastro/PaisesCadastrados"></p:menuitem>
-			<p:menuitem value="Uf"  outcome="/auxcadastro/UfCadastrados" ></p:menuitem>
-			<p:menuitem value="Localidade" outcome="/auxcadastro/LocaisCadastrados" ></p:menuitem>
-			<p:menuitem value="Sublocalidade"  outcome="/auxcadastro/BairrosCadastrados" />
-			<p:menuitem value="Tipo Logradouro" outcome="/auxcadastro/LogradourosCadastrados2" />
-			<p:menuitem value="Cep"  outcome="/auxcadastro/CepsCadastrados" />
-			</p:submenu>
-			<p:submenu label="Aux Recursos">
-			<p:submenu label="Preço">
-			<p:menuitem  value="Tabela de preço"  outcome ="/auxrecurso/TabelasCadastradas"/>
-			<p:menuitem  value="Precificacão"  outcome ="/auxrecurso/CadastroPreço"/>
-			</p:submenu>
-			<p:submenu label="Mesa - Caixa">
-			<p:menuitem  value="Mesas Cadastradas"  outcome ="/cadastroprincipal/CadastroMesa"/>
-			<p:menuitem  value="Caixas Cadastrados"  outcome ="/cadastroprincipal/CadastroCaixa"/>
-			</p:submenu>
-			</p:submenu>
-			</p:submenu>
-			<p:menuitem value="Sair" url="/j_spring_security_logout"/>
-			</p:submenu>
-			
-		</p:menubar>
-		</div>
+			<div class="ui-fluid">
+				<p:menubar>
+					<p:submenu label="Menu">
+						<p:submenu label="Cadastros">
+							<p:menuitem value="Empresa"
+								rendered="#{request.isUserInRole('ADMINISTRADOR')}"
+								outcome="/cadastros/EmpresasCadastradas" />
+							<p:menuitem value="Produto"
+								outcome="/cadastros/ProdutosCadastrados" />
+							<p:menuitem value="Cliente"
+								outcome="/cadastros/ClientesCadastrados" />
+							<p:menuitem value="Funcionario"
+								rendered="#{request.isUserInRole('VENDEDOR')}"
+								outcome="/cadastros/FuncionariosCadastrados" />
+							<p:menuitem value="Usuario"
+								rendered="#{request.isUserInRole('ADMINISTRADOR')}"
+								outcome="/cadastros/UsuariosCadastrados" />
+						</p:submenu>
+						<p:submenu label="Processo">
+							<p:submenu label="Movimento Mesa">
+								<p:menuitem value="Mesa"
+									action="/MovimentoMesa?faces-redirect=true" />
+								<p:menuitem value="Caixa"
+									action="/MovimentoCaixa?faces-redirect=true" />
+								<p:menuitem value="Relatorios"
+									outcome="/relatorios/RelatorioPedidosEmitidos" />
+							</p:submenu>
+						</p:submenu>
+						<p:submenu label="Auxiliares">
+							<p:submenu label="Aux tabelas"
+								rendered="#{request.isUserInRole('ADMINISTRADOR')}">
+								<p:menuitem value="Pais"
+									outcome="/auxcadastro/PaisesCadastrados"></p:menuitem>
+								<p:menuitem value="Uf" outcome="/auxcadastro/UfCadastrados"></p:menuitem>
+								<p:menuitem value="Localidade"
+									outcome="/auxcadastro/LocaisCadastrados"></p:menuitem>
+								<p:menuitem value="Sublocalidade"
+									outcome="/auxcadastro/BairrosCadastrados" />
+								<p:menuitem value="Tipo Logradouro"
+									outcome="/auxcadastro/LogradourosCadastrados2" />
+								<p:menuitem value="Cep" outcome="/auxcadastro/CepsCadastrados" />
+							</p:submenu>
+							<p:submenu label="Aux Recursos">
+								<p:submenu label="Preço">
+									<p:menuitem value="Tabela de preço"
+										outcome="/auxrecurso/TabelasCadastradas" />
+									<p:menuitem value="Precificacão"
+										outcome="/auxrecurso/CadastroPreço" />
+								</p:submenu>
+								<p:submenu label="Mesa - Caixa">
+									<p:menuitem value="Mesas Cadastradas"
+										outcome="/cadastroprincipal/CadastroMesa" />
+									<p:menuitem value="Caixas Cadastrados"
+										outcome="/cadastroprincipal/CadastroCaixa" />
+								</p:submenu>
+							</p:submenu>
+						</p:submenu>
+						<p:menuitem value="Sair" url="/j_spring_security_logout" />
+					</p:submenu>
+
+				</p:menubar>
+			</div>
 		</nav>
 		<p:idleMonitor timeout="1000" onidle="idleDialog.show()" />
 
